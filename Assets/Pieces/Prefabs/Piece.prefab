@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1112939580242970203}
   - component: {fileID: -1361309661910176544}
   - component: {fileID: -7530600108877130140}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Piece
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ab4fbed5c9cf54087a05612ba9c9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableJointDirections: 
-  canRotate: 0
-  canBeAttachedTo: 0
+  _availableJointDirections: 
+  _canRotate: 0
+  _canBeAttachedTo: 0
 --- !u!120 &-7530600108877130140
 LineRenderer:
   m_ObjectHideFlags: 0
