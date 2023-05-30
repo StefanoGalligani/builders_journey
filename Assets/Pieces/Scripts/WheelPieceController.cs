@@ -17,6 +17,8 @@ namespace BuilderGame.Pieces {
 
         internal override void UpdatePiece()
         {
+            if (_joint) return;
+            
             _motorSpeed = 0;
             if (Input.GetKey(KeyCode.D)) {
                 _motorSpeed += _speed;
