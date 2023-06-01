@@ -7,6 +7,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
     public class PieceSelectable : MonoBehaviour
     {
         [SerializeField] private Image _image;
+        [SerializeField] private Image _highlight;
         [SerializeField] private TextMeshProUGUI _infoText;
         private Piece _piecePrefab;
         private PieceSelectionManager _selectionManager;
@@ -21,6 +22,10 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
 
         public void OnClick() {
             _selectionManager.Selection(this, _piecePrefab);
+        }
+
+        internal void ToggleHighlight(bool value) {
+            _highlight.enabled = value;
         }
     }
 }
