@@ -1,6 +1,5 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Grid;
-using Cinemachine;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
@@ -32,7 +31,6 @@ namespace BuilderGame.BuildingPhase.Builder {
             _placedPieces[x][y].transform.position = _gridInfo.BottomLeftCoords + new Vector2(x, y) * _gridInfo.CellSize + _gridInfo.GridOffset;
 
             _placedPieces[x][y].Init(_gridInfo.MainPieceCoordinates, true);
-            GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = _placedPieces[x][y].transform; //gestire la cosa in modo diverso
         }
 
         public void SetPiecePrefab(Piece piecePrefab) {
