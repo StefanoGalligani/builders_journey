@@ -30,7 +30,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             _isMainPiece = isMainPiece;
 
             _facingDirection = Direction.Right;
-            _jointDirection = Direction.Invalid;
+            _jointDirection = Direction.Null;
 
             if (_lr) {
                 _lr.SetPositions(new[] {transform.position, transform.position});
@@ -51,7 +51,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 _facingDirection = _facingDirection + 1;
                 transform.Rotate(Vector3.forward * 90);
 
-                if (_jointDirection.Equals(Direction.Invalid)) break;
+                if (_jointDirection.Equals(Direction.Null)) break;
                 if (IsAvailableJointDirection(_jointDirection)) break;
             }
         }
@@ -60,7 +60,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             if (!_joint) return;
             _joint.connectedBody = null;
             _isConnected = false;
-            _jointDirection = Direction.Invalid;
+            _jointDirection = Direction.Null;
             UpdateLineRenderer();
         }
 

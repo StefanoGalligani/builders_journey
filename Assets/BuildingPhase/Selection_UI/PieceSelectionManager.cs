@@ -15,7 +15,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
             selectables = new List<PieceSelectable>();
             _scrollContent.sizeDelta = new Vector2(0, 110*_pieceInfos.Length + 10);
             foreach(PieceInfoScriptableObject pieceInfo in _pieceInfos) {
-                PieceSelectable pieceSelectable = GameObject.Instantiate<PieceSelectable>(_pieceSelectablePrefab, _scrollContent);
+                PieceSelectable pieceSelectable = Instantiate<PieceSelectable>(_pieceSelectablePrefab, _scrollContent);
                 pieceSelectable.Init(pieceInfo, this);
                 selectables.Add(pieceSelectable);
             }

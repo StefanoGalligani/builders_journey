@@ -10,7 +10,7 @@ namespace BuilderGame.Utils {
         public static readonly int Up = 1;
         public static readonly int Left = 2;
         public static readonly int Down = 3;
-        public static readonly int Invalid = 4;
+        public static readonly int Null = 4;
 
         public Direction(int value) {
             _internalValue = value;
@@ -24,7 +24,7 @@ namespace BuilderGame.Utils {
                 return false;
             }
 
-            Direction other = new Direction(Direction.Invalid);
+            Direction other = new Direction(Direction.Null);
 
             if (obj.GetType() == typeof(int)) {
                 other = new Direction((int)obj);
@@ -94,15 +94,15 @@ namespace BuilderGame.Utils {
 
         public static Direction operator +(Direction first, Direction second)
         {
-            if (first._internalValue == Invalid || second._internalValue == Invalid)
-                return new Direction(Invalid);
+            if (first._internalValue == Null || second._internalValue == Null)
+                return new Direction(Null);
             return new Direction((first._internalValue + second._internalValue)%4);
         }
 
         public static Direction operator -(Direction first, Direction second)
         {
-            if (first._internalValue == Invalid || second._internalValue == Invalid)
-                return new Direction(Invalid);
+            if (first._internalValue == Null || second._internalValue == Null)
+                return new Direction(Null);
             return new Direction((first._internalValue - second._internalValue + 4)%4);
         }
     }
