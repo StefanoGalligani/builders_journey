@@ -7,6 +7,8 @@ namespace BuilderGame.BuildingPhase.Builder {
         public static StartManagerSingleton Instance {get {return (_instance==null ? (_instance = new StartManagerSingleton()) : _instance);} private set{} }
         public event Action GameStart;
 
+        private StartManagerSingleton() {}
+
         internal void StartGame() {
             GameStart?.Invoke();
         }
