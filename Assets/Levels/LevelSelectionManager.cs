@@ -13,6 +13,7 @@ namespace BuilderGame.Levels {
         
         private void Start() {
             _selectables = new List<LevelSelectable>();
+            LevelReferenceSingleton.Instance.SetReferences(_levelInfos);
             _fileManager = LevelFileManagerSingleton.Instance;
             _fileManager.CreateFileIfNotExists(_levelInfos);
 

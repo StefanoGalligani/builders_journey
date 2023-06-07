@@ -13,10 +13,10 @@ namespace BuilderGame.Cam
         {
             _vehicleTransform = GameObject.FindObjectOfType<Vehicle>().transform;
             _cinemachine.Follow = _vehicleTransform;
-            StartManagerSingleton.Instance.GameStart += OnStartGame;
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
-        private void OnStartGame() {
+        private void OnGameStart() {
             _cinemachine.Follow = _vehicleTransform.GetChild(0);
         }
     }

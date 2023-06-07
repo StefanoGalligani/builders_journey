@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using BuilderGame.Levels;
 using BuilderGame.Levels.FileManagement;
 
 namespace BuilderGame.EndingPhase
@@ -6,6 +8,8 @@ namespace BuilderGame.EndingPhase
     public class EndUIManager : MonoBehaviour
     {
         [SerializeField] private GameObject _uiPanel;
+        [SerializeField] private string _menuSceneName;
+        private string _nextLevelSceneName;
         private void Start()
         {
             _uiPanel.SetActive(false);
@@ -14,18 +18,27 @@ namespace BuilderGame.EndingPhase
 
         private void OnEndLevel() {
             _uiPanel.SetActive(true);
-            //prende nome del livello e del successore dal singleton che gestisce i riferimenti ai livelli
-            //poi li usa al posto delle stringhe qua sotto
-            LevelFileManagerSingleton.Instance.SetLevelStars("this", 2);
-            LevelFileManagerSingleton.Instance.SetLevelState("this", Levels.LevelState.Passed);
-            LevelFileManagerSingleton.Instance.SetLevelState("next", Levels.LevelState.Passed);
+            string currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName();
+            string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName();
+            _nextLevelSceneName = nextLevelInfos[1];
+            Levels.LevelState previousState = LevelFileManagerSingleton.Instance.GetLevelState(currentLevelName);
+            int previousStars = LevelFileManagerSingleton.Instance.GetLevelStars(currentLevelName);
+
+            int newStars = 2; //ottenere dinamicamente
+            if (newStars > previousStars) {
+                LevelFileManagerSingleton.Instance.SetLevelStars(currentLevelName, newStars);
+            }
+            if (previousState != LevelState.Passed) {
+                LevelFileManagerSingleton.Instance.SetLevelState(currentLevelName, Levels.LevelState.Passed);
+                LevelFileManagerSingleton.Instance.SetLevelState(nextLevelInfos[0], Levels.LevelState.NotPassed);
+            }
         }
 
         public void OnMenuButtonClick() {
-
+            SceneManager.LoadScene(_menuSceneName);
         }
         public void OnNextLevelButtonClick() {
-            
+            SceneManager.LoadScene(_nextLevelSceneName);
         }
     }
 }

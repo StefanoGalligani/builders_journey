@@ -9,7 +9,7 @@ namespace BuilderGame {
         public bool IsReadyToStart {get {return _isReadyToStart;} set {Debug.Log(value?"Ready":"Not ready"); _isReadyToStart=value;}}
 
         private void Start() {
-            StartManagerSingleton.Instance.GameStart += OnGameStart;
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         private void OnGameStart() {

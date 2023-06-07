@@ -19,7 +19,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
                 pieceSelectable.Init(pieceInfo, this);
                 selectables.Add(pieceSelectable);
             }
-            StartManagerSingleton.Instance.GameStart += OnGameStart;
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         private void OnGameStart() {

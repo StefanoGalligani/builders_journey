@@ -11,7 +11,7 @@ namespace BuilderGame.BuildingPhase.Grid {
 
         private void Start() {
             _builderManager = new BuilderManager(_gridInfo, _vehicle, _mainPiecePrefab);
-            StartManagerSingleton.Instance.GameStart += OnGameStart;
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         private void OnGameStart() {

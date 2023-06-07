@@ -9,7 +9,7 @@ namespace BuilderGame.Pieces {
 
         private void Start() {
             _pieceEnabled = false;
-            StartManagerSingleton.Instance.GameStart += OnGameStart;
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
             InitController();
             if (_controller != null) _controller.SetGameObject(gameObject);
         }
@@ -30,7 +30,8 @@ namespace BuilderGame.Pieces {
         }
 
         private void OnDestroy() {
-            StartManagerSingleton.Instance.GameStart -= OnGameStart;
+            if (FindObjectOfType<StartNotifier>())
+                FindObjectOfType<StartNotifier>().GameStart -= OnGameStart;
         }
     }
 }

@@ -1,13 +1,15 @@
+using System;
 using UnityEngine;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class BuilderUIManager : MonoBehaviour
+    public class StartNotifier : MonoBehaviour
     {
+        public event Action GameStart;
         [SerializeField] private Vehicle _vehicle;
 
         public void StartGame() {
             if (!_vehicle.IsReadyToStart) return;
-            StartManagerSingleton.Instance.StartGame();
+            GameStart?.Invoke();
         }
     }
 }
