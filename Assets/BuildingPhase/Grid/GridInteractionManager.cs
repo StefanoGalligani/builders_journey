@@ -7,6 +7,7 @@ namespace BuilderGame.BuildingPhase.Grid {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;
         [SerializeField] private Piece _mainPiecePrefab;
+        [SerializeField] private GameObject _content;
         private BuilderManager _builderManager;
 
         private void Start() {
@@ -15,7 +16,7 @@ namespace BuilderGame.BuildingPhase.Grid {
         }
 
         private void OnGameStart() {
-            gameObject.SetActive(false);
+            _content.SetActive(false);
         }
 
         public void SetNewPiecePrefab(Piece piecePrefab) {

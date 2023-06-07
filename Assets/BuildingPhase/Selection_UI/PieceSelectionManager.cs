@@ -9,6 +9,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
         [SerializeField] private GridInteractionManager _gridInteractionManager;
+        [SerializeField] private GameObject _content;
         private List<PieceSelectable> selectables;
         
         private void Start() {
@@ -23,7 +24,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
         }
 
         private void OnGameStart() {
-            gameObject.SetActive(false);
+            _content.SetActive(false);
         }
 
         public void Selection(PieceSelectable pieceSelectable, Piece prefab) {
