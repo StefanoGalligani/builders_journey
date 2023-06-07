@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1821,6 +1821,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2331e4b19912d0d4d81826f7281b7072, type: 2}
   - {fileID: 11400000, guid: 7a14a5d865bcc6c408bc8b7e3eec75f7, type: 2}
   - {fileID: 11400000, guid: e25e128ac53c36c4585d6a5c36ac8d6a, type: 2}
+  - {fileID: 11400000, guid: 86ea348d271546c44b672fdb4041aef6, type: 2}
+  - {fileID: 11400000, guid: 1eacdc47d6c407f4a9a54a3820dd954e, type: 2}
 --- !u!1 &1654094409
 GameObject:
   m_ObjectHideFlags: 0

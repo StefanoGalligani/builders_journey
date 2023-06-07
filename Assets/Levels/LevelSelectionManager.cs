@@ -9,15 +9,17 @@ namespace BuilderGame.Levels {
         [SerializeField] private LevelSelectable _levelSelectablePrefab;
         [SerializeField] private LevelInfoScriptableObject[] _levelInfos;
         private List<LevelSelectable> _selectables;
+        private LevelFileManagerSingleton _fileManager;
         
         private void Start() {
             _selectables = new List<LevelSelectable>();
-            LevelFileManagerSingleton.Instance.CreateFileIfNotExists(_levelInfos);
+            _fileManager = LevelFileManagerSingleton.Instance;
+            _fileManager.CreateFileIfNotExists(_levelInfos);
 
             foreach(LevelInfoScriptableObject levelInfo in _levelInfos) {
                 LevelSelectable levelSelectable = Instantiate<LevelSelectable>(_levelSelectablePrefab, _contentRect);
-                int stars = LevelFileManagerSingleton.Instance.GetLevelStars(levelInfo.LevelName);
-                LevelState state = LevelFileManagerSingleton.Instance.GetLevelState(levelInfo.LevelName);
+                int stars = _fileManager.GetLevelStars(levelInfo.LevelName);
+                LevelState state = _fileManager.GetLevelState(levelInfo.LevelName);
 
                 levelSelectable.Init(levelInfo, stars, state, this);
                 _selectables.Add(levelSelectable);
