@@ -28,6 +28,7 @@ namespace BuilderGame.Pieces {
         }
 
         private void UpdateMotorSpeed() {
+            if (!_joint) return;
             JointMotor2D m = _joint.motor;
             m.motorSpeed = _motorSpeed;
             _joint.motor = m;

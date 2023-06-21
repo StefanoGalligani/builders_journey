@@ -48,16 +48,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d70fc76e002c298499849992c7e1a0ba, type: 3}
+    - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.b
-      value: 0.20630117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.g
-      value: 0.6157225
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.r
-      value: 0.8962264
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970212, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_RootOrder
@@ -129,6 +133,6 @@ FixedJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: -1.1, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0

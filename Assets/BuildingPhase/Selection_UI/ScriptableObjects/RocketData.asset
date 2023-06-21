@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Price: 4
   Prefab: {fileID: 936681325961206473, guid: 0e2a984e3d06bab40b5a61a06140e644, type: 3}
-  Sprite: {fileID: 0}
+  Sprite: {fileID: -424266360, guid: 9b4d502bf435af844beea061dadd3ab6, type: 3}

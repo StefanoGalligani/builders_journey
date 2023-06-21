@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: _canRotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: canBeAttachedTo
       value: 1
       objectReference: {fileID: 0}
@@ -21,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: _availableJointDirections.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: availableJointDirections.Array.data[0]
@@ -34,6 +38,10 @@ PrefabInstance:
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: availableJointDirections.Array.data[3]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: _availableJointDirections.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: _availableJointDirections.Array.data[1]
@@ -50,18 +58,18 @@ PrefabInstance:
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+      objectReference: {fileID: 159151793, guid: e7e46ddbee252da498adc674cb141b04, type: 3}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.b
-      value: 0.7483802
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.g
-      value: 0.7483802
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Color.r
-      value: 0.8679245
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970212, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_RootOrder

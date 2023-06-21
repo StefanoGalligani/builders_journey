@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabfd7f8f9119e547b7ffeb4217482a1, type: 3}
   m_Name: EmptyData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  price: 0
-  prefab: {fileID: 0}
+  Price: 0
+  Prefab: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 889217e96f988d047bb8ce568f735e1e, type: 3}
