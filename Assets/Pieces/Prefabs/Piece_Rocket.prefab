@@ -99,6 +99,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970213, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7252094
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970213, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.08739528
+      objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Name
       value: Piece_Rocket
@@ -128,6 +136,26 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: -1.1, y: 0}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!95 &3197430481620442165
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968448846625468494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3660c4e3931494a4f9221f760869094c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-8712485676676912188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,3 +169,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 20
+  _animator: {fileID: 3197430481620442165}

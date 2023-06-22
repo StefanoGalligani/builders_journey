@@ -4,9 +4,12 @@ namespace BuilderGame.Pieces {
     public class RocketPieceController : SpecialPieceController {
         private float _force;
         private Rigidbody2D _rb;
+        private bool _wasActive = false;
+        private Animator _animator;
 
-        internal RocketPieceController(float force) {
+        internal RocketPieceController(float force, Animator animator) {
             _force = force;
+            _animator = animator;
         }
 
         internal override void StartPiece() {
@@ -17,6 +20,16 @@ namespace BuilderGame.Pieces {
         {
             if (Input.GetKey(KeyCode.Space)) {
                 _rb.AddForce(transform.right*_force);
+                SetState(true);
+            } else {
+                SetState(false);
+            }
+        }
+
+        private void SetState(bool active) {
+            if (active != _wasActive) {
+                _wasActive = active;
+                _animator.SetBool("Active", active);
             }
         }
     }
