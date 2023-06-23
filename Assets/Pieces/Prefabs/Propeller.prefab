@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: _availableJointDirections.Array.data[0]
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 861109403, guid: 0e1b46a170817904ebb570313caebbf4, type: 3}
     - target: {fileID: 1112939580242970212, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -102,7 +106,7 @@ Animator:
   m_GameObject: {fileID: 3432732536666165109}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: c41978658baac094d99146af511a4862, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
