@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabfd7f8f9119e547b7ffeb4217482a1, type: 3}
   m_Name: RocketData
   m_EditorClassIdentifier: 
+  Id: 5
   Price: 4
   Prefab: {fileID: 936681325961206473, guid: 0e2a984e3d06bab40b5a61a06140e644, type: 3}
   Sprite: {fileID: -424266360, guid: 9b4d502bf435af844beea061dadd3ab6, type: 3}

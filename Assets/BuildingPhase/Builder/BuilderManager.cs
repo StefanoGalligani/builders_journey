@@ -1,11 +1,13 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Grid;
+using BuilderGame.BuildingPhase.Builder.FileManagement;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
     {
         private Vehicle _vehicle;
         private Piece _piecePrefab;
+        private int _pieceId;
         private Piece[][] _placedPieces;
         private GridInfoScriptableObject _gridInfo;
         private VehicleConnectionManager _vehicleConnectionManager;
@@ -18,23 +20,28 @@ namespace BuilderGame.BuildingPhase.Builder {
             for (int i=0; i<_placedPieces.Length; i++) {
                 _placedPieces[i] = new Piece[gridInfo.GridDimensions.y];
             }
-
-            PlaceMainPiece(mainPiecePrefab);
-
+            
             _vehicleConnectionManager = new VehicleConnectionManager(gridInfo, vehicle);
+
+            bool vehicleBuilt = false;
+            if (VehicleFileManagerSingleton.Instance.IsVehicleSaved()) {
+                vehicleBuilt = BuildVehicleFromData(VehicleFileManagerSingleton.Instance.GetVehicleData(), mainPiecePrefab);
+            }
+            if (!vehicleBuilt) {
+                PlaceMainPiece(mainPiecePrefab);
+            }
+
         }
 
         private void PlaceMainPiece(Piece mainPiecePrefab) {
             int x = _gridInfo.MainPieceCoordinates.x;
             int y = _gridInfo.MainPieceCoordinates.y;
-            _placedPieces[x][y] = GameObject.Instantiate(mainPiecePrefab, _vehicle.transform);
-            _placedPieces[x][y].transform.position = _gridInfo.BottomLeftCoords + new Vector2(x, y) * _gridInfo.CellSize + _gridInfo.GridOffset;
-
-            _placedPieces[x][y].Init(_gridInfo.MainPieceCoordinates, true);
+            InstantiateNewPiece(mainPiecePrefab, x, y, 0, true);
         }
 
-        public void SetPiecePrefab(Piece piecePrefab) {
+        public void SetPiecePrefab(Piece piecePrefab, int pieceId) {
             _piecePrefab = piecePrefab;
+            _pieceId = pieceId;
         }
 
         public void PlacePiece(Vector2Int gridCoords) {
@@ -47,12 +54,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             }
             
             if (_piecePrefab != null) {
-                Piece newBlock = GameObject.Instantiate<Piece>(_piecePrefab);
-                newBlock.transform.position = _gridInfo.BottomLeftCoords + new Vector2(gridCoords.x, gridCoords.y) * _gridInfo.CellSize + _gridInfo.GridOffset;
-                newBlock.transform.SetParent(_vehicle.transform);
-                _placedPieces[gridCoords.x][gridCoords.y] = newBlock;
-
-                newBlock.Init(gridCoords);
+                InstantiateNewPiece(_piecePrefab, gridCoords.x, gridCoords.y, _pieceId);
             }
             
             _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
@@ -81,6 +83,38 @@ namespace BuilderGame.BuildingPhase.Builder {
                 }
             }
             return false;
+        }
+
+        private bool BuildVehicleFromData(VehicleDataSerializable vehicleData, Piece mainPiecePrefab) {
+            PiecesDictionary piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
+            if (!piecesDictionary.AreAllIdsValid(vehicleData.pieceIds)) {
+                Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
+                return false;
+            }
+            //controllare che le coordinate dei pezzi siano valide, shiftare se si possono adattare, altrimenti return false
+            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
+                int id = vehicleData.pieceIds[i];
+                Piece prefab = (id>0) ? piecesDictionary.GetPrefabById(id) : mainPiecePrefab;
+                int[] coords = vehicleData.pieceCoordinates[i];
+                Piece newPiece = InstantiateNewPiece(prefab, coords[0], coords[1], id, id==0);
+                newPiece.SetRotation(vehicleData.pieceRotations[i]);
+            }
+            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
+            return true;
+        }
+
+        private Piece InstantiateNewPiece(Piece prefab, int gridx, int gridy, int id, bool isMain=false) {
+            Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform);
+            newPiece.transform.position = PositionFromGridCoordinates(gridx, gridy);
+            _placedPieces[gridx][gridy] = newPiece;
+
+            newPiece.Init(new Vector2Int(gridx, gridy), id, isMain);
+
+            return newPiece;
+        }
+
+        private Vector2 PositionFromGridCoordinates(int gridx, int gridy) {
+            return _gridInfo.BottomLeftCoords + new Vector2(gridx,gridy) * _gridInfo.CellSize + _gridInfo.GridOffset;
         }
 
         private bool IsValidPosition(int x, int y) { //estrarre in una classe di utils

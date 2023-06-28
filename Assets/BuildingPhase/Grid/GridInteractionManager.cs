@@ -19,8 +19,8 @@ namespace BuilderGame.BuildingPhase.Grid {
             _content.SetActive(false);
         }
 
-        public void SetNewPiecePrefab(Piece piecePrefab) {
-            _builderManager.SetPiecePrefab(piecePrefab);
+        public void SetNewPiecePrefab(Piece piecePrefab, int pieceId) {
+            _builderManager.SetPiecePrefab(piecePrefab, pieceId);
         }
 
         public void Clicked(bool leftClick) {

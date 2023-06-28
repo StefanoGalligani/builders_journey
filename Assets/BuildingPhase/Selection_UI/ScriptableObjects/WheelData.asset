@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabfd7f8f9119e547b7ffeb4217482a1, type: 3}
   m_Name: WheelData
   m_EditorClassIdentifier: 
+  Id: 6
   Price: 5
   Prefab: {fileID: 3450438086592029298, guid: ff0220c7d236138478fd5ab0c38a5d41, type: 3}
   Sprite: {fileID: 21300000, guid: 87c24559f23012b4aad51edf99a4756e, type: 3}

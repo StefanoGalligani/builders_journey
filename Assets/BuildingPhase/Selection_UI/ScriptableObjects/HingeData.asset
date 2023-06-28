@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabfd7f8f9119e547b7ffeb4217482a1, type: 3}
   m_Name: HingeData
   m_EditorClassIdentifier: 
+  Id: 3
   Price: 3
   Prefab: {fileID: 8905659374273624105, guid: dbc19cefd02071f4b9812ed283b6147f, type: 3}
   Sprite: {fileID: 159151793, guid: e7e46ddbee252da498adc674cb141b04, type: 3}

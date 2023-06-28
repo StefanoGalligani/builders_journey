@@ -12,6 +12,10 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
         [SerializeField] private GameObject _content;
         private List<PieceSelectable> selectables;
         
+        private void Awake() {
+            FindObjectOfType<PiecesDictionary>().Init(_pieceInfos);
+        }
+
         private void Start() {
             selectables = new List<PieceSelectable>();
             _scrollContent.sizeDelta = new Vector2(0, 110*_pieceInfos.Length + 10);
@@ -27,8 +31,8 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
             _content.SetActive(false);
         }
 
-        public void Selection(PieceSelectable pieceSelectable, Piece prefab) {
-            _gridInteractionManager.SetNewPiecePrefab(prefab);
+        public void Selection(PieceSelectable pieceSelectable, Piece prefab, int id) {
+            _gridInteractionManager.SetNewPiecePrefab(prefab, id);
             selectables.ForEach(s => s.ToggleHighlight(s.Equals(pieceSelectable)));
         }
     }

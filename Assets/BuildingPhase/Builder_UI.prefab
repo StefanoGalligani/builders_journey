@@ -423,7 +423,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2935719151742347733}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9990219
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 2935719152765501172}
   - component: {fileID: 2935719152765501176}
   - component: {fileID: 2935719152765501178}
+  - component: {fileID: 5334199330530696658}
   m_Layer: 5
   m_Name: Builder_UI
   m_TagString: Untagged
@@ -914,6 +915,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vehicle: {fileID: 0}
+--- !u!114 &5334199330530696658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935719152765501171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d1e881dfc4cb04e97d3579eabee640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5755397537378296492
 GameObject:
   m_ObjectHideFlags: 0

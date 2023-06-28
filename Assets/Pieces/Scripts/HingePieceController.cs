@@ -39,7 +39,7 @@ namespace BuilderGame.Pieces {
         }
 
         private void AdjustBaseSpriteRotation() {
-            if (!_joint.connectedBody) return;
+            if (!_joint) return;
             Vector2 connectedBody = _joint.connectedBody.transform.position;
             Vector2 directionFromConnected = (Vector2)transform.position - connectedBody;
             float connectedAngle = Vector2.SignedAngle(Vector2.up, directionFromConnected);

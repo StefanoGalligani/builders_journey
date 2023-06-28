@@ -17,10 +17,12 @@ namespace BuilderGame.BuildingPhase.Builder {
         private bool _isMainPiece = false;
 
         internal Vector2Int GridPosition{get; private set;}
+        internal int Id {get; private set;}
+        internal Direction FacingDirection{get {return _facingDirection;}}
         internal bool CanBeAttachedTo {get { return _canBeAttachedTo;}}
         internal bool IsConnected {get { return (_isConnected || _isMainPiece);}}
 
-        internal void Init(Vector2Int gridPosition, bool isMainPiece = false)
+        internal void Init(Vector2Int gridPosition, int id, bool isMainPiece = false)
         {
             _rb = GetComponent<Rigidbody2D>();
             _lr = GetComponent<LineRenderer>();
@@ -28,6 +30,7 @@ namespace BuilderGame.BuildingPhase.Builder {
 
             GridPosition = gridPosition;
             _isMainPiece = isMainPiece;
+            Id = id;
 
             _facingDirection = Direction.Right;
             _jointDirection = Direction.Null;
@@ -51,9 +54,16 @@ namespace BuilderGame.BuildingPhase.Builder {
                 _facingDirection = _facingDirection + 1;
                 transform.Rotate(Vector3.forward * 90);
 
-                if (_jointDirection.Equals(Direction.Null)) break;
-                if (IsAvailableJointDirection(_jointDirection)) break;
+                bool isValidRotationForJoint = _jointDirection.Equals(Direction.Null) || IsAvailableJointDirection(_jointDirection);
+                if (isValidRotationForJoint) break;
             }
+        }
+
+        internal void SetRotation(Direction newRot) {
+            if(!_canRotate) return;
+
+            _facingDirection = newRot;
+            transform.Rotate(Vector3.forward * 90 * newRot);
         }
 
         internal void DetachJoint() {

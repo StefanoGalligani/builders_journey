@@ -1,0 +1,16 @@
+{
+    "name": "PiecesAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:922ee0c850408a240a136190181d4576"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
