@@ -15,6 +15,10 @@ namespace BuilderGame.BuildingPhase.Builder.FileManagement
         private VehicleFileManagerSingleton()
         {
             _filePath = Application.persistentDataPath + "/Vehicles/";
+            if (!Directory.Exists(_filePath))  
+            {  
+                Directory.CreateDirectory(_filePath);  
+            } 
         }
 
         public bool IsVehicleSaved() {
@@ -36,29 +40,31 @@ namespace BuilderGame.BuildingPhase.Builder.FileManagement
             return null;
         }
 
-        private void WriteToFile(string fileName) {
+        internal bool WriteToFile(string fileName) {
             if (!_fileRead) {
                 Debug.LogWarning("Tried to write to file without having the data");
-                return;
+                return false;
             }
             FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Create);
             BinaryFormatter converter = new BinaryFormatter();
             converter.Serialize(dataStream, _vehicleData);
             dataStream.Close();
+            return true;
         }
 
-        private void ReadFromFile(string fileName) {
-            if(File.Exists(_filePath + fileName)) {
-                FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Open);
-
-                BinaryFormatter converter = new BinaryFormatter();
-                _vehicleData = converter.Deserialize(dataStream) as VehicleDataSerializable;
-
-                dataStream.Close();
-                _fileRead = true;
-            } else {
+        internal bool ReadFromFile(string fileName) {
+            if(!File.Exists(_filePath + fileName)) {
                 Debug.LogError("Could not find file " + _filePath + fileName);
+                return false;
             }
+            FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Open);
+
+            BinaryFormatter converter = new BinaryFormatter();
+            _vehicleData = converter.Deserialize(dataStream) as VehicleDataSerializable;
+
+            dataStream.Close();
+            _fileRead = true;
+            return true;
         }
     }
 }

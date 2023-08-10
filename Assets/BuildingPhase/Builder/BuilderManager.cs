@@ -6,6 +6,7 @@ namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
     {
         private Vehicle _vehicle;
+        private Piece _mainPiecePrefab;
         private Piece _piecePrefab;
         private int _pieceId;
         private Piece[][] _placedPieces;
@@ -15,6 +16,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle, Piece mainPiecePrefab) {
             _gridInfo = gridInfo;
             _vehicle = vehicle;
+            _mainPiecePrefab = mainPiecePrefab;
 
             _placedPieces = new Piece[gridInfo.GridDimensions.x][];
             for (int i=0; i<_placedPieces.Length; i++) {
@@ -25,18 +27,18 @@ namespace BuilderGame.BuildingPhase.Builder {
 
             bool vehicleBuilt = false;
             if (VehicleFileManagerSingleton.Instance.IsVehicleSaved()) {
-                vehicleBuilt = BuildVehicleFromData(VehicleFileManagerSingleton.Instance.GetVehicleData(), mainPiecePrefab);
+                vehicleBuilt = BuildVehicleFromData(VehicleFileManagerSingleton.Instance.GetVehicleData());
             }
             if (!vehicleBuilt) {
-                PlaceMainPiece(mainPiecePrefab);
+                PlaceMainPiece();
             }
 
         }
 
-        private void PlaceMainPiece(Piece mainPiecePrefab) {
+        private void PlaceMainPiece() {
             int x = _gridInfo.MainPieceCoordinates.x;
             int y = _gridInfo.MainPieceCoordinates.y;
-            InstantiateNewPiece(mainPiecePrefab, x, y, 0, true);
+            InstantiateNewPiece(_mainPiecePrefab, x, y, 0, true);
         }
 
         public void SetPiecePrefab(Piece piecePrefab, int pieceId) {
@@ -85,7 +87,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             return false;
         }
 
-        private bool BuildVehicleFromData(VehicleDataSerializable vehicleData, Piece mainPiecePrefab) {
+        private bool BuildVehicleFromData(VehicleDataSerializable vehicleData) {
             PiecesDictionary piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
             if (!piecesDictionary.AreAllIdsValid(vehicleData.pieceIds)) {
                 Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
@@ -94,7 +96,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             //controllare che le coordinate dei pezzi siano valide, shiftare se si possono adattare, altrimenti return false
             for (int i=0; i<vehicleData.pieceIds.Length; i++) {
                 int id = vehicleData.pieceIds[i];
-                Piece prefab = (id>0) ? piecesDictionary.GetPrefabById(id) : mainPiecePrefab;
+                Piece prefab = (id>0) ? piecesDictionary.GetPrefabById(id) : _mainPiecePrefab;
                 int[] coords = vehicleData.pieceCoordinates[i];
                 Piece newPiece = InstantiateNewPiece(prefab, coords[0], coords[1], id, id==0);
                 newPiece.SetRotation(vehicleData.pieceRotations[i]);

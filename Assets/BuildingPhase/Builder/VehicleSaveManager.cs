@@ -1,9 +1,10 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Builder.FileManagement;
+using UnityEngine.SceneManagement;
 
 namespace BuilderGame.BuildingPhase.Builder
 {
-    public class VehicleAutoSaveManager : MonoBehaviour
+    public class VehicleSaveManager : MonoBehaviour
     {
         private Transform _vehicle;
         void Start()
@@ -12,7 +13,7 @@ namespace BuilderGame.BuildingPhase.Builder
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
-        private void OnGameStart() {
+        private void SaveVehicle() {
             VehicleDataSerializable vehicleData = new VehicleDataSerializable();
             vehicleData.pieceIds = new int[_vehicle.childCount];
             vehicleData.pieceCoordinates = new int[_vehicle.childCount][];
@@ -25,6 +26,22 @@ namespace BuilderGame.BuildingPhase.Builder
                 vehicleData.pieceCoordinates[i] = new int[]{coord.x, coord.y};
             }
             VehicleFileManagerSingleton.Instance.SetVehicleData(vehicleData);
+        }
+
+        public void SaveOnFile(string name) {
+            SaveVehicle();
+            VehicleFileManagerSingleton.Instance.WriteToFile(name);
+        }
+
+        public void LoadFromFile(string name) {
+            bool loaded = VehicleFileManagerSingleton.Instance.ReadFromFile(name);
+            if (loaded)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+
+        private void OnGameStart() {
+            SaveVehicle();
         }
     }
 }
