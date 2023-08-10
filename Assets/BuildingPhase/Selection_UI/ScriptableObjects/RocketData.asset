@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RocketData
   m_EditorClassIdentifier: 
   Id: 5
-  Price: 4
+  Price: 6
   Prefab: {fileID: 936681325961206473, guid: 0e2a984e3d06bab40b5a61a06140e644, type: 3}
   Sprite: {fileID: -424266360, guid: 9b4d502bf435af844beea061dadd3ab6, type: 3}

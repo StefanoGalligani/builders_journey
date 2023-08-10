@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HingeData
   m_EditorClassIdentifier: 
   Id: 3
-  Price: 3
+  Price: 4
   Prefab: {fileID: 8905659374273624105, guid: dbc19cefd02071f4b9812ed283b6147f, type: 3}
   Sprite: {fileID: 159151793, guid: e7e46ddbee252da498adc674cb141b04, type: 3}

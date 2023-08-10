@@ -1042,6 +1042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cinemachine: {fileID: 5918859990805968047}
+  _originalOffset: {x: 0, y: 1, z: 0}
 --- !u!1 &5918859990629868624
 GameObject:
   m_ObjectHideFlags: 0
