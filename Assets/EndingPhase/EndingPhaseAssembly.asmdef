@@ -2,7 +2,8 @@
     "name": "EndingPhaseAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:cbf8bf83bf0c10e48891f31b85d5aca8"
+        "GUID:cbf8bf83bf0c10e48891f31b85d5aca8",
+        "GUID:936a0029030a7484dbf3603e53d10c85"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

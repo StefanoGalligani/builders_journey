@@ -1,22 +1,22 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Grid;
+using BuilderGame.BuildingPhase.Price;
 using BuilderGame.BuildingPhase.Builder.FileManagement;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
     {
+        public int NewPieceId {private get; set;}
         private Vehicle _vehicle;
-        private Piece _mainPiecePrefab;
-        private Piece _piecePrefab;
-        private int _pieceId;
         private Piece[][] _placedPieces;
         private GridInfoScriptableObject _gridInfo;
         private VehicleConnectionManager _vehicleConnectionManager;
+        private PiecesDictionary _piecesDictionary;
+        private TotalPriceInfo _totalPriceInfo;
 
-        public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle, Piece mainPiecePrefab) {
+        public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
             _gridInfo = gridInfo;
             _vehicle = vehicle;
-            _mainPiecePrefab = mainPiecePrefab;
 
             _placedPieces = new Piece[gridInfo.GridDimensions.x][];
             for (int i=0; i<_placedPieces.Length; i++) {
@@ -24,6 +24,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             }
             
             _vehicleConnectionManager = new VehicleConnectionManager(gridInfo, vehicle);
+            _piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
 
             bool vehicleBuilt = false;
             if (VehicleFileManagerSingleton.Instance.IsVehicleSaved()) {
@@ -38,25 +39,18 @@ namespace BuilderGame.BuildingPhase.Builder {
         private void PlaceMainPiece() {
             int x = _gridInfo.MainPieceCoordinates.x;
             int y = _gridInfo.MainPieceCoordinates.y;
-            InstantiateNewPiece(_mainPiecePrefab, x, y, 0, true);
-        }
-
-        public void SetPiecePrefab(Piece piecePrefab, int pieceId) {
-            _piecePrefab = piecePrefab;
-            _pieceId = pieceId;
+            InstantiateNewPiece(0, _gridInfo.MainPieceCoordinates);
         }
 
         public void PlacePiece(Vector2Int gridCoords) {
             if (!IsPlaceable(gridCoords)) return;
 
             if (_placedPieces[gridCoords.x][gridCoords.y] != null) {
-                _placedPieces[gridCoords.x][gridCoords.y].transform.SetParent(null);
-                GameObject.Destroy(_placedPieces[gridCoords.x][gridCoords.y].gameObject);
-                _placedPieces[gridCoords.x][gridCoords.y] = null;
+                RemovePiece(gridCoords);
             }
             
-            if (_piecePrefab != null) {
-                InstantiateNewPiece(_piecePrefab, gridCoords.x, gridCoords.y, _pieceId);
+            if (NewPieceId >= 0) {
+                InstantiateNewPiece(NewPieceId, gridCoords);
             }
             
             _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
@@ -88,35 +82,49 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private bool BuildVehicleFromData(VehicleDataSerializable vehicleData) {
-            PiecesDictionary piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
-            if (!piecesDictionary.AreAllIdsValid(vehicleData.pieceIds)) {
+            if (!_piecesDictionary.AreAllIdsValid(vehicleData.pieceIds)) {
                 Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
                 return false;
             }
             //controllare che le coordinate dei pezzi siano valide, shiftare se si possono adattare, altrimenti return false
             for (int i=0; i<vehicleData.pieceIds.Length; i++) {
                 int id = vehicleData.pieceIds[i];
-                Piece prefab = (id>0) ? piecesDictionary.GetPrefabById(id) : _mainPiecePrefab;
+                Piece prefab = _piecesDictionary.GetPrefabById(id);
                 int[] coords = vehicleData.pieceCoordinates[i];
-                Piece newPiece = InstantiateNewPiece(prefab, coords[0], coords[1], id, id==0);
+                Piece newPiece = InstantiateNewPiece(id, new Vector2Int(coords[0], coords[1]));
                 newPiece.SetRotation(vehicleData.pieceRotations[i]);
             }
             _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
             return true;
         }
 
-        private Piece InstantiateNewPiece(Piece prefab, int gridx, int gridy, int id, bool isMain=false) {
-            Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform);
-            newPiece.transform.position = PositionFromGridCoordinates(gridx, gridy);
-            _placedPieces[gridx][gridy] = newPiece;
+        private void RemovePiece(Vector2Int gridCoords) {
+            int price = _piecesDictionary.GetPriceById(_placedPieces[gridCoords.x][gridCoords.y].Id);
+            _placedPieces[gridCoords.x][gridCoords.y].transform.SetParent(null);
+            GameObject.Destroy(_placedPieces[gridCoords.x][gridCoords.y].gameObject);
+            _placedPieces[gridCoords.x][gridCoords.y] = null;
 
-            newPiece.Init(new Vector2Int(gridx, gridy), id, isMain);
+            _totalPriceInfo.SubtractPrice(price);
+        }
+
+        private Piece InstantiateNewPiece(int id, Vector2Int gridCoords) {
+            int price = _piecesDictionary.GetPriceById(id);
+            Piece prefab = _piecesDictionary.GetPrefabById(id);
+
+            Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform);
+            newPiece.transform.position = PositionFromGridCoordinates(gridCoords);
+            _placedPieces[gridCoords.x][gridCoords.y] = newPiece;
+
+            bool isMain = id==0;
+            newPiece.Init(id, gridCoords, isMain);
+
+            _totalPriceInfo.SumPrice(price);
 
             return newPiece;
         }
 
-        private Vector2 PositionFromGridCoordinates(int gridx, int gridy) {
-            return _gridInfo.BottomLeftCoords + new Vector2(gridx,gridy) * _gridInfo.CellSize + _gridInfo.GridOffset;
+        private Vector2 PositionFromGridCoordinates(Vector2Int gridCoords) {
+            return _gridInfo.BottomLeftCoords + new Vector2(gridCoords.x, gridCoords.y) * _gridInfo.CellSize + _gridInfo.GridOffset;
         }
 
         private bool IsValidPosition(int x, int y) { //estrarre in una classe di utils

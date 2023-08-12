@@ -6,12 +6,11 @@ namespace BuilderGame.BuildingPhase.Grid {
     {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;
-        [SerializeField] private Piece _mainPiecePrefab;
         [SerializeField] private GameObject _content;
         private BuilderManager _builderManager;
 
         private void Start() {
-            _builderManager = new BuilderManager(_gridInfo, _vehicle, _mainPiecePrefab);
+            _builderManager = new BuilderManager(_gridInfo, _vehicle);
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
@@ -19,8 +18,8 @@ namespace BuilderGame.BuildingPhase.Grid {
             _content.SetActive(false);
         }
 
-        public void SetNewPiecePrefab(Piece piecePrefab, int pieceId) {
-            _builderManager.SetPiecePrefab(piecePrefab, pieceId);
+        public void SetNewPieceId(int pieceId) {
+            _builderManager.NewPieceId = pieceId;
         }
 
         public void Clicked(bool leftClick) {

@@ -9,7 +9,7 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
         [SerializeField] private Image _image;
         [SerializeField] private Image _highlight;
         [SerializeField] private TextMeshProUGUI _infoText;
-        private Piece _piecePrefab;
+        private PieceInfoScriptableObject _pieceInfo;
         private int _pieceId;
         private PieceSelectionManager _selectionManager;
 
@@ -17,13 +17,12 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
             _selectionManager = selectionManager;
 
             _infoText.text = "$ " + pieceInfo.Price;
-            _piecePrefab = pieceInfo.Prefab;
-            _pieceId = pieceInfo.Id;
+            _pieceInfo = pieceInfo;
             _image.sprite = pieceInfo.Sprite;
         }
 
         public void OnClick() {
-            _selectionManager.Selection(this, _piecePrefab, _pieceId);
+            _selectionManager.Selection(this, _pieceInfo);
         }
 
         internal void ToggleHighlight(bool value) {

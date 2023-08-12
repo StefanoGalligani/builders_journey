@@ -31,8 +31,8 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
             _content.SetActive(false);
         }
 
-        public void Selection(PieceSelectable pieceSelectable, Piece prefab, int id) {
-            _gridInteractionManager.SetNewPiecePrefab(prefab, id);
+        public void Selection(PieceSelectable pieceSelectable, PieceInfoScriptableObject pieceInfo) {
+            _gridInteractionManager.SetNewPieceId(pieceInfo.Id);
             selectables.ForEach(s => s.ToggleHighlight(s.Equals(pieceSelectable)));
         }
     }

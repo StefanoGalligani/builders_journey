@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BuilderGame.BuildingPhase.Price;
 using BuilderGame.Levels;
 using BuilderGame.Levels.FileManagement;
 
@@ -24,10 +25,12 @@ namespace BuilderGame.EndingPhase
             Levels.LevelState previousState = LevelFileManagerSingleton.Instance.GetLevelState(currentLevelName);
             int previousStars = LevelFileManagerSingleton.Instance.GetLevelStars(currentLevelName);
 
-            int newStars = 2; //ottenere dinamicamente
+            int totalPrice = FindObjectOfType<TotalPriceInfo>().GetTotalPrice();
+            int newStars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(totalPrice);
             if (newStars > previousStars) {
                 LevelFileManagerSingleton.Instance.SetLevelStars(currentLevelName, newStars);
             }
+
             if (previousState != LevelState.Passed) {
                 LevelFileManagerSingleton.Instance.SetLevelState(currentLevelName, Levels.LevelState.Passed);
                 LevelFileManagerSingleton.Instance.SetLevelState(nextLevelInfos[0], Levels.LevelState.NotPassed);

@@ -22,7 +22,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         internal bool CanBeAttachedTo {get { return _canBeAttachedTo;}}
         internal bool IsConnected {get { return (_isConnected || _isMainPiece);}}
 
-        internal void Init(Vector2Int gridPosition, int id, bool isMainPiece = false)
+        internal void Init(int id, Vector2Int gridPosition, bool isMainPiece = false)
         {
             _rb = GetComponent<Rigidbody2D>();
             _lr = GetComponent<LineRenderer>();

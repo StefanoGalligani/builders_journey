@@ -6,5 +6,7 @@ namespace BuilderGame.Levels {
     {
         public string LevelName;
         public string SceneName;
+        public int PriceLimitThreeStars;
+        public int PriceLimitTwoStars;
     }
 }
