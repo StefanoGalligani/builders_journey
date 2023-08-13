@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using BuilderGame.BuildingPhase.Grid;
+using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.Builder;
+using BuilderGame.BuildingPhase.PieceInfo;
+using BuilderGame.BuildingPhase.VehicleManagement;
 
 namespace BuilderGame.BuildingPhase.SelectionUI {
     public class PieceSelectionManager : MonoBehaviour {

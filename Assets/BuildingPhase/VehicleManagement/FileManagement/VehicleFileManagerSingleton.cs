@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace BuilderGame.BuildingPhase.Builder.FileManagement
+namespace BuilderGame.BuildingPhase.VehicleManagement.FileManagement
 {
     public class VehicleFileManagerSingleton
     {
@@ -34,7 +34,7 @@ namespace BuilderGame.BuildingPhase.Builder.FileManagement
             _fileRead = true;
         }
         
-        internal VehicleDataSerializable GetVehicleData() {
+        public VehicleDataSerializable GetVehicleData() {
             if (_vehicleData != null) return _vehicleData;
             Debug.LogWarning("No vehicle data is present");
             return null;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BuilderGame.BuildingPhase.Builder {
+namespace BuilderGame.BuildingPhase.VehicleManagement {
     public class StartNotifier : MonoBehaviour
     {
         public event Action GameStart;

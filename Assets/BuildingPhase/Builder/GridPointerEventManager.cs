@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace BuilderGame.BuildingPhase.Grid {
+namespace BuilderGame.BuildingPhase.Builder {
     public class GridPointerEventManager : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField] GridInteractionManager _gridInteractionManager;

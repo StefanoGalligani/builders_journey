@@ -1,7 +1,7 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.Builder;
+using BuilderGame.BuildingPhase.VehicleManagement;
 
-namespace BuilderGame.BuildingPhase.SelectionUI {
+namespace BuilderGame.BuildingPhase.PieceInfo {
     [CreateAssetMenu(fileName = "PieceData", menuName = "ScriptableObjects/PieceInfoScriptableObject", order = 1)]
     public class PieceInfoScriptableObject : ScriptableObject
     {

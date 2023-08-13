@@ -1,7 +1,7 @@
 using UnityEngine;
 using BuilderGame.Utils;
 
-namespace BuilderGame.BuildingPhase.Builder {
+namespace BuilderGame.BuildingPhase.VehicleManagement {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Piece : MonoBehaviour {
         [SerializeField] private DirectionEnum[] _availableJointDirections;
@@ -16,13 +16,13 @@ namespace BuilderGame.BuildingPhase.Builder {
         private bool _isConnected = false;
         private bool _isMainPiece = false;
 
-        internal Vector2Int GridPosition{get; private set;}
-        internal int Id {get; private set;}
-        internal Direction FacingDirection{get {return _facingDirection;}}
-        internal bool CanBeAttachedTo {get { return _canBeAttachedTo;}}
-        internal bool IsConnected {get { return (_isConnected || _isMainPiece);}}
+        public Vector2Int GridPosition{get; private set;}
+        public int Id {get; private set;}
+        public Direction FacingDirection{get {return _facingDirection;}}
+        public bool CanBeAttachedTo {get { return _canBeAttachedTo;}}
+        public bool IsConnected {get { return (_isConnected || _isMainPiece);}}
 
-        internal void Init(int id, Vector2Int gridPosition, bool isMainPiece = false)
+        public void Init(int id, Vector2Int gridPosition, bool isMainPiece = false)
         {
             _rb = GetComponent<Rigidbody2D>();
             _lr = GetComponent<LineRenderer>();
@@ -47,7 +47,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
 
-        internal void Rotate() {
+        public void Rotate() {
             if(!_canRotate) return;
 
             for (int i=0; i<4; i++) {
@@ -59,14 +59,14 @@ namespace BuilderGame.BuildingPhase.Builder {
             }
         }
 
-        internal void SetRotation(Direction newRot) {
+        public void SetRotation(Direction newRot) {
             if(!_canRotate) return;
 
             _facingDirection = newRot;
             transform.Rotate(Vector3.forward * 90 * newRot);
         }
 
-        internal void DetachJoint() {
+        public void DetachJoint() {
             if (!_joint) return;
             _joint.connectedBody = null;
             _isConnected = false;
@@ -74,7 +74,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             UpdateLineRenderer();
         }
 
-        internal void ConnectJoint(Rigidbody2D other, Direction dir) {
+        public void ConnectJoint(Rigidbody2D other, Direction dir) {
             _bodyToConnectTo = other;
             _isConnected = true;
             _jointDirection = dir;
@@ -82,7 +82,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             UpdateLineRenderer();
         }
 
-        internal bool IsPossibleJointDirection(Direction dir) {
+        public bool IsPossibleJointDirection(Direction dir) {
             if (_canRotate && _availableJointDirections.Length > 0) return true;
             return IsAvailableJointDirection(dir);
         }

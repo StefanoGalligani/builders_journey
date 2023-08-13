@@ -423,7 +423,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2935719151742347733}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.9990219
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -927,6 +927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d1e881dfc4cb04e97d3579eabee640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainPiecePrefab: {fileID: 2544133511482576689, guid: 7801cf4973b0b704aab3ff5dad16dccf, type: 3}
 --- !u!1 &5755397537378296492
 GameObject:
   m_ObjectHideFlags: 0

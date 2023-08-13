@@ -1,18 +1,21 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.Grid;
+using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.Price;
-using BuilderGame.BuildingPhase.Builder.FileManagement;
+using BuilderGame.BuildingPhase.VehicleManagement;
+using BuilderGame.BuildingPhase.VehicleManagement.FileManagement;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
     {
-        public int NewPieceId {private get; set;}
+        public int NewPieceId {private get{return _newPieceId;} set {_newPieceId = value; _validSelection = true;}}
+        private int _newPieceId;
         private Vehicle _vehicle;
         private Piece[][] _placedPieces;
         private GridInfoScriptableObject _gridInfo;
         private VehicleConnectionManager _vehicleConnectionManager;
         private PiecesDictionary _piecesDictionary;
         private TotalPriceInfo _totalPriceInfo;
+        private bool _validSelection = false;
 
         public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
             _gridInfo = gridInfo;
@@ -25,6 +28,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             
             _vehicleConnectionManager = new VehicleConnectionManager(gridInfo, vehicle);
             _piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
+            _totalPriceInfo = GameObject.FindObjectOfType<TotalPriceInfo>();
 
             bool vehicleBuilt = false;
             if (VehicleFileManagerSingleton.Instance.IsVehicleSaved()) {
@@ -64,6 +68,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private bool IsPlaceable(Vector2Int gridCoords) {
+            if (!_validSelection) return false;
             if (gridCoords.x == _gridInfo.MainPieceCoordinates.x && gridCoords.y == _gridInfo.MainPieceCoordinates.y)
                 return false;
             for (int i=-1; i<=1; i++) {

@@ -1,8 +1,9 @@
 {
-    "name": "PiecesAssembly",
+    "name": "BuildingPhaseAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:b5704b815afc15946b32529fb8b6225d"
+        "GUID:b5704b815afc15946b32529fb8b6225d",
+        "GUID:ed160febb6a97a34f92d075bf234bdde"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

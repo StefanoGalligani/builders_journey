@@ -1,7 +1,6 @@
 using UnityEngine;
 using Cinemachine;
-using BuilderGame.BuildingPhase;
-using BuilderGame.BuildingPhase.Builder;
+using BuilderGame.BuildingPhase.VehicleManagement;
 
 namespace BuilderGame.Cam
 {

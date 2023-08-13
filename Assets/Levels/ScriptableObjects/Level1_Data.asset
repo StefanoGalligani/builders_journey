@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 1
   SceneName: Level1
+  PriceLimitThreeStars: 6
+  PriceLimitTwoStars: 10

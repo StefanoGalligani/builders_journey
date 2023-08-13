@@ -1,8 +1,11 @@
 {
-    "name": "PiecesAssembly",
+    "name": "GridAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:b5704b815afc15946b32529fb8b6225d"
+        "GUID:b5704b815afc15946b32529fb8b6225d",
+        "GUID:14c474927b07356438945d9c7911b7d2",
+        "GUID:936a0029030a7484dbf3603e53d10c85",
+        "GUID:922ee0c850408a240a136190181d4576"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

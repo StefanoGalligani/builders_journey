@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BuilderGame.BuildingPhase.Grid {
+namespace BuilderGame.BuildingPhase.Builder {
     [CreateAssetMenu(fileName = "GridData", menuName = "ScriptableObjects/GridInfoScriptableObject", order = 1)]
     public class GridInfoScriptableObject : ScriptableObject
     {

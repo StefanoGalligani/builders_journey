@@ -1,9 +1,9 @@
 using System;
 
-namespace BuilderGame.BuildingPhase.Builder.FileManagement
+namespace BuilderGame.BuildingPhase.VehicleManagement.FileManagement
 {
     [Serializable]
-    internal class VehicleDataSerializable
+    public class VehicleDataSerializable
     {
         public int[] pieceIds;
         public int[][] pieceCoordinates;

@@ -1,8 +1,8 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.Builder.FileManagement;
+using BuilderGame.BuildingPhase.VehicleManagement.FileManagement;
 using UnityEngine.SceneManagement;
 
-namespace BuilderGame.BuildingPhase.Builder
+namespace BuilderGame.BuildingPhase.VehicleManagement
 {
     public class VehicleSaveManager : MonoBehaviour
     {

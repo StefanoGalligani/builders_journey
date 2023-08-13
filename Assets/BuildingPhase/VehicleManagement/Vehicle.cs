@@ -1,8 +1,7 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.Builder;
 using System.Linq;
 
-namespace BuilderGame.BuildingPhase {
+namespace BuilderGame.BuildingPhase.VehicleManagement {
     public class Vehicle : MonoBehaviour
     {
         private bool _isReadyToStart = false;

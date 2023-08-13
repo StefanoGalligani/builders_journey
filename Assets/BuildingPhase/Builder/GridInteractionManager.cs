@@ -1,7 +1,7 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.Builder;
+using BuilderGame.BuildingPhase.VehicleManagement;
 
-namespace BuilderGame.BuildingPhase.Grid {
+namespace BuilderGame.BuildingPhase.Builder {
     public class GridInteractionManager : MonoBehaviour
     {
         [SerializeField] private GridInfoScriptableObject _gridInfo;

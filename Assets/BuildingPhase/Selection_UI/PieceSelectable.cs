@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using BuilderGame.BuildingPhase.Builder;
+using BuilderGame.BuildingPhase.PieceInfo;
 
 namespace BuilderGame.BuildingPhase.SelectionUI {
     public class PieceSelectable : MonoBehaviour
