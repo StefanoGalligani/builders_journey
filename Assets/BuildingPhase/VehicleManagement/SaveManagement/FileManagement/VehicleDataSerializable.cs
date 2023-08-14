@@ -1,6 +1,6 @@
 using System;
 
-namespace BuilderGame.BuildingPhase.VehicleManagement.FileManagement
+namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
     [Serializable]
     public class VehicleDataSerializable

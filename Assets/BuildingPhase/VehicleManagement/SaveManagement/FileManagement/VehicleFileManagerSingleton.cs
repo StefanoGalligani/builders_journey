@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace BuilderGame.BuildingPhase.VehicleManagement.FileManagement
+namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
     public class VehicleFileManagerSingleton
     {
@@ -53,6 +53,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.FileManagement
         }
 
         internal bool ReadFromFile(string fileName) {
+            Debug.Log("File name: " + _filePath + fileName);
             if(!File.Exists(_filePath + fileName)) {
                 Debug.LogError("Could not find file " + _filePath + fileName);
                 return false;
