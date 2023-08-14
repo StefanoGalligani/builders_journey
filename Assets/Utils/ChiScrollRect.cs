@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace BuilderGame
+namespace BuilderGame.Utils
 {
     public class ChiScrollRect : ScrollRect, IPointerEnterHandler, IPointerExitHandler
     {

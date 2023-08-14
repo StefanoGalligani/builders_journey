@@ -3,7 +3,7 @@ using UnityEngine;
 using BuilderGame.BuildingPhase.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
 
-namespace BuilderGame.BuildingPhase {
+namespace BuilderGame.BuildingPhase.Dictionary {
     public class PiecesDictionary : MonoBehaviour {
         [SerializeField] private Piece _mainPiecePrefab;
         private Dictionary<int, Piece> _prefabDictionary;

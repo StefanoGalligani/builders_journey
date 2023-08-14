@@ -1,5 +1,5 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase;
+using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.FileManagement;
