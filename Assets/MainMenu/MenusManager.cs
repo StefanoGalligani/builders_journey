@@ -21,5 +21,9 @@ namespace BuilderGame.MainMenu
                 menus[i].SetActive(index == i);
             }
         }
+
+        public void Quit() {
+            Application.Quit();
+        }
     }
 }
