@@ -72,7 +72,7 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         private bool IsPlaceable(Vector2Int gridCoords) {
             if (!_validSelection) return false;
-            if (gridCoords.x == _gridInfo.MainPieceCoordinates.x && gridCoords.y == _gridInfo.MainPieceCoordinates.y)
+            if (gridCoords.x == _mainPieceCoords.x && gridCoords.y == _mainPieceCoords.y)
                 return false;
             for (int i=-1; i<=1; i++) {
                 for (int j=-1; j<=1; j++) {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.VehicleManagement;
+using BuilderGame.Utils;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class GridInteractionManager : MonoBehaviour
@@ -30,6 +31,10 @@ namespace BuilderGame.BuildingPhase.Builder {
             } else {
                 _builderManager.RotatePiece(gridCoords);
             }
+        }
+
+        public void ClickedShift(int direction) {
+            _builderManager.ShiftAllPieces(direction);
         }
 
         private Vector2Int PositionToGridCoordinates(Vector2 pos) {
