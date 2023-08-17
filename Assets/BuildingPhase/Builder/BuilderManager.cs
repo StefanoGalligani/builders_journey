@@ -94,7 +94,19 @@ namespace BuilderGame.BuildingPhase.Builder {
                 Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
                 return false;
             }
-            //controllare che le coordinate dei pezzi siano valide, shiftare se si possono adattare, altrimenti return false
+            Vector2Int maxCoord = MaximumCoord(vehicleData);
+            Vector2Int necessaryShift = _gridInfo.GridDimensions - maxCoord - new Vector2Int(1,1);
+            if (necessaryShift.x < 0 || necessaryShift.y < 0) {
+                Vector2Int vehicleSize = maxCoord - MinimumCoord(vehicleData) + new Vector2Int(1,1);
+                if (vehicleSize.x > _gridInfo.GridDimensions.x || vehicleSize.y > _gridInfo.GridDimensions.y) {
+                    Debug.LogWarning("The loaded vehicle is too large for this level");
+                    return false;
+                }
+                for (int i=0; i<vehicleData.pieceIds.Length; i++) {
+                    vehicleData.pieceCoordinates[i][0] += necessaryShift.x;
+                    vehicleData.pieceCoordinates[i][1] += necessaryShift.y;
+                }
+            }
             for (int i=0; i<vehicleData.pieceIds.Length; i++) {
                 int id = vehicleData.pieceIds[i];
                 Piece prefab = _piecesDictionary.GetPrefabById(id);
@@ -106,6 +118,27 @@ namespace BuilderGame.BuildingPhase.Builder {
             _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
             return true;
         }
+        
+        private Vector2Int MaximumCoord(VehicleDataSerializable vehicleData) {
+            Vector2Int maxCoord = new Vector2Int(0, 0);
+            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
+                int[] coords = vehicleData.pieceCoordinates[i];
+                if (coords[0] > maxCoord.x) maxCoord.x = coords[0];
+                if (coords[1] > maxCoord.y) maxCoord.y = coords[1];
+            }
+            return maxCoord;
+        }
+        
+        private Vector2Int MinimumCoord(VehicleDataSerializable vehicleData) {
+            Vector2Int minCoord = new Vector2Int(1000, 1000);
+            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
+                int[] coords = vehicleData.pieceCoordinates[i];
+                if (coords[0] < minCoord.x) minCoord.x = coords[0];
+                if (coords[1] < minCoord.y) minCoord.y = coords[1];
+            }
+            return minCoord;
+        }
+
 
         private void RemovePiece(Vector2Int gridCoords) {
             int price = _piecesDictionary.GetPriceById(_placedPieces[gridCoords.x][gridCoords.y].Id);

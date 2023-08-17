@@ -26,6 +26,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         public void Clicked(bool leftClick) {
             Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2Int gridCoords = PositionToGridCoordinates(clickPosition);
+            if (gridCoords.x >= _gridInfo.GridDimensions.x || gridCoords.y >= _gridInfo.GridDimensions.y) return;
             if (leftClick) {
                 _builderManager.PlacePiece(gridCoords);
             } else {
