@@ -7,21 +7,19 @@ using System.Linq;
 namespace BuilderGame.BuildingPhase.Builder {
     internal class VehicleConnectionManager {
         private Vehicle _vehicle;
-        private GridInfoScriptableObject _gridInfo;
 
-        internal VehicleConnectionManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
-            _gridInfo = gridInfo;
+        internal VehicleConnectionManager(Vehicle vehicle) {
             _vehicle = vehicle;
         }
 
-        internal bool ConnectPieces(Piece[][] placedPieces) {
+        internal bool ConnectPieces(Piece[][] placedPieces, Vector2Int mainPieceCoords) {
             Piece[] pieces = _vehicle.GetComponentsInChildren<Piece>();
             if(pieces.Length < 2) return false;
 
             pieces.ToList().ForEach(p => p.DetachJoint());
 
             Queue<Piece> pieceQueue = new Queue<Piece>();
-            pieceQueue.Enqueue(placedPieces[_gridInfo.MainPieceCoordinates.x][_gridInfo.MainPieceCoordinates.y]);
+            pieceQueue.Enqueue(placedPieces[mainPieceCoords.x][mainPieceCoords.y]);
             
             while (pieceQueue.Count > 0) {
                 Piece currentPiece = pieceQueue.Dequeue();

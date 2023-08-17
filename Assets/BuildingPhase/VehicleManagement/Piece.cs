@@ -40,6 +40,13 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             }
         }
 
+        public void Shift(Direction dir, float distance) {
+            Vector2Int shiftCoords = dir;
+            GridPosition += shiftCoords;
+            transform.position += new Vector3(shiftCoords.x * distance, shiftCoords.y * distance);
+            UpdateLineRenderer();
+        }
+
         public void PrepareForGame() {
             _rb.simulated = true;
             if (_lr) _lr.enabled = false;

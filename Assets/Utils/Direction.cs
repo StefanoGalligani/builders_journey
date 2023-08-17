@@ -6,11 +6,11 @@ namespace BuilderGame.Utils {
     public struct Direction {
         private int _internalValue { get; set; }
 
-        public static readonly int Right = 0;
-        public static readonly int Up = 1;
-        public static readonly int Left = 2;
-        public static readonly int Down = 3;
-        public static readonly int Null = 4;
+        public const int Right = 0;
+        public const int Up = 1;
+        public const int Left = 2;
+        public const int Down = 3;
+        public const int Null = 4;
 
         public Direction(int value) {
             _internalValue = value;
@@ -24,7 +24,7 @@ namespace BuilderGame.Utils {
                 return false;
             }
 
-            Direction other = new Direction(Direction.Null);
+            Direction other = Direction.Null;
 
             if (obj.GetType() == typeof(int)) {
                 other = new Direction((int)obj);
@@ -62,6 +62,10 @@ namespace BuilderGame.Utils {
                     return Vector3.zero;
             }
         }
+
+        public static implicit operator Vector2(Direction d)  {
+            return (Vector3)d;
+        }
         public static implicit operator Vector3Int(Direction d)  {
             switch (d._internalValue) {
                 case 0:
@@ -74,6 +78,20 @@ namespace BuilderGame.Utils {
                     return Vector3Int.down;
                 default:
                     return Vector3Int.zero;
+            }
+        }
+        public static implicit operator Vector2Int(Direction d)  {
+            switch (d._internalValue) {
+                case 0:
+                    return Vector2Int.right;
+                case 1:
+                    return Vector2Int.up;
+                case 2:
+                    return Vector2Int.left;
+                case 3:
+                    return Vector2Int.down;
+                default:
+                    return Vector2Int.zero;
             }
         }
         

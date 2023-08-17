@@ -1,6 +1,7 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
+using BuilderGame.Utils;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 
@@ -16,6 +17,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         private PiecesDictionary _piecesDictionary;
         private TotalPriceInfo _totalPriceInfo;
         private bool _validSelection = false;
+        private Vector2Int _mainPieceCoords;
 
         public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
             _gridInfo = gridInfo;
@@ -26,7 +28,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 _placedPieces[i] = new Piece[gridInfo.GridDimensions.y];
             }
             
-            _vehicleConnectionManager = new VehicleConnectionManager(gridInfo, vehicle);
+            _vehicleConnectionManager = new VehicleConnectionManager(vehicle);
             _piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
             _totalPriceInfo = GameObject.FindObjectOfType<TotalPriceInfo>();
 
@@ -44,6 +46,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             int x = _gridInfo.MainPieceCoordinates.x;
             int y = _gridInfo.MainPieceCoordinates.y;
             InstantiateNewPiece(0, _gridInfo.MainPieceCoordinates);
+            _mainPieceCoords = _gridInfo.MainPieceCoordinates;
         }
 
         public void PlacePiece(Vector2Int gridCoords) {
@@ -57,7 +60,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 InstantiateNewPiece(NewPieceId, gridCoords);
             }
             
-            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
+            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
         }
 
         public void RotatePiece(Vector2Int gridCoords) {
@@ -98,8 +101,9 @@ namespace BuilderGame.BuildingPhase.Builder {
                 int[] coords = vehicleData.pieceCoordinates[i];
                 Piece newPiece = InstantiateNewPiece(id, new Vector2Int(coords[0], coords[1]));
                 newPiece.SetRotation(vehicleData.pieceRotations[i]);
+                if (id == 0) _mainPieceCoords = newPiece.GridPosition;
             }
-            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces);
+            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
             return true;
         }
 
@@ -126,6 +130,98 @@ namespace BuilderGame.BuildingPhase.Builder {
             _totalPriceInfo.SumPrice(price);
 
             return newPiece;
+        }
+
+        internal void ShiftAllPieces(Direction dir) {
+            bool shiftIsValid = true;
+            switch(dir) {
+                case Direction.Right:
+                    int i=_gridInfo.GridDimensions.x-1;
+                    for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                        if (_placedPieces[i][j]) {
+                            shiftIsValid = false;
+                            break;
+                        }
+                    }
+                break;
+                case Direction.Up:
+                    int j1=_gridInfo.GridDimensions.y-1;
+                    for (i=0; i<_gridInfo.GridDimensions.x; i++) {
+                        if (_placedPieces[i][j1]) {
+                            shiftIsValid = false;
+                            break;
+                        }
+                    }
+                break;
+                case Direction.Left:
+                    int i1=0;
+                    for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                        if (_placedPieces[i1][j]) {
+                            shiftIsValid = false;
+                            break;
+                        }
+                    }
+                break;
+                case Direction.Down:
+                    int j2=0;
+                    for (i=0; i<_gridInfo.GridDimensions.x; i++) {
+                        if (_placedPieces[i][j2]) {
+                            shiftIsValid = false;
+                            break;
+                        }
+                    }
+                break;
+                default:
+                    shiftIsValid = false;
+                break;
+            }
+            if (!shiftIsValid) {
+                Debug.LogWarning("Pieces cannot be shifted in direction " + ((Vector2)dir).x + "," + ((Vector2)dir).y);
+                return;
+            }
+            _mainPieceCoords.x += ((Vector2Int)dir).x;
+            _mainPieceCoords.y += ((Vector2Int)dir).y;
+            switch(dir) {
+                case Direction.Right:
+                    for (int i=_gridInfo.GridDimensions.x-2; i>=0; i--) {
+                        for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                            ShiftPiece(new Vector2Int(i, j), dir);
+                        }
+                    }
+                break;
+                case Direction.Up:
+                    for (int j=_gridInfo.GridDimensions.y-2; j>=0; j--) {
+                        for (int i=_gridInfo.GridDimensions.x-1; i>=0; i--) {
+                            ShiftPiece(new Vector2Int(i, j), dir);
+                        }
+                    }
+                break;
+                case Direction.Left:
+                    for (int i=1; i<_gridInfo.GridDimensions.x; i++) {
+                        for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                            ShiftPiece(new Vector2Int(i, j), dir);
+                        }
+                    }
+                break;
+                case Direction.Down:
+                    for (int j=1; j<_gridInfo.GridDimensions.y; j++) {
+                        for (int i=0; i<_gridInfo.GridDimensions.x; i++) {
+                            ShiftPiece(new Vector2Int(i, j), dir);
+                        }
+                    }
+                break;
+            }
+        }
+
+        private void ShiftPiece(Vector2Int gridCoords, Direction dir) {
+            Piece p = _placedPieces[gridCoords.x][gridCoords.y];
+            if (p != null) {
+                p.Shift(dir, _gridInfo.CellSize);
+                Vector2Int offset = dir;
+                _placedPieces[gridCoords.x + offset.x][gridCoords.y + offset.y] = p;
+                _placedPieces[gridCoords.x][gridCoords.y] = null;
+                
+            }
         }
 
         private Vector2 PositionFromGridCoordinates(Vector2Int gridCoords) {
