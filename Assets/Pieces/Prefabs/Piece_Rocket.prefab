@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daaf3232cdd31c741bf78303d565ed4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action:
+  _action:
     m_Name: Element 0
     m_Type: 1
     m_ExpectedControlType: Button

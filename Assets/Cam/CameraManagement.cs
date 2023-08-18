@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using BuilderGame.BuildingPhase.Start;
 using UnityEngine.InputSystem;
+using BuilderGame.Input;
 
 namespace BuilderGame.Cam
 {
@@ -11,20 +12,21 @@ namespace BuilderGame.Cam
         [SerializeField] private Vector3 _originalOffset;
         [SerializeField] private Transform _vehicleTransform;
         private CinemachineFramingTransposer _transposer;
+        private Controls _actionAsset;
         private bool _buildingPhase = true;
 
         void Start()
         {
             _transposer = _cinemachine.GetComponentInChildren<CinemachineFramingTransposer>();
             _transposer.m_TrackedObjectOffset = _originalOffset;
+            _actionAsset = new Controls();
+            _actionAsset.Enable();
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         void Update() {
-            if (!_buildingPhase) return;
-            //cambiare con Action
-            if (Mouse.current.middleButton.isPressed) {
-                Vector3 mouseDelta = Mouse.current.delta.value;
+            if (_buildingPhase && _actionAsset.defaultmap.CameraMoveActive.IsInProgress()) {
+                Vector3 mouseDelta = _actionAsset.defaultmap.CameraMove.ReadValue<Vector2>();
                 _transposer.m_TrackedObjectOffset -= mouseDelta * Time.deltaTime * 2;
             }
         }

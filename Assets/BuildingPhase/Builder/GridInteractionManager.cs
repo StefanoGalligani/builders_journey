@@ -19,7 +19,6 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private void OnGameStart() {
-            Debug.Log("Game started. Deactivating.");
             _content.SetActive(false);
         }
 

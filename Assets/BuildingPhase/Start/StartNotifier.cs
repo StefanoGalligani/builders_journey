@@ -5,7 +5,7 @@ namespace BuilderGame.BuildingPhase.Start {
     public class StartNotifier : MonoBehaviour
     {
         public event Action GameStart;
-        public bool CanStart;
+        [HideInInspector] public bool CanStart;
 
         public void StartGame() {
             if (!CanStart) return;

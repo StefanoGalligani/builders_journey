@@ -22,10 +22,6 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
         }
 
         public bool IsVehicleSaved() {
-            if(_fileRead)
-                for (int i=0; i<_vehicleData.pieceIds.Length; i++) {
-                    Debug.Log("Saved id: " + _vehicleData.pieceIds[i]);
-                }
             return _fileRead;
         }
 

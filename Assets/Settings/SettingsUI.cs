@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using BuilderGame.Input;
 
-namespace BuilderGame
+namespace BuilderGame.Settings
 {
     public class SettingsUI : MonoBehaviour
     {
         [SerializeField] private GameObject _content;
         [SerializeField] private bool _isMainMenu = false;
         [SerializeField] private string _menuSceneName;
+        private Controls _actionAsset;
         private bool _isContentOpen = false;
 
         private void Start() {
             Time.timeScale = 1;
             _content.SetActive(_isMainMenu);
             _isContentOpen = _isMainMenu;
+            _actionAsset = new Controls();
+            _actionAsset.Enable();
+            _actionAsset.defaultmap.Pause.performed += ctx => OnPause();
         }
 
-        private void Update()
+        private void OnPause()
         {
-            //cambiare con Action
-            if (Keyboard.current.escapeKey.wasPressedThisFrame) {
-                ToggleContent(!_isContentOpen);
-            }
+            ToggleContent(!_isContentOpen);
         }
 
         public void OnCloseSettings() {
@@ -46,6 +48,10 @@ namespace BuilderGame
             _content.SetActive(value);
             _isContentOpen = value;
             Time.timeScale = value ? 0 : 1;
+        }
+
+        private void OnDisable() {
+            _actionAsset.Disable();
         }
     }
 }

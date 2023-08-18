@@ -1,48 +1,55 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
+using BuilderGame.Input;
 
 namespace BuilderGame.Utils
 {
     public class ChiScrollRect : ScrollRect, IPointerEnterHandler, IPointerExitHandler
     {
-        private bool swallowMouseWheelScrolls = true;
-        private bool isMouseOver = false;
+        private Controls _actionAsset;
+        private bool _swallowMouseWheelScrolls = true;
+        private bool _isMouseOver = false;
+
+        protected override void Start() {
+            base.Start();
+            _actionAsset = new Controls();
+            _actionAsset.Enable();
+            _actionAsset.defaultmap.Scroll.performed += ctx => DetectScroll(ctx);
+        }
     
         public void OnPointerEnter(PointerEventData eventData)
         {
-            isMouseOver = true;
+            _isMouseOver = true;
         }
     
         public void OnPointerExit(PointerEventData eventData)
         {
-            isMouseOver = false;
+            _isMouseOver = false;
         }
     
-        private void Update()
+        private void DetectScroll(InputAction.CallbackContext context)
         {
             // Detect the mouse wheel and generate a scroll. This fixes the issue where Unity will prevent our ScrollRect
             // from receiving any mouse wheel messages if the mouse is over a raycast target (such as a button).
-            if (isMouseOver && IsMouseWheelRolling())
+            if (_isMouseOver)
             {
-                //cambiare con Action
-                var delta = Mouse.current.scroll.value.y;
-    
                 PointerEventData pointerData = new PointerEventData(EventSystem.current);
-                pointerData.scrollDelta = new Vector2(0f, delta);
     
-                swallowMouseWheelScrolls = false;
+                pointerData.scrollDelta = context.ReadValue<Vector2>();
+                _swallowMouseWheelScrolls = false;
                 OnScroll(pointerData);
-                swallowMouseWheelScrolls = true;
+                _swallowMouseWheelScrolls = true;
             }
         }
     
         public override void OnScroll(PointerEventData data)
         {
-            if (IsMouseWheelRolling() && swallowMouseWheelScrolls)
+            if (IsMouseWheelRolling() && _swallowMouseWheelScrolls)
             {
-                // Eat the scroll so that we don't get a double scroll when the mouse is over an image
+                // Eat the scroll so that we don't get a double scroll when the mouse is not over an image
             }
             else
             {
