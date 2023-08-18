@@ -47,12 +47,7 @@ namespace BuilderGame.Utils
     
         public override void OnScroll(PointerEventData data)
         {
-            if (IsMouseWheelRolling() && _swallowMouseWheelScrolls)
-            {
-                // Eat the scroll so that we don't get a double scroll when the mouse is not over an image
-            }
-            else
-            {
+            if (!_swallowMouseWheelScrolls) {
                 // Amplify the mousewheel so that it matches the scroll sensitivity.
                 if (data.scrollDelta.y < -Mathf.Epsilon)
                     data.scrollDelta = new Vector2(0f, -scrollSensitivity);
@@ -61,11 +56,6 @@ namespace BuilderGame.Utils
     
                 base.OnScroll(data);
             }
-        }
-    
-        private static bool IsMouseWheelRolling()
-        {
-            return Mouse.current.scroll.value.y != 0;
         }
     }
 }
