@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.Pieces {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -17,5 +18,7 @@ namespace BuilderGame.Pieces {
         internal virtual void UpdatePiece(){}
 
         internal virtual void FixedUpdatePiece(){}
+
+        internal abstract void OnActionExecuted(InputAction.CallbackContext context);
     }
 }

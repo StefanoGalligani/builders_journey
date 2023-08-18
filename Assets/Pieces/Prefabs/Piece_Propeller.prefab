@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
@@ -27,6 +28,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 861109403, guid: 0e1b46a170817904ebb570313caebbf4, type: 3}
+    - target: {fileID: 1112939580242970203, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Mass
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970212, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -76,6 +81,18 @@ PrefabInstance:
       value: Piece_Propeller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4111296285888547553}
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6082562811992125726}
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5351349449806541130}
   m_SourcePrefab: {fileID: 100100000, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
 --- !u!1 &3432732536666165109 stripped
 GameObject:
@@ -95,6 +112,7 @@ FixedJoint2D:
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: 1000
   m_BreakTorque: Infinity
+  m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
@@ -102,7 +120,7 @@ FixedJoint2D:
   m_Frequency: 0
 --- !u!95 &6082562811992125726
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -119,7 +137,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5351349449806541130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,4 +151,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c738dd68fd17249877ddec26e20095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action:
+    m_Name: Element 0
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: e2e69070-32e7-4611-84ba-2a9847ee2618
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5f598f6b-daec-48da-9147-34347c219aeb
+      m_Path: <Keyboard>/space
+      m_Interactions: Press(behavior=2)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Element 0
+      m_Flags: 0
+    m_Flags: 0
   _force: 30

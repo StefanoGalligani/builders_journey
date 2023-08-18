@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,20 +17,18 @@ namespace BuilderGame.Pieces {
 
         internal override void StartPiece() {
             _joint = gameObject.GetComponent<HingeJoint2D>();
+            _motorSpeed = 0;
             float angle = _baseSprite.transform.eulerAngles.z * Mathf.PI / 180;
         }
 
         internal override void UpdatePiece()
         {
-            _motorSpeed = 0;
-            if (Keyboard.current.qKey.wasPressedThisFrame) {
-                _motorSpeed -= _speed;
-            }
-            if (Keyboard.current.eKey.wasPressedThisFrame) {
-                _motorSpeed += _speed;
-            }
-            UpdateMotorSpeed();
             AdjustBaseSpriteRotation();
+        }
+
+        internal override void OnActionExecuted(InputAction.CallbackContext context) {
+            _motorSpeed = _speed * (int)context.ReadValue<Single>();
+            UpdateMotorSpeed();
         }
 
         private void UpdateMotorSpeed() {

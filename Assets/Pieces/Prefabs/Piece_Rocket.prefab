@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
@@ -116,6 +117,18 @@ PrefabInstance:
       value: Piece_Rocket
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8664181896713300889}
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3197430481620442165}
+    - targetCorrespondingSourceObject: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8712485676676912188}
   m_SourcePrefab: {fileID: 100100000, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
 --- !u!1 &7968448846625468494 stripped
 GameObject:
@@ -135,6 +148,7 @@ FixedJoint2D:
   m_ConnectedRigidBody: {fileID: 0}
   m_BreakForce: 1000
   m_BreakTorque: Infinity
+  m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -1.1, y: 0}
@@ -142,7 +156,7 @@ FixedJoint2D:
   m_Frequency: 0
 --- !u!95 &3197430481620442165
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -159,7 +173,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-8712485676676912188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,4 +187,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daaf3232cdd31c741bf78303d565ed4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action:
+    m_Name: Element 0
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: e2e69070-32e7-4611-84ba-2a9847ee2618
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5f598f6b-daec-48da-9147-34347c219aeb
+      m_Path: <Keyboard>/space
+      m_Interactions: Press(behavior=2)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Element 0
+      m_Flags: 0
+    m_Flags: 0
   _force: 20
