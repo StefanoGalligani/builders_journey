@@ -1,6 +1,7 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.Utils;
+using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase.VehicleManagement;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private void OnGameStart() {
+            Debug.Log("Game started. Deactivating.");
             _content.SetActive(false);
         }
 

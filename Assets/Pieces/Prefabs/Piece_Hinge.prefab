@@ -316,10 +316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d1dacc1448aed4eb1247a5ed6f7517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action:
-    m_Name: Element 0
+  _action:
+    m_Name: Action
     m_Type: 0
-    m_ExpectedControlType: Axis
+    m_ExpectedControlType: Axis 
     m_Id: 4e0f27a6-dae1-4989-9493-2b34928edd3c
     m_Processors: 
     m_Interactions: 
@@ -349,5 +349,6 @@ MonoBehaviour:
       m_Action: Element 0
       m_Flags: 8
     m_Flags: 0
+  _isAxis: 1
   _speed: 40
   _baseSprite: {fileID: 1140298026442864648}

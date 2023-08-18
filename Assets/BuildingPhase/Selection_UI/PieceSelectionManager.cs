@@ -4,6 +4,7 @@ using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Builder;
 using BuilderGame.BuildingPhase.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
+using BuilderGame.BuildingPhase.Start;
 
 namespace BuilderGame.BuildingPhase.SelectionUI {
     public class PieceSelectionManager : MonoBehaviour {

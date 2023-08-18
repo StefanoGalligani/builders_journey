@@ -1,6 +1,6 @@
 using UnityEngine;
 using Cinemachine;
-using BuilderGame.BuildingPhase.VehicleManagement;
+using BuilderGame.BuildingPhase.Start;
 using UnityEngine.InputSystem;
 
 namespace BuilderGame.Cam
@@ -9,13 +9,12 @@ namespace BuilderGame.Cam
     {
         [SerializeField] private CinemachineVirtualCamera _cinemachine;
         [SerializeField] private Vector3 _originalOffset;
+        [SerializeField] private Transform _vehicleTransform;
         private CinemachineFramingTransposer _transposer;
-        private Transform _vehicleTransform;
         private bool _buildingPhase = true;
 
         void Start()
         {
-            _vehicleTransform = GameObject.FindObjectOfType<Vehicle>().transform;
             _transposer = _cinemachine.GetComponentInChildren<CinemachineFramingTransposer>();
             _transposer.m_TrackedObjectOffset = _originalOffset;
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;

@@ -208,8 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6eb15e5d4adaa44b99de2250da8529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actions: []
-  action:
+  _action:
     m_Name: Element 0
     m_Type: 0
     m_ExpectedControlType: Axis
@@ -242,4 +241,5 @@ MonoBehaviour:
       m_Action: Element 0
       m_Flags: 8
     m_Flags: 0
+  _isAxis: 1
   _speed: 300

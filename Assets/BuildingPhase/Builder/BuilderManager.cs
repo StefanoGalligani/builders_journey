@@ -1,9 +1,11 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
-using BuilderGame.Utils;
+using BuilderGame.BuildingPhase.Start;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
+using BuilderGame.Utils;
+using BuilderGame.Pieces;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class BuilderManager
@@ -57,10 +59,10 @@ namespace BuilderGame.BuildingPhase.Builder {
             }
             
             if (NewPieceId >= 0) {
-                InstantiateNewPiece(NewPieceId, gridCoords);
+                Piece p = InstantiateNewPiece(NewPieceId, gridCoords);
             }
             
-            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
+            GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
         }
 
         public void RotatePiece(Vector2Int gridCoords) {
@@ -114,8 +116,12 @@ namespace BuilderGame.BuildingPhase.Builder {
                 Piece newPiece = InstantiateNewPiece(id, new Vector2Int(coords[0], coords[1]));
                 newPiece.SetRotation(vehicleData.pieceRotations[i]);
                 if (id == 0) _mainPieceCoords = newPiece.GridPosition;
+                SpecialPiece sp = newPiece.gameObject.GetComponent<SpecialPiece>();
+                if (sp && vehicleData.rebinds[i].Length > 0) {
+                    sp.LoadRebind(vehicleData.rebinds[i]);
+                }
             }
-            _vehicle.IsReadyToStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
+            GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
             return true;
         }
         

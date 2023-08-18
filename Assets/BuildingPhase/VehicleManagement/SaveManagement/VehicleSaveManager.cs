@@ -1,29 +1,37 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
+using BuilderGame.Pieces;
+using BuilderGame.BuildingPhase.Start;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
 {
     public class VehicleSaveManager : MonoBehaviour
     {
-        private Transform _vehicle;
+        [SerializeField] private Transform _vehicleTransform;
         void Start()
         {
-            _vehicle = FindObjectOfType<Vehicle>().transform;
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         private void SaveVehicle() {
             VehicleDataSerializable vehicleData = new VehicleDataSerializable();
-            vehicleData.pieceIds = new int[_vehicle.childCount];
-            vehicleData.pieceCoordinates = new int[_vehicle.childCount][];
-            vehicleData.pieceRotations = new int[_vehicle.childCount];
-            Piece[] pieces = _vehicle.GetComponentsInChildren<Piece>();
-            for (int i=0; i<_vehicle.childCount; i++) {
+            vehicleData.pieceIds = new int[_vehicleTransform.childCount];
+            vehicleData.pieceRotations = new int[_vehicleTransform.childCount];
+            vehicleData.pieceCoordinates = new int[_vehicleTransform.childCount][];
+            vehicleData.rebinds = new string[_vehicleTransform.childCount];
+            Piece[] pieces = _vehicleTransform.GetComponentsInChildren<Piece>();
+            for (int i=0; i<_vehicleTransform.childCount; i++) {
                 vehicleData.pieceIds[i] = pieces[i].Id;
                 vehicleData.pieceRotations[i] = pieces[i].FacingDirection;
                 Vector2Int coord = pieces[i].GridPosition;
                 vehicleData.pieceCoordinates[i] = new int[]{coord.x, coord.y};
+                vehicleData.rebinds[i] = "";
+                SpecialPiece sp = pieces[i].gameObject.GetComponent<SpecialPiece>();
+                if (sp) {
+                    vehicleData.rebinds[i] = sp.GetRebind();
+                }
             }
             VehicleFileManagerSingleton.Instance.SetVehicleData(vehicleData);
         }

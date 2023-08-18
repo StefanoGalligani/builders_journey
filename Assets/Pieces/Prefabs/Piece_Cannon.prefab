@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3581875bf45b6b145af42560bd754799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action:
+  _action:
     m_Name: Element 0
     m_Type: 1
     m_ExpectedControlType: Button
@@ -188,5 +188,6 @@ MonoBehaviour:
       m_Action: Element 0
       m_Flags: 0
     m_Flags: 0
+  _isAxis: 0
   _cannonBall: {fileID: 7626289463306717519, guid: 2a8f3534f337f24419f281be1cc1e803, type: 3}
   _force: 20

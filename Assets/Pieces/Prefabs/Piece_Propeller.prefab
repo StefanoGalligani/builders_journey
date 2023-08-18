@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c738dd68fd17249877ddec26e20095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action:
+  _action:
     m_Name: Element 0
     m_Type: 1
     m_ExpectedControlType: Button
@@ -168,4 +168,5 @@ MonoBehaviour:
       m_Action: Element 0
       m_Flags: 0
     m_Flags: 0
+  _isAxis: 0
   _force: 30
