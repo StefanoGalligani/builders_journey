@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using BuilderGame.BuildingPhase.VehicleManagement;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.Cam
 {
@@ -22,9 +23,10 @@ namespace BuilderGame.Cam
 
         void Update() {
             if (!_buildingPhase) return;
-            if (Input.GetMouseButton(2)) {
-                Vector3 mouseDelta = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0);
-                _transposer.m_TrackedObjectOffset -= mouseDelta * Time.deltaTime * 70;
+            //cambiare con Action
+            if (Mouse.current.middleButton.isPressed) {
+                Vector3 mouseDelta = Mouse.current.delta.value;
+                _transposer.m_TrackedObjectOffset -= mouseDelta * Time.deltaTime * 2;
             }
         }
 

@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace BuilderGame.Utils
 {
     public class ChiScrollRect : ScrollRect, IPointerEnterHandler, IPointerExitHandler
     {
-        private static string mouseScrollWheelAxis = "Mouse ScrollWheel";
         private bool swallowMouseWheelScrolls = true;
         private bool isMouseOver = false;
     
@@ -26,7 +26,8 @@ namespace BuilderGame.Utils
             // from receiving any mouse wheel messages if the mouse is over a raycast target (such as a button).
             if (isMouseOver && IsMouseWheelRolling())
             {
-                var delta = UnityEngine.Input.GetAxis(mouseScrollWheelAxis);
+                //cambiare con Action
+                var delta = Mouse.current.scroll.value.y;
     
                 PointerEventData pointerData = new PointerEventData(EventSystem.current);
                 pointerData.scrollDelta = new Vector2(0f, delta);
@@ -57,7 +58,7 @@ namespace BuilderGame.Utils
     
         private static bool IsMouseWheelRolling()
         {
-            return UnityEngine.Input.GetAxis(mouseScrollWheelAxis) != 0;
+            return Mouse.current.scroll.value.y != 0;
         }
     }
 }

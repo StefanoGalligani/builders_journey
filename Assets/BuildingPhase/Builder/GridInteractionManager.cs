@@ -1,6 +1,8 @@
 using UnityEngine;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.Utils;
+using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.BuildingPhase.Builder {
     public class GridInteractionManager : MonoBehaviour
@@ -24,7 +26,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         public void Clicked(bool leftClick) {
-            Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
             Vector2Int gridCoords = PositionToGridCoordinates(clickPosition);
             if (gridCoords.x >= _gridInfo.GridDimensions.x || gridCoords.y >= _gridInfo.GridDimensions.y) return;
             if (leftClick) {

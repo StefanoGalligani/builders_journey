@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame
 {
@@ -20,7 +21,8 @@ namespace BuilderGame
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) {
+            //cambiare con Action
+            if (Keyboard.current.escapeKey.wasPressedThisFrame) {
                 ToggleContent(!_isContentOpen);
             }
         }

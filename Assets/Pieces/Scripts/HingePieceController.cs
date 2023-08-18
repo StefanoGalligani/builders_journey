@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.Pieces {
     [RequireComponent(typeof(HingeJoint2D))]
@@ -21,10 +22,10 @@ namespace BuilderGame.Pieces {
         internal override void UpdatePiece()
         {
             _motorSpeed = 0;
-            if (Input.GetKey(KeyCode.Q)) {
+            if (Keyboard.current.qKey.wasPressedThisFrame) {
                 _motorSpeed -= _speed;
             }
-            if (Input.GetKey(KeyCode.E)) {
+            if (Keyboard.current.eKey.wasPressedThisFrame) {
                 _motorSpeed += _speed;
             }
             UpdateMotorSpeed();

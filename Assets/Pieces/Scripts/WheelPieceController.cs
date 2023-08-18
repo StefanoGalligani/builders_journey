@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.Pieces {
     [RequireComponent(typeof(WheelJoint2D))]
@@ -20,10 +21,10 @@ namespace BuilderGame.Pieces {
             if (!_joint) return;
             
             _motorSpeed = 0;
-            if (Input.GetKey(KeyCode.D)) {
+            if (Keyboard.current.dKey.isPressed) {
                 _motorSpeed += _speed;
             }
-            if (Input.GetKey(KeyCode.A)) {
+            if (Keyboard.current.aKey.isPressed) {
                 _motorSpeed -= _speed;
             }
 

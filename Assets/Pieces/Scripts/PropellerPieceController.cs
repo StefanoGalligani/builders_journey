@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BuilderGame.Pieces {
     public class PropellerPieceController : SpecialPieceController {
@@ -18,7 +19,7 @@ namespace BuilderGame.Pieces {
 
         internal override void UpdatePiece()
         {
-            if (Input.GetKey(KeyCode.Space)) {
+            if (Keyboard.current.spaceKey.isPressed) {
                 _rb.AddForce(Vector2.up*_force);
                 SetState(true);
             } else {
