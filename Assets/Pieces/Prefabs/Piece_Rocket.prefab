@@ -195,12 +195,12 @@ MonoBehaviour:
     m_ExpectedControlType: Button
     m_Id: e2e69070-32e7-4611-84ba-2a9847ee2618
     m_Processors: 
-    m_Interactions: 
+    m_Interactions: Press(behavior=2)
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 5f598f6b-daec-48da-9147-34347c219aeb
       m_Path: <Keyboard>/space
-      m_Interactions: Press(behavior=2)
+      m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Element 0

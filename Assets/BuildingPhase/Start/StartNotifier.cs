@@ -10,6 +10,7 @@ namespace BuilderGame.BuildingPhase.Start {
         public void StartGame() {
             if (!CanStart) return;
             GameStart?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 }

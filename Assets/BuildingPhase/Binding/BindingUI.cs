@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BuilderGame.Pieces;
 using BuilderGame.BuildingPhase.VehicleManagement;
+using BuilderGame.BuildingPhase.Start;
 
 namespace BuilderGame.BuildingPhase.Binding
 {
@@ -18,6 +19,7 @@ namespace BuilderGame.BuildingPhase.Binding
 
         private void Start() {
             _bindingInfos = new BindingInfo[0];
+            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         public void PrepareUI(SpecialPiece piece, Sprite sprite) {
@@ -37,6 +39,10 @@ namespace BuilderGame.BuildingPhase.Binding
 
         private void RebindAction(int actionNumber) {
             _piece.RebindButtonClicked(actionNumber, _bindingInfos[actionNumber].UpdateBindingName);
+        }
+
+        private void OnGameStart() {
+            _content.SetActive(false);
         }
     }
 }

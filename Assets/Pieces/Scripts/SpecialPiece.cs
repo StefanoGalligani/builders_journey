@@ -65,7 +65,8 @@ namespace BuilderGame.Pieces {
 
         public string GetBindingName(int index) {
             _indexOffset = ActionNames.Length > 1 ? 1 : 0; //si potrà rimuovere quando i pezzi non saranno rebindati alla creazione
-            return _action.GetBindingDisplayString(index + _indexOffset);
+            return _action.bindings[index + _indexOffset].effectivePath.Split("/")[1].ToUpper();
+            //return _action.GetBindingDisplayString(index + _indexOffset);
         }
 
         public string GetBindingJson() {
