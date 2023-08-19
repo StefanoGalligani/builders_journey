@@ -2,6 +2,7 @@ using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
 using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 using BuilderGame.Utils;
@@ -60,6 +61,11 @@ namespace BuilderGame.BuildingPhase.Builder {
             
             if (NewPieceId >= 0) {
                 Piece p = InstantiateNewPiece(NewPieceId, gridCoords);
+                //spostare questa logica nel GridInteractionManager
+                if (p.GetComponent<SpecialPiece>()) {
+                    GameObject.FindObjectOfType<BindingUI>()
+                    .PrepareUI(p.GetComponent<SpecialPiece>(), _piecesDictionary.GetSpriteById(NewPieceId));
+                }
             }
             
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
@@ -117,8 +123,8 @@ namespace BuilderGame.BuildingPhase.Builder {
                 newPiece.SetRotation(vehicleData.pieceRotations[i]);
                 if (id == 0) _mainPieceCoords = newPiece.GridPosition;
                 SpecialPiece sp = newPiece.gameObject.GetComponent<SpecialPiece>();
-                if (sp && vehicleData.rebinds[i].Length > 0) {
-                    sp.LoadRebind(vehicleData.rebinds[i]);
+                if (sp && vehicleData.bindings[i].Length > 0) {
+                    sp.LoadBindingJson(vehicleData.bindings[i]);
                 }
             }
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);

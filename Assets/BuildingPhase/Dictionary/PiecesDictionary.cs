@@ -8,6 +8,7 @@ namespace BuilderGame.BuildingPhase.Dictionary {
         [SerializeField] private Piece _mainPiecePrefab;
         private Dictionary<int, Piece> _prefabDictionary;
         private Dictionary<int, int> _priceDictionary;
+        private Dictionary<int, Sprite> _spriteDictionary;
         public void Init(PieceInfoScriptableObject[] pieceInfos) {
             _prefabDictionary = new Dictionary<int, Piece>();
             foreach (PieceInfoScriptableObject pieceSo in pieceInfos) {
@@ -20,6 +21,12 @@ namespace BuilderGame.BuildingPhase.Dictionary {
                 _priceDictionary.Add(pieceSo.Id, pieceSo.Price);
             }
             _priceDictionary.Add(0, 0);
+
+            _spriteDictionary = new Dictionary<int, Sprite>();
+            foreach (PieceInfoScriptableObject pieceSo in pieceInfos) {
+                _spriteDictionary.Add(pieceSo.Id, pieceSo.Sprite);
+            }
+            _spriteDictionary.Add(0, _mainPiecePrefab.GetComponent<SpriteRenderer>().sprite);
         }
 
         public Piece GetPrefabById(int id) {
@@ -32,6 +39,12 @@ namespace BuilderGame.BuildingPhase.Dictionary {
             int price = 0;
             _priceDictionary.TryGetValue(id, out price);
             return price;
+        }
+
+        public Sprite GetSpriteById(int id) {
+            Sprite sprite = null;
+            _spriteDictionary.TryGetValue(id, out sprite);
+            return sprite;
         }
 
         public bool AreAllIdsValid(int[] ids) {

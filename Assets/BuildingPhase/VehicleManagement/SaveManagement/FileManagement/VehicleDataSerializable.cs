@@ -8,6 +8,6 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
         public int[] pieceIds;
         public int[][] pieceCoordinates;
         public int[] pieceRotations;
-        public string[] rebinds;
+        public string[] bindings;
     }
 }
