@@ -4,22 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using BuilderGame.Pieces;
 using BuilderGame.BuildingPhase.VehicleManagement;
-using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase;
 
 namespace BuilderGame.BuildingPhase.Binding
 {
-    public class BindingUI : MonoBehaviour
+    public class BindingUI : BuildingPhaseUI
     {
         [SerializeField] private BindingInfo _bindingInfoPrefab;
-        [SerializeField] private GameObject _content;
         [SerializeField] private GameObject _infoContainer;
         [SerializeField] private Image _image;
         private BindingInfo[] _bindingInfos;
         private SpecialPiece _piece;
 
-        private void Start() {
+        protected override void Init() {
             _bindingInfos = new BindingInfo[0];
-            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
         public void PrepareUI(SpecialPiece piece, Sprite sprite) {
@@ -39,10 +37,6 @@ namespace BuilderGame.BuildingPhase.Binding
 
         private void RebindAction(int actionNumber) {
             _piece.RebindButtonClicked(actionNumber, _bindingInfos[actionNumber].UpdateBindingName);
-        }
-
-        private void OnGameStart() {
-            _content.SetActive(false);
         }
     }
 }

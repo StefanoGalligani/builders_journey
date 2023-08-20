@@ -4,22 +4,21 @@ using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Builder;
 using BuilderGame.BuildingPhase.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
-using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase;
 
 namespace BuilderGame.BuildingPhase.SelectionUI {
-    public class PieceSelectionManager : MonoBehaviour {
+    public class PieceSelectionManager : BuildingPhaseUI {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
         [SerializeField] private GridInteractionManager _gridInteractionManager;
-        [SerializeField] private GameObject _content;
         private List<PieceSelectable> selectables;
         
         private void Awake() {
             FindObjectOfType<PiecesDictionary>().Init(_pieceInfos);
         }
 
-        private void Start() {
+        protected override void Init() {
             selectables = new List<PieceSelectable>();
             _scrollContent.sizeDelta = new Vector2(0, 110*_pieceInfos.Length + 10);
             foreach(PieceInfoScriptableObject pieceInfo in _pieceInfos) {
@@ -27,11 +26,6 @@ namespace BuilderGame.BuildingPhase.SelectionUI {
                 pieceSelectable.Init(pieceInfo, this);
                 selectables.Add(pieceSelectable);
             }
-            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
-        }
-
-        private void OnGameStart() {
-            _content.SetActive(false);
         }
 
         public void Selection(PieceSelectable pieceSelectable, PieceInfoScriptableObject pieceInfo) {

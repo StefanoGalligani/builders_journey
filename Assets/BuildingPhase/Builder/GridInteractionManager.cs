@@ -1,25 +1,19 @@
 using UnityEngine;
 using BuilderGame.Utils;
-using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class GridInteractionManager : MonoBehaviour
+    public class GridInteractionManager : BuildingPhaseUI
     {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;
-        [SerializeField] private GameObject _content;
         private BuilderManager _builderManager;
 
-        private void Start() {
+        protected override void Init() {
             _builderManager = new BuilderManager(_gridInfo, _vehicle);
-            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
-        }
-
-        private void OnGameStart() {
-            _content.SetActive(false);
         }
 
         public void SetNewPieceId(int pieceId) {

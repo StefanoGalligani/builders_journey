@@ -1,5 +1,5 @@
 {
-    "name": "BuildingPhaseAssembly",
+    "name": "DictionaryAssembly",
     "rootNamespace": "",
     "references": [
         "GUID:b5704b815afc15946b32529fb8b6225d",

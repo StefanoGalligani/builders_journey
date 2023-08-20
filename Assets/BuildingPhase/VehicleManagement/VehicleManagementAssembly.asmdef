@@ -1,5 +1,5 @@
 {
-    "name": "Vehicle",
+    "name": "VehicleManagementAssembly",
     "rootNamespace": "",
     "references": [
         "GUID:14c474927b07356438945d9c7911b7d2",

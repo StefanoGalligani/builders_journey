@@ -1,16 +1,17 @@
 {
-    "name": "GridAssembly",
+    "name": "BuilderAssembly",
     "rootNamespace": "",
     "references": [
         "GUID:b5704b815afc15946b32529fb8b6225d",
         "GUID:14c474927b07356438945d9c7911b7d2",
         "GUID:936a0029030a7484dbf3603e53d10c85",
-        "GUID:922ee0c850408a240a136190181d4576",
         "GUID:88f215d44519b6d4e832df0ccf56c203",
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:8e3ca5666198c414d8762619bfbb254e",
         "GUID:d2b99f2eda1182347a03a102a5ed4c14",
-        "GUID:67cbb729145dfde468153da2813f34b9"
+        "GUID:67cbb729145dfde468153da2813f34b9",
+        "GUID:6c7b184973422b14dbeac523d99281d8",
+        "GUID:8e3ca5666198c414d8762619bfbb254e",
+        "GUID:922ee0c850408a240a136190181d4576"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

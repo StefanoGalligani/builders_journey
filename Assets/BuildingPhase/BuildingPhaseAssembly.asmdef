@@ -1,9 +1,8 @@
 {
-    "name": "PauseAssembly",
+    "name": "BuildingPhaseAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:af6b48860f7b03444aa9bb664e421e00"
+        "GUID:8e3ca5666198c414d8762619bfbb254e"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
