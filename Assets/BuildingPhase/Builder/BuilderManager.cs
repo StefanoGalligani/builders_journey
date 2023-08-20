@@ -9,9 +9,9 @@ using BuilderGame.Utils;
 using BuilderGame.Pieces;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class BuilderManager
+    internal class BuilderManager
     {
-        public int NewPieceId {private get{return _newPieceId;} set {_newPieceId = value; _validSelection = true;}}
+        internal int NewPieceId {private get{return _newPieceId;} set {_newPieceId = value; _validSelection = true;}}
         private int _newPieceId;
         private Vehicle _vehicle;
         private Piece[][] _placedPieces;
@@ -22,7 +22,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         private bool _validSelection = false;
         private Vector2Int _mainPieceCoords;
 
-        public BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
+        internal BuilderManager(GridInfoScriptableObject gridInfo, Vehicle vehicle) {
             _gridInfo = gridInfo;
             _vehicle = vehicle;
 
@@ -52,7 +52,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             _mainPieceCoords = _gridInfo.MainPieceCoordinates;
         }
 
-        public void PlacePiece(Vector2Int gridCoords) {
+        internal void PlacePiece(Vector2Int gridCoords) {
             if (!IsPlaceable(gridCoords)) return;
 
             if (_placedPieces[gridCoords.x][gridCoords.y] != null) {
@@ -71,7 +71,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
         }
 
-        public void RotatePiece(Vector2Int gridCoords) {
+        internal void RotatePiece(Vector2Int gridCoords) {
             if (_placedPieces[gridCoords.x][gridCoords.y] == null) {
                 return;
             }
@@ -88,7 +88,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                     
                     int newX = gridCoords.x + i;
                     int newY = gridCoords.y + j;
-                    if (!IsValidPosition(newX, newY)) continue;
+                    if (!UtilsFunctions.IsValidPosition(_placedPieces, newX, newY)) continue;
 
                     if (_placedPieces[newX][newY] != null)
                         return true;

@@ -28,7 +28,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                         Direction d = i;
                         int newX = ((Vector3Int)d).x + currentPiece.GridPosition.x;
                         int newY = ((Vector3Int)d).y + currentPiece.GridPosition.y;
-                        if (!IsValidPosition(placedPieces, newX, newY)) continue;
+                        if (!UtilsFunctions.IsValidPosition(placedPieces, newX, newY)) continue;
 
                         Piece neighbour = placedPieces[newX][newY];
 
@@ -46,14 +46,5 @@ namespace BuilderGame.BuildingPhase.Builder {
 
             return notConnected == null;
         }
-
-        private bool IsValidPosition(Object[][] matrix, int x, int y) { //estrarre in una classe di utils
-            if (x < 0 || x >= matrix.Length)
-                return false;
-            if (y < 0 || y >= matrix[x].Length)
-                return false;
-            return true;
-        }
-
     }
 }

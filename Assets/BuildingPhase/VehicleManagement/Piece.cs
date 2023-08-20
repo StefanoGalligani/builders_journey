@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using BuilderGame.Utils;
 
@@ -94,11 +95,8 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             return IsAvailableJointDirection(dir);
         }
 
-        private bool IsAvailableJointDirection(Direction dir) { // fare più pulito
-            foreach (DirectionEnum dEnum in _availableJointDirections) {
-                if ((dir - _facingDirection).Equals(dEnum)) return true;
-            }
-            return false;
+        private bool IsAvailableJointDirection(Direction dir) {
+            return _availableJointDirections.AsEnumerable().Any(dEnum => (dir - _facingDirection).Equals(dEnum));
         }
 
         private void UpdateLineRenderer() {
