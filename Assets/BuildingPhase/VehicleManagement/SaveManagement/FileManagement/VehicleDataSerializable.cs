@@ -5,9 +5,13 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
     [Serializable]
     public class VehicleDataSerializable
     {
-        public int[] pieceIds;
-        public int[][] pieceCoordinates;
-        public int[] pieceRotations;
-        public string[] bindings;
+        public PieceDataSerializable[] data;
+        public int[] GetAllIds() {
+            int[] ids = new int[data.Length];
+            for (int i=0; i<data.Length; i++) {
+                ids[i] = data[i].pieceId;
+            }
+            return ids;
+        }
     }
 }

@@ -98,7 +98,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private bool BuildVehicleFromData(VehicleDataSerializable vehicleData) {
-            if (!_piecesDictionary.AreAllIdsValid(vehicleData.pieceIds)) {
+            if (!_piecesDictionary.AreAllIdsValid(vehicleData.GetAllIds())) {
                 Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
                 return false;
             }
@@ -110,21 +110,21 @@ namespace BuilderGame.BuildingPhase.Builder {
                     Debug.LogWarning("The loaded vehicle is too large for this level");
                     return false;
                 }
-                for (int i=0; i<vehicleData.pieceIds.Length; i++) {
-                    vehicleData.pieceCoordinates[i][0] += necessaryShift.x;
-                    vehicleData.pieceCoordinates[i][1] += necessaryShift.y;
+                for (int i=0; i<vehicleData.data.Length; i++) {
+                    vehicleData.data[i].pieceCoordinates[0] += necessaryShift.x;
+                    vehicleData.data[i].pieceCoordinates[1] += necessaryShift.y;
                 }
             }
-            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
-                int id = vehicleData.pieceIds[i];
+            for (int i=0; i<vehicleData.data.Length; i++) {
+                int id = vehicleData.data[i].pieceId;
                 Piece prefab = _piecesDictionary.GetPrefabById(id);
-                int[] coords = vehicleData.pieceCoordinates[i];
+                int[] coords = vehicleData.data[i].pieceCoordinates;
                 Piece newPiece = InstantiateNewPiece(id, new Vector2Int(coords[0], coords[1]));
-                newPiece.SetRotation(vehicleData.pieceRotations[i]);
+                newPiece.SetRotation(vehicleData.data[i].pieceRotation);
                 if (id == 0) _mainPieceCoords = newPiece.GridPosition;
                 SpecialPiece sp = newPiece.gameObject.GetComponent<SpecialPiece>();
-                if (sp && vehicleData.bindings[i].Length > 0) {
-                    sp.LoadBindingJson(vehicleData.bindings[i]);
+                if (sp && vehicleData.data[i].binding.Length > 0) {
+                    sp.LoadBindingJson(vehicleData.data[i].binding);
                 }
             }
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
@@ -133,8 +133,8 @@ namespace BuilderGame.BuildingPhase.Builder {
         
         private Vector2Int MaximumCoord(VehicleDataSerializable vehicleData) {
             Vector2Int maxCoord = new Vector2Int(0, 0);
-            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
-                int[] coords = vehicleData.pieceCoordinates[i];
+            for (int i=0; i<vehicleData.data.Length; i++) {
+                int[] coords = vehicleData.data[i].pieceCoordinates;
                 if (coords[0] > maxCoord.x) maxCoord.x = coords[0];
                 if (coords[1] > maxCoord.y) maxCoord.y = coords[1];
             }
@@ -143,8 +143,8 @@ namespace BuilderGame.BuildingPhase.Builder {
         
         private Vector2Int MinimumCoord(VehicleDataSerializable vehicleData) {
             Vector2Int minCoord = new Vector2Int(1000, 1000);
-            for (int i=0; i<vehicleData.pieceIds.Length; i++) {
-                int[] coords = vehicleData.pieceCoordinates[i];
+            for (int i=0; i<vehicleData.data.Length; i++) {
+                int[] coords = vehicleData.data[i].pieceCoordinates;
                 if (coords[0] < minCoord.x) minCoord.x = coords[0];
                 if (coords[1] < minCoord.y) minCoord.y = coords[1];
             }

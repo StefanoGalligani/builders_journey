@@ -17,20 +17,17 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
 
         private void SaveVehicle() {
             VehicleDataSerializable vehicleData = new VehicleDataSerializable();
-            vehicleData.pieceIds = new int[_vehicleTransform.childCount];
-            vehicleData.pieceRotations = new int[_vehicleTransform.childCount];
-            vehicleData.pieceCoordinates = new int[_vehicleTransform.childCount][];
-            vehicleData.bindings = new string[_vehicleTransform.childCount];
+            vehicleData.data = new PieceDataSerializable[_vehicleTransform.childCount];
             Piece[] pieces = _vehicleTransform.GetComponentsInChildren<Piece>();
             for (int i=0; i<_vehicleTransform.childCount; i++) {
-                vehicleData.pieceIds[i] = pieces[i].Id;
-                vehicleData.pieceRotations[i] = pieces[i].FacingDirection;
+                vehicleData.data[i].pieceId = pieces[i].Id;
+                vehicleData.data[i].pieceRotation = pieces[i].FacingDirection;
                 Vector2Int coord = pieces[i].GridPosition;
-                vehicleData.pieceCoordinates[i] = new int[]{coord.x, coord.y};
-                vehicleData.bindings[i] = "";
+                vehicleData.data[i].pieceCoordinates = new int[]{coord.x, coord.y};
+                vehicleData.data[i].binding = "";
                 SpecialPiece sp = pieces[i].gameObject.GetComponent<SpecialPiece>();
                 if (sp) {
-                    vehicleData.bindings[i] = sp.GetBindingJson();
+                    vehicleData.data[i].binding = sp.GetBindingJson();
                 }
             }
             VehicleFileManagerSingleton.Instance.SetVehicleData(vehicleData);
