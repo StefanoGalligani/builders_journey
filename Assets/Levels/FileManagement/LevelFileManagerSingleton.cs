@@ -22,8 +22,8 @@ namespace BuilderGame.Levels.FileManagement
         public void SetLevelStars(string levelName, int stars) {
             if (!_fileRead) ReadFromFile();
             for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.levelsNames[i]) {
-                    _levelsData.levelsStars[i] = stars;
+                if (levelName == _levelsData.data[i].levelName) {
+                    _levelsData.data[i].levelStars = stars;
                     WriteToFile();
                     return;
                 }
@@ -34,8 +34,8 @@ namespace BuilderGame.Levels.FileManagement
         public void SetLevelState(string levelName, LevelState state) {
             if (!_fileRead) ReadFromFile();
             for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.levelsNames[i]) {
-                    _levelsData.levelsStates[i] = state;
+                if (levelName == _levelsData.data[i].levelName) {
+                    _levelsData.data[i].levelState = state;
                     WriteToFile();
                     return;
                 }
@@ -46,8 +46,8 @@ namespace BuilderGame.Levels.FileManagement
         public int GetLevelStars(string levelName) {
             if (!_fileRead) ReadFromFile();
             for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.levelsNames[i]) {
-                    return _levelsData.levelsStars[i];
+                if (levelName == _levelsData.data[i].levelName) {
+                    return _levelsData.data[i].levelStars;
                 }
             }
             Debug.LogWarning("Tried to read from level " + levelName + " but it was not found in file");
@@ -57,8 +57,8 @@ namespace BuilderGame.Levels.FileManagement
         public LevelState GetLevelState(string levelName) {
             if (!_fileRead) ReadFromFile();
             for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.levelsNames[i]) {
-                    return _levelsData.levelsStates[i];
+                if (levelName == _levelsData.data[i].levelName) {
+                    return _levelsData.data[i].levelState;
                 }
             }
             Debug.LogWarning("Tried to read from level " + levelName + " but it was not found in file");
@@ -82,20 +82,16 @@ namespace BuilderGame.Levels.FileManagement
             int n = levelInfos.Length;
             newLevelsData = new LevelsDataSerializable();
             _levelsData.levelCount = n;
-            newLevelsData.levelsNames = new string[n];
-            newLevelsData.levelsStars = new int[n];
-            newLevelsData.levelsStates = new LevelState[n];
+            newLevelsData.data = new SingleLevelData[n];
             bool lastLevelPassed = false;
             for (int i=0; i<_levelsData.levelCount; i++) {
-                newLevelsData.levelsNames[i] = _levelsData.levelsNames[i];
-                newLevelsData.levelsStars[i] = _levelsData.levelsStars[i];
-                newLevelsData.levelsStates[i] = _levelsData.levelsStates[i];
-                lastLevelPassed = (_levelsData.levelsStates[i] == LevelState.Passed);
+                newLevelsData.data[i] = _levelsData.data[i];
+                lastLevelPassed = (_levelsData.data[i].levelState == LevelState.Passed);
             }
             for (int i=_levelsData.levelCount; i<n; i++) {
-                newLevelsData.levelsNames[i] = levelInfos[i].LevelName;
-                newLevelsData.levelsStars[i] = 0;
-                newLevelsData.levelsStates[i] = (i==_levelsData.levelCount && lastLevelPassed) ? 
+                newLevelsData.data[i].levelName = levelInfos[i].LevelName;
+                newLevelsData.data[i].levelStars = 0;
+                newLevelsData.data[i].levelState = (i==_levelsData.levelCount && lastLevelPassed) ? 
                     LevelState.NotPassed : LevelState.Blocked;
             }
             _levelsData = newLevelsData;
@@ -105,13 +101,11 @@ namespace BuilderGame.Levels.FileManagement
             int n = levelInfos.Length;
             _levelsData = new LevelsDataSerializable();
             _levelsData.levelCount = n;
-            _levelsData.levelsNames = new string[n];
-            _levelsData.levelsStars = new int[n];
-            _levelsData.levelsStates = new LevelState[n];
+            _levelsData.data = new SingleLevelData[n];
             for (int i=0; i<n; i++) {
-                _levelsData.levelsNames[i] = levelInfos[i].LevelName;
-                _levelsData.levelsStars[i] = 0;
-                _levelsData.levelsStates[i] = (i==0)?LevelState.NotPassed:LevelState.Blocked;
+                _levelsData.data[i].levelName = levelInfos[i].LevelName;
+                _levelsData.data[i].levelStars = 0;
+                _levelsData.data[i].levelState = (i==0)?LevelState.NotPassed:LevelState.Blocked;
             }
             _fileRead = true;
             WriteToFile();
