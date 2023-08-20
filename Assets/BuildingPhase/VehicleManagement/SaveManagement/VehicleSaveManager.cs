@@ -30,16 +30,16 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
                     vehicleData.data[i].binding = sp.GetBindingJson();
                 }
             }
-            VehicleFileManagerSingleton.Instance.SetVehicleData(vehicleData);
+            VehicleFileAccessSingleton.Instance.SetVehicleData(vehicleData);
         }
 
         public void SaveOnFile(string name) {
             SaveVehicle();
-            VehicleFileManagerSingleton.Instance.WriteToFile(name);
+            VehicleFileAccessSingleton.Instance.WriteToFile(name);
         }
 
         public void LoadFromFile(string name) {
-            bool loaded = VehicleFileManagerSingleton.Instance.ReadFromFile(name);
+            bool loaded = VehicleFileAccessSingleton.Instance.ReadFromFile(name);
             if (loaded)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

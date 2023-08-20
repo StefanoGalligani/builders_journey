@@ -6,17 +6,17 @@ using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using BuilderGame.Levels.FileManagement;
 
 namespace BuilderGame.MainMenu.LevelSelection {
-    public class LevelSelectionManager : MonoBehaviour {
+    public class LevelSelectionUI : MonoBehaviour {
         [SerializeField] private RectTransform _contentRect;
         [SerializeField] private LevelSelectable _levelSelectablePrefab;
         [SerializeField] private LevelInfoScriptableObject[] _levelInfos;
         private List<LevelSelectable> _selectables;
-        private LevelFileManagerSingleton _fileManager;
+        private LevelFileAccessSingleton _fileManager;
         
         private void Start() {
             _selectables = new List<LevelSelectable>();
             LevelReferenceSingleton.Instance.SetReferences(_levelInfos);
-            _fileManager = LevelFileManagerSingleton.Instance;
+            _fileManager = LevelFileAccessSingleton.Instance;
             _fileManager.CreateFileIfNotExists(_levelInfos);
 
             foreach(LevelInfoScriptableObject levelInfo in _levelInfos) {

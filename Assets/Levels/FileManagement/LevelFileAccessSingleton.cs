@@ -11,16 +11,16 @@ using UnityEngine.UIElements;
 
 namespace BuilderGame.Levels.FileManagement
 {
-    public class LevelFileManagerSingleton
+    public class LevelFileAccessSingleton
     {
         private string _fileName = "Data.bin";
         private string _filePath;
         private LevelsDataSerializable _levelsData;
         private bool _fileRead = false;
-        private static LevelFileManagerSingleton _instance;
-        public static LevelFileManagerSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileManagerSingleton()) : _instance);} private set{} }
+        private static LevelFileAccessSingleton _instance;
+        public static LevelFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{} }
 
-        private LevelFileManagerSingleton()
+        private LevelFileAccessSingleton()
         {
             _filePath = Application.persistentDataPath + "/" + _fileName;
         }

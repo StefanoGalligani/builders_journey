@@ -5,10 +5,10 @@ using BuilderGame.Utils;
 using System.Linq;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    internal class VehicleConnectionManager {
+    internal class VehicleConnector {
         private Vehicle _vehicle;
 
-        internal VehicleConnectionManager(Vehicle vehicle) {
+        internal VehicleConnector(Vehicle vehicle) {
             _vehicle = vehicle;
         }
 

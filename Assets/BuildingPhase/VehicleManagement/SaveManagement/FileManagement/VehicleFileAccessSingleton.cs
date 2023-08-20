@@ -4,15 +4,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
-    public class VehicleFileManagerSingleton
+    public class VehicleFileAccessSingleton
     {
         private string _filePath;
         private VehicleDataSerializable _vehicleData;
         private bool _fileRead = false;
-        private static VehicleFileManagerSingleton _instance;
-        public static VehicleFileManagerSingleton Instance {get {return (_instance==null ? (_instance = new VehicleFileManagerSingleton()) : _instance);} private set{} }
+        private static VehicleFileAccessSingleton _instance;
+        public static VehicleFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new VehicleFileAccessSingleton()) : _instance);} private set{} }
 
-        private VehicleFileManagerSingleton()
+        private VehicleFileAccessSingleton()
         {
             _filePath = Application.persistentDataPath + "/Vehicles/";
             if (!Directory.Exists(_filePath))  

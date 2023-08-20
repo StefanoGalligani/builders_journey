@@ -11,9 +11,9 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
         [SerializeField] private TextMeshProUGUI _infoText;
         private PieceInfoScriptableObject _pieceInfo;
         private int _pieceId;
-        private PieceSelectionManager _selectionManager;
+        private PieceSelectionUI _selectionManager;
 
-        internal void Init(PieceInfoScriptableObject pieceInfo, PieceSelectionManager selectionManager) {
+        internal void Init(PieceInfoScriptableObject pieceInfo, PieceSelectionUI selectionManager) {
             _selectionManager = selectionManager;
 
             _infoText.text = "$ " + pieceInfo.Price;

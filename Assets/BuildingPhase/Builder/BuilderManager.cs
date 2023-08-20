@@ -16,7 +16,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         private Vehicle _vehicle;
         private Piece[][] _placedPieces;
         private GridInfoScriptableObject _gridInfo;
-        private VehicleConnectionManager _vehicleConnectionManager;
+        private VehicleConnector _vehicleConnectionManager;
         private PiecesDictionary _piecesDictionary;
         private TotalPriceInfo _totalPriceInfo;
         private bool _validSelection = false;
@@ -31,13 +31,13 @@ namespace BuilderGame.BuildingPhase.Builder {
                 _placedPieces[i] = new Piece[gridInfo.GridDimensions.y];
             }
             
-            _vehicleConnectionManager = new VehicleConnectionManager(vehicle);
+            _vehicleConnectionManager = new VehicleConnector(vehicle);
             _piecesDictionary = GameObject.FindObjectOfType<PiecesDictionary>();
             _totalPriceInfo = GameObject.FindObjectOfType<TotalPriceInfo>();
 
             bool vehicleBuilt = false;
-            if (VehicleFileManagerSingleton.Instance.IsVehicleSaved()) {
-                vehicleBuilt = BuildVehicleFromData(VehicleFileManagerSingleton.Instance.GetVehicleData());
+            if (VehicleFileAccessSingleton.Instance.IsVehicleSaved()) {
+                vehicleBuilt = BuildVehicleFromData(VehicleFileAccessSingleton.Instance.GetVehicleData());
             }
             if (!vehicleBuilt) {
                 PlaceMainPiece();

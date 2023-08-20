@@ -13,10 +13,10 @@ namespace BuilderGame.MainMenu.LevelSelection
         [SerializeField] private TextMeshProUGUI _infoText;
         [SerializeField] private Color[] colors;
         private string _sceneName;
-        private LevelSelectionManager _selectionManager;
+        private LevelSelectionUI _selectionManager;
         private bool _clickable;
 
-        internal void Init(LevelInfoScriptableObject levelInfo, int levelStars, LevelState levelState, LevelSelectionManager selectionManager) {
+        internal void Init(LevelInfoScriptableObject levelInfo, int levelStars, LevelState levelState, LevelSelectionUI selectionManager) {
             _selectionManager = selectionManager;
 
             _infoText.text = levelInfo.LevelName;

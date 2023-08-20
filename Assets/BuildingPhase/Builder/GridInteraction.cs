@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class GridInteractionManager : BuildingPhaseUI
+    public class GridInteraction : BuildingPhaseUI
     {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;

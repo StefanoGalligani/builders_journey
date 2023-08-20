@@ -6,7 +6,7 @@ using BuilderGame.Levels.FileManagement;
 
 namespace BuilderGame.EndingPhase
 {
-    public class EndUIManager : MonoBehaviour
+    public class EndUI : MonoBehaviour
     {
         [SerializeField] private GameObject _uiPanel;
         [SerializeField] private string _menuSceneName;
@@ -22,18 +22,18 @@ namespace BuilderGame.EndingPhase
             string currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName();
             string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName();
             _nextLevelSceneName = nextLevelInfos[1];
-            Levels.LevelState previousState = LevelFileManagerSingleton.Instance.GetLevelState(currentLevelName);
-            int previousStars = LevelFileManagerSingleton.Instance.GetLevelStars(currentLevelName);
+            Levels.LevelState previousState = LevelFileAccessSingleton.Instance.GetLevelState(currentLevelName);
+            int previousStars = LevelFileAccessSingleton.Instance.GetLevelStars(currentLevelName);
 
             int totalPrice = FindObjectOfType<TotalPriceInfo>().GetTotalPrice();
             int newStars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(totalPrice);
             if (newStars > previousStars) {
-                LevelFileManagerSingleton.Instance.SetLevelStars(currentLevelName, newStars);
+                LevelFileAccessSingleton.Instance.SetLevelStars(currentLevelName, newStars);
             }
 
             if (previousState != LevelState.Passed) {
-                LevelFileManagerSingleton.Instance.SetLevelState(currentLevelName, Levels.LevelState.Passed);
-                LevelFileManagerSingleton.Instance.SetLevelState(nextLevelInfos[0], Levels.LevelState.NotPassed);
+                LevelFileAccessSingleton.Instance.SetLevelState(currentLevelName, Levels.LevelState.Passed);
+                LevelFileAccessSingleton.Instance.SetLevelState(nextLevelInfos[0], Levels.LevelState.NotPassed);
             }
         }
 

@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class GridPointerEventManager : MonoBehaviour, IPointerDownHandler
+    public class GridPointerEventHandler : MonoBehaviour, IPointerDownHandler
     {
-        [SerializeField] GridInteractionManager _gridInteractionManager;
+        [SerializeField] GridInteraction _gridInteractionManager;
         public void OnPointerDown(PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Left) {

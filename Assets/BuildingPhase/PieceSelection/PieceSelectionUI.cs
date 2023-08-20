@@ -7,11 +7,11 @@ using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase;
 
 namespace BuilderGame.BuildingPhase.PieceSelection {
-    public class PieceSelectionManager : BuildingPhaseUI {
+    public class PieceSelectionUI : BuildingPhaseUI {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
-        [SerializeField] private GridInteractionManager _gridInteractionManager;
+        [SerializeField] private GridInteraction _gridInteractionManager;
         private List<PieceSelectable> selectables;
         
         private void Awake() {

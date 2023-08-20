@@ -6,7 +6,7 @@ using BuilderGame.Input;
 
 namespace BuilderGame.Cam
 {
-    public class CameraManagement : MonoBehaviour
+    public class CameraMovement : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera _cinemachine;
         [SerializeField] private Vector3 _originalOffset;
