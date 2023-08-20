@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 
 namespace BuilderGame.Levels.FileManagement
 {

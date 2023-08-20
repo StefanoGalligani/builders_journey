@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 
 namespace BuilderGame.Levels {
     public class LevelReferenceSingleton {

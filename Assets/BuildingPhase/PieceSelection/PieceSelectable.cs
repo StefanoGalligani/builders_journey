@@ -1,9 +1,9 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using BuilderGame.BuildingPhase.PieceInfo;
+using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 
-namespace BuilderGame.BuildingPhase.SelectionUI {
+namespace BuilderGame.BuildingPhase.PieceSelection {
     public class PieceSelectable : MonoBehaviour
     {
         [SerializeField] private Image _image;

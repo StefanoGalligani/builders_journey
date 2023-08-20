@@ -1,9 +1,13 @@
 {
-    "name": "LevelsAssembly",
+    "name": "PieceSelectionAssembly",
     "rootNamespace": "",
     "references": [
+        "GUID:b5704b815afc15946b32529fb8b6225d",
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:7ac721247f91aad4fa8c5fabc52b2152"
+        "GUID:ed160febb6a97a34f92d075bf234bdde",
+        "GUID:922ee0c850408a240a136190181d4576",
+        "GUID:4dd49148e000e494ab0666019ac28f6e",
+        "GUID:6c7b184973422b14dbeac523d99281d8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

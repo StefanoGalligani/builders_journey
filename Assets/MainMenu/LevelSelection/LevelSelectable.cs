@@ -1,8 +1,10 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using BuilderGame.Levels;
+using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 
-namespace BuilderGame.Levels
+namespace BuilderGame.MainMenu.LevelSelection
 {
     public class LevelSelectable : MonoBehaviour
     {
@@ -31,11 +33,5 @@ namespace BuilderGame.Levels
             if (!_clickable) return;
             _selectionManager.Selection(this, _sceneName);
         }
-    }
-
-    public enum LevelState {
-        Blocked,
-        NotPassed,
-        Passed
     }
 }

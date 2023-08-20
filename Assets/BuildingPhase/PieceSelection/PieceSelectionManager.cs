@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Builder;
-using BuilderGame.BuildingPhase.PieceInfo;
+using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase;
 
-namespace BuilderGame.BuildingPhase.SelectionUI {
+namespace BuilderGame.BuildingPhase.PieceSelection {
     public class PieceSelectionManager : BuildingPhaseUI {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;

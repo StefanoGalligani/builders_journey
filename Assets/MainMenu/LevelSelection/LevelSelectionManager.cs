@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BuilderGame.Levels;
+using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using BuilderGame.Levels.FileManagement;
 
-namespace BuilderGame.Levels {
+namespace BuilderGame.MainMenu.LevelSelection {
     public class LevelSelectionManager : MonoBehaviour {
         [SerializeField] private RectTransform _contentRect;
         [SerializeField] private LevelSelectable _levelSelectablePrefab;

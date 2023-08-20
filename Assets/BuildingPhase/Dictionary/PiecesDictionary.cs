@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using BuilderGame.BuildingPhase.PieceInfo;
+using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
 
 namespace BuilderGame.BuildingPhase.Dictionary {
