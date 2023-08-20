@@ -1,7 +1,13 @@
 using UnityEngine;
+using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using UnityEngine.UIElements;
 
 namespace BuilderGame.Levels.FileManagement
 {
@@ -19,50 +25,41 @@ namespace BuilderGame.Levels.FileManagement
             _filePath = Application.persistentDataPath + "/" + _fileName;
         }
 
-        public void SetLevelStars(string levelName, int stars) {
+        private void UpdateLevelInfo(string levelName, Action<int> action) {
             if (!_fileRead) ReadFromFile();
-            for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.data[i].levelName) {
-                    _levelsData.data[i].levelStars = stars;
-                    WriteToFile();
-                    return;
-                }
+            List<int> indices = _levelsData.data.AsEnumerable().Select((l,i) => (l.levelName==levelName) ? i : -1).Except(new int[] {-1}).ToList();
+            if (indices.Count > 0) {
+                action(indices.First());
+                WriteToFile();
+                return;
             }
             Debug.LogWarning("Tried to update level " + levelName + " but it was not found in file");
+        }
+
+        private T GetLevelInfo<T>(string levelName, Func<SingleLevelData, T> action) {
+            if (!_fileRead) ReadFromFile();
+            SingleLevelData level = _levelsData.data.AsEnumerable().FirstOrDefault(l => l.levelName==levelName);
+            if (level.levelName==levelName) {
+                return action(level);
+            }
+            Debug.LogWarning("Tried to read from level " + levelName + " but it was not found in file");
+            return default;
+        }
+
+        public void SetLevelStars(string levelName, int stars) {
+            UpdateLevelInfo(levelName, i => _levelsData.data[i].levelStars = stars);
         }
 
         public void SetLevelState(string levelName, LevelState state) {
-            if (!_fileRead) ReadFromFile();
-            for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.data[i].levelName) {
-                    _levelsData.data[i].levelState = state;
-                    WriteToFile();
-                    return;
-                }
-            }
-            Debug.LogWarning("Tried to update level " + levelName + " but it was not found in file");
+            UpdateLevelInfo(levelName, i => _levelsData.data[i].levelState = state);
         }
         
         public int GetLevelStars(string levelName) {
-            if (!_fileRead) ReadFromFile();
-            for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.data[i].levelName) {
-                    return _levelsData.data[i].levelStars;
-                }
-            }
-            Debug.LogWarning("Tried to read from level " + levelName + " but it was not found in file");
-            return 0;
+            return GetLevelInfo(levelName, l => l.levelStars);
         }
 
         public LevelState GetLevelState(string levelName) {
-            if (!_fileRead) ReadFromFile();
-            for (int i=0; i<_levelsData.levelCount; i++) {
-                if (levelName == _levelsData.data[i].levelName) {
-                    return _levelsData.data[i].levelState;
-                }
-            }
-            Debug.LogWarning("Tried to read from level " + levelName + " but it was not found in file");
-            return LevelState.Blocked;
+            return GetLevelInfo(levelName, l => l.levelState);
         }
 
         public void CreateFileIfNotExists(LevelInfoScriptableObject[] levelInfos) {

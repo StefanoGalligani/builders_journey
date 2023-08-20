@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
@@ -16,50 +19,47 @@ namespace BuilderGame.Levels {
             }
         }
 
-        public string GetCurrentSceneLevelName() {
+        private int GetCurrentLevelIndex() {
             string sceneName = SceneManager.GetActiveScene().name;
-            for (int i=0; i<_levelInfos.Length; i++) {
-                if (sceneName == _levelInfos[i].SceneName) {
-                    return _levelInfos[i].LevelName;
-                }
+            List<int> indices = _levelInfos.AsEnumerable().Select((l,i) => l.SceneName==sceneName ? i : -1).Except(new int[] {-1}).ToList();
+            if (indices.Count > 0) {
+                return indices.First();
             }
-            Debug.LogWarning("Tried to access level name from scene " + sceneName + " but it was not found");
-            return null;
+            Debug.LogWarning("Tried to access level from scene " + sceneName + " but it was not found");
+            return -1;
+        }
+
+        private T GetCurrentLevelInfo<T>(Func<LevelInfoScriptableObject, T> action) {
+            int index = GetCurrentLevelIndex();
+            if (index >= 0) {
+                return action(_levelInfos[index]);
+            }
+            return default;
         }
 
         public string[] GetNextLevelNameAndSceneName() {
-            string sceneName = SceneManager.GetActiveScene().name;
-            for (int i=0; i<_levelInfos.Length-1; i++) {
-                if (sceneName == _levelInfos[i].SceneName) {
-                    return new string[]{_levelInfos[i+1].LevelName, _levelInfos[i+1].SceneName};
-                }
+            int index = GetCurrentLevelIndex();
+            if (index >= 0 && index < _levelInfos.Length-1) {
+                return new string[]{_levelInfos[index+1].LevelName, _levelInfos[index+1].SceneName};
             }
-            Debug.LogWarning("Tried to access level scene after " + sceneName + " but it was not found");
+            Debug.LogWarning("No level found after this scene");
             return null;
+        }
+
+        public string GetCurrentSceneLevelName() {
+            return GetCurrentLevelInfo(l => l.LevelName);
         }
 
         public int GetCurrentSceneLevelStars(int totalPrice) {
-            string sceneName = SceneManager.GetActiveScene().name;
-            for (int i=0; i<_levelInfos.Length; i++) {
-                if (sceneName == _levelInfos[i].SceneName) {
-                    if (totalPrice <= _levelInfos[i].PriceLimitThreeStars) return 3;
-                    if (totalPrice <= _levelInfos[i].PriceLimitTwoStars) return 2;
+            return GetCurrentLevelInfo(l => {
+                    if (totalPrice <= l.PriceLimitThreeStars) return 3;
+                    if (totalPrice <= l.PriceLimitTwoStars) return 2;
                     return 1;
-                }
-            }
-            Debug.LogWarning("Tried to access level stars from scene " + sceneName + " but it was not found");
-            return 0;
+                });
         }
 
         public int[] GetCurrentScenePriceLimits() {
-            string sceneName = SceneManager.GetActiveScene().name;
-            for (int i=0; i<_levelInfos.Length-1; i++) {
-                if (sceneName == _levelInfos[i].SceneName) {
-                    return new int[]{_levelInfos[i].PriceLimitThreeStars, _levelInfos[i].PriceLimitTwoStars};
-                }
-            }
-            Debug.LogWarning("Tried to access level prices from scene " + sceneName + " but it was not found");
-            return null;
+            return GetCurrentLevelInfo(l => new int[]{l.PriceLimitThreeStars, l.PriceLimitTwoStars});
         }
     }
 }
