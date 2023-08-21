@@ -1,8 +1,9 @@
 using UnityEngine;
+using BuilderGame.Utils;
 
 namespace BuilderGame.MainMenu.LevelSelection.LevelInfo {
     [CreateAssetMenu(fileName = "LevelData", menuName = "ScriptableObjects/LevelInfoScriptableObject", order = 1)]
-    public class LevelInfoScriptableObject : ScriptableObject
+    public class LevelInfoScriptableObject : ScriptableObject, IInfoScriptableObject
     {
         public string LevelName;
         public string SceneName;

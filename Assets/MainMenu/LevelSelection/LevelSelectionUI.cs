@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using BuilderGame.Levels;
+using BuilderGame.Utils;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using BuilderGame.Levels.FileManagement;
 
 namespace BuilderGame.MainMenu.LevelSelection {
-    public class LevelSelectionUI : MonoBehaviour {
+    public class LevelSelectionUI : MonoBehaviour, ISelectionUI<LevelSelectable, LevelInfoScriptableObject> {
         [SerializeField] private RectTransform _contentRect;
         [SerializeField] private LevelSelectable _levelSelectablePrefab;
         [SerializeField] private LevelInfoScriptableObject[] _levelInfos;
@@ -29,12 +30,8 @@ namespace BuilderGame.MainMenu.LevelSelection {
             }
         }
 
-        private void OnGameStart() {
-            gameObject.SetActive(false);
-        }
-
-        public void Selection(LevelSelectable levelSelectable, string sceneName) {
-            SceneManager.LoadScene(sceneName);
+        public void Selection(LevelSelectable levelSelectable, LevelInfoScriptableObject levelInfo) {
+            SceneManager.LoadScene(levelInfo.SceneName);
         }
     }
 }

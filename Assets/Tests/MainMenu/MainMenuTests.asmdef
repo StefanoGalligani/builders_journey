@@ -4,7 +4,11 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "MainMenuAssembly"
+        "MainMenuAssembly",
+        "LevelSelectionAssembly",
+        "UtilsAssembly",
+        "LevelsAssembly",
+        "LevelInfoAssembly"
     ],
     "includePlatforms": [
         "Editor"

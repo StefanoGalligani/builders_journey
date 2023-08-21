@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
+[assembly: InternalsVisibleToAttribute("MainMenuTests")]
 namespace BuilderGame.MainMenu
 {
     public class MenusManager : MonoBehaviour
     {
         private GameObject[] menus;
 
-        private void Start() {
+        internal void Start() {
             menus = new GameObject[transform.childCount];
             for (int i=0; i<transform.childCount; i++) {
                 menus[i] = transform.GetChild(i).gameObject;
