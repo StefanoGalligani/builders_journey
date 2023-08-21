@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
 
+[assembly: InternalsVisibleToAttribute("DictionaryTests")]
 namespace BuilderGame.BuildingPhase.Dictionary {
     public class PiecesDictionary : MonoBehaviour {
-        [SerializeField] private Piece _mainPiecePrefab;
+        [SerializeField] internal Piece _mainPiecePrefab;
         private Dictionary<int, Piece> _prefabDictionary;
         private Dictionary<int, int> _priceDictionary;
         private Dictionary<int, Sprite> _spriteDictionary;

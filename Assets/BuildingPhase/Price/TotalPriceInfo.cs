@@ -12,14 +12,14 @@ namespace BuilderGame.BuildingPhase.Price
         public void SumPrice(int price) {
             if (price > 0) {
                 _totalPrice += price;
-                _priceUi.UpdatePrice(_totalPrice);
+                if (_priceUi) _priceUi.UpdatePrice(_totalPrice);
             }
         }
         
         public void SubtractPrice(int price) {
             if (price > 0) {
                 _totalPrice -= price;
-                _priceUi.UpdatePrice(_totalPrice);
+                if (_priceUi) _priceUi.UpdatePrice(_totalPrice);
             }
         }
 

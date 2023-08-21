@@ -1,39 +1,61 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using BuilderGame.BuildingPhase.Price;
 using BuilderGame.Levels;
 using BuilderGame.Levels.FileManagement;
 
+[assembly: InternalsVisibleToAttribute("EndingPhaseTests")]
 namespace BuilderGame.EndingPhase
 {
     public class EndUI : MonoBehaviour
     {
         [SerializeField] private GameObject _uiPanel;
         [SerializeField] private string _menuSceneName;
+        private string _currentLevelName;
+        private string _nextLevelName;
         private string _nextLevelSceneName;
-        private void Start()
+        private Levels.LevelState _previousState;
+        private int _previousStars;
+
+        internal void Start()
         {
-            _uiPanel.SetActive(false);
+            if (_uiPanel) _uiPanel.SetActive(false);
             FindObjectOfType<EndNotifier>().GameEnd += OnEndLevel;
         }
 
         private void OnEndLevel() {
-            _uiPanel.SetActive(true);
-            string currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName();
-            string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName();
-            _nextLevelSceneName = nextLevelInfos[1];
-            Levels.LevelState previousState = LevelFileAccessSingleton.Instance.GetLevelState(currentLevelName);
-            int previousStars = LevelFileAccessSingleton.Instance.GetLevelStars(currentLevelName);
+            if (_uiPanel) _uiPanel.SetActive(true);
+            RetrieveSceneInfos();
+            RetrieveOldInfos();
+            UpdateStars();
+            UpdateStates();
+        }
 
+        private void RetrieveSceneInfos() {
+            _currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName();
+            string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName();
+            _nextLevelName = nextLevelInfos[0];
+            _nextLevelSceneName = nextLevelInfos[1];
+        }
+
+        private void RetrieveOldInfos() {
+            _previousState = LevelFileAccessSingleton.Instance.GetLevelState(_currentLevelName);
+            _previousStars = LevelFileAccessSingleton.Instance.GetLevelStars(_currentLevelName);
+        }
+
+        private void UpdateStars() {
             int totalPrice = FindObjectOfType<TotalPriceInfo>().GetTotalPrice();
             int newStars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(totalPrice);
-            if (newStars > previousStars) {
-                LevelFileAccessSingleton.Instance.SetLevelStars(currentLevelName, newStars);
+            if (newStars > _previousStars) {
+                LevelFileAccessSingleton.Instance.SetLevelStars(_currentLevelName, newStars);
             }
+        }
 
-            if (previousState != LevelState.Passed) {
-                LevelFileAccessSingleton.Instance.SetLevelState(currentLevelName, Levels.LevelState.Passed);
-                LevelFileAccessSingleton.Instance.SetLevelState(nextLevelInfos[0], Levels.LevelState.NotPassed);
+        private void UpdateStates() {
+            if (_previousState != LevelState.Passed) {
+                LevelFileAccessSingleton.Instance.SetLevelState(_currentLevelName, Levels.LevelState.Passed);
+                LevelFileAccessSingleton.Instance.SetLevelState(_nextLevelName, Levels.LevelState.NotPassed);
             }
         }
 

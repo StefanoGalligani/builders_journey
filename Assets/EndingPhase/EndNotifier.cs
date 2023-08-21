@@ -6,14 +6,14 @@ namespace BuilderGame.EndingPhase
     public class EndNotifier : MonoBehaviour
     {
         public event Action GameEnd;
-        [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         private bool _activated = false;
-        private void OnTriggerEnter2D(Collider2D other) {
+        internal void OnTriggerEnter2D(Collider2D other) {
             if (_activated || !other.gameObject.layer.Equals(LayerMask.NameToLayer("Vehicle"))) return;
 
             _activated = true;
             GameEnd?.Invoke();
-            Destroy(spriteRenderer);
+            if(_spriteRenderer) Destroy(_spriteRenderer);
         }
     }
 }

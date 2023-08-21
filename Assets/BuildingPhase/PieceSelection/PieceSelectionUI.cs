@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Builder;
 using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
-using BuilderGame.BuildingPhase;
+using BuilderGame.Utils;
 
+[assembly: InternalsVisibleToAttribute("PieceSelectionTests")]
 namespace BuilderGame.BuildingPhase.PieceSelection {
-    public class PieceSelectionUI : BuildingPhaseUI {
+    public class PieceSelectionUI : BuildingPhaseUI, ISelectionUI<PieceSelectable, PieceInfoScriptableObject> {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
