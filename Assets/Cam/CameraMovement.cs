@@ -15,7 +15,7 @@ namespace BuilderGame.Cam
         private Controls _actionAsset;
         private bool _buildingPhase = true;
 
-        void Start()
+        private void Start()
         {
             _transposer = _cinemachine.GetComponentInChildren<CinemachineFramingTransposer>();
             _transposer.m_TrackedObjectOffset = _originalOffset;
@@ -24,7 +24,7 @@ namespace BuilderGame.Cam
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 
-        void Update() {
+        private void Update() {
             if (_buildingPhase && _actionAsset.defaultmap.CameraMoveActive.IsInProgress()) {
                 Vector3 mouseDelta = _actionAsset.defaultmap.CameraMove.ReadValue<Vector2>();
                 _transposer.m_TrackedObjectOffset -= mouseDelta * Time.deltaTime * 2;

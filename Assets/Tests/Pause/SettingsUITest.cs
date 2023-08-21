@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace BuilderGame.Pause
 {
-    public class SettingsUI : MonoBehaviour
+    public class SettingsUITest
     {
-
     }
 }

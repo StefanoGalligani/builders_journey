@@ -1,10 +1,12 @@
+using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using BuilderGame.BuildingPhase.Start;
 using UnityEngine.InputSystem.Controls;
 using Unity.Properties;
-using System;
 
+[assembly: InternalsVisibleToAttribute("PiecesTests")]
 namespace BuilderGame.Pieces {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class SpecialPiece : MonoBehaviour {
@@ -14,29 +16,29 @@ namespace BuilderGame.Pieces {
         private bool _pieceEnabled;
         private int _indexOffset;
 
-        private void Start() {
+        internal void Start() {
             _pieceEnabled = false;
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
 
             InitController();
             if (_controller != null) _controller.SetGameObject(gameObject);
 
-            _action.performed += ctx => OnActionExecuted(ctx);
+            if(_action!=null) _action.performed += ctx => OnActionExecuted(ctx);
             _indexOffset = ActionNames.Length > 1 ? 1 : 0;
         }
 
         protected abstract void InitController();
 
-        private void OnGameStart() {
+        internal void OnGameStart() {
             _pieceEnabled = true;
             if (_controller != null) _controller.StartPiece();
         }
         
-        private void Update() {
+        internal void Update() {
             if (_pieceEnabled && _controller != null) _controller.UpdatePiece();
         }
         
-        private void FixedUpdate() {
+        internal void FixedUpdate() {
             if (_pieceEnabled && _controller != null) _controller.FixedUpdatePiece();
         }
 
@@ -45,7 +47,7 @@ namespace BuilderGame.Pieces {
                 FindObjectOfType<StartNotifier>().GameStart -= OnGameStart;
         }
 
-        private void OnActionExecuted(InputAction.CallbackContext context) {
+        internal void OnActionExecuted(InputAction.CallbackContext context) {
             if (_pieceEnabled && _controller != null) _controller.OnActionExecuted(context);
         }
 
