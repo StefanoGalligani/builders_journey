@@ -7,12 +7,13 @@ using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleToAttribute("LevelsTests")]
+[assembly: InternalsVisibleToAttribute("EndingPhaseTests")]
 namespace BuilderGame.Levels {
     public class LevelReferenceSingleton {
         private LevelInfoScriptableObject[] _levelInfos;
         private static LevelReferenceSingleton _instance;
         internal bool _warnings = true;
-        public static LevelReferenceSingleton Instance {get {return (_instance==null ? (_instance = new LevelReferenceSingleton()) : _instance);} private set{} }
+        public static LevelReferenceSingleton Instance {get {return (_instance==null ? (_instance = new LevelReferenceSingleton()) : _instance);} private set{_instance = value;} }
         private LevelReferenceSingleton(){}
 
         public void SetReferences(LevelInfoScriptableObject[] levelInfos) {
@@ -65,7 +66,7 @@ namespace BuilderGame.Levels {
         }
 
         internal static void DestroyInstance() {
-            _instance = null;
+            Instance = null;
         }
     }
 }

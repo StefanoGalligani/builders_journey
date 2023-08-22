@@ -13,12 +13,13 @@ namespace BuilderGame.Levels.FileManagement
 {
     public class LevelFileAccessSingleton
     {
+        public static LevelFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{_instance = value;} }
+        private static LevelFileAccessSingleton _instance;
         private string _fileName = "Data.bin";
         private string _filePath;
         private LevelsDataSerializable _levelsData;
         private bool _fileRead = false;
-        private static LevelFileAccessSingleton _instance;
-        public static LevelFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{} }
+        internal bool _test;
 
         private LevelFileAccessSingleton()
         {
@@ -63,7 +64,7 @@ namespace BuilderGame.Levels.FileManagement
         }
 
         public void CreateFileIfNotExists(LevelInfoScriptableObject[] levelInfos) {
-            if(File.Exists(_filePath)) {
+            if(CheckIfFileExists()) {
                 ReadFromFile();
                 if (levelInfos.Length > _levelsData.levelCount) {
                     AddNewLevels(levelInfos);
@@ -74,11 +75,15 @@ namespace BuilderGame.Levels.FileManagement
             }
         }
 
+        private bool CheckIfFileExists() {
+            return _test ? _fileRead : File.Exists(_filePath);
+        }
+
         private void AddNewLevels(LevelInfoScriptableObject[] levelInfos) {
             LevelsDataSerializable newLevelsData = new LevelsDataSerializable();
             int n = levelInfos.Length;
             newLevelsData = new LevelsDataSerializable();
-            _levelsData.levelCount = n;
+            newLevelsData.levelCount = n;
             newLevelsData.data = new SingleLevelData[n];
             bool lastLevelPassed = false;
             for (int i=0; i<_levelsData.levelCount; i++) {
@@ -109,6 +114,7 @@ namespace BuilderGame.Levels.FileManagement
         }
 
         private void WriteToFile() {
+            if (_test) return;
             if (!_fileRead) {
                 Debug.LogWarning("Tried to write to file without having the data");
                 return;
@@ -120,6 +126,10 @@ namespace BuilderGame.Levels.FileManagement
         }
 
         private void ReadFromFile() {
+            if (_test) {
+                _fileRead = true;
+                return;
+            }
             if(File.Exists(_filePath)) {
                 FileStream dataStream = new FileStream(_filePath, FileMode.Open);
 
@@ -131,6 +141,11 @@ namespace BuilderGame.Levels.FileManagement
             } else {
                 Debug.LogError("Could not find file " + _filePath);
             }
+        }
+
+        //FOR TESTING
+        internal static void DestroyInstance() {
+            Instance = null;
         }
     }
 }

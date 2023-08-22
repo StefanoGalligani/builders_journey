@@ -54,7 +54,6 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             ActivateJoint();
         }
 
-
         public void Rotate() {
             if(!_canRotate) return;
 
