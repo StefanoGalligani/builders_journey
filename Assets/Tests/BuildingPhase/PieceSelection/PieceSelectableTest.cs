@@ -17,7 +17,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
         [SetUp]
         public void SetUp() {
             selectionUI = new MockPieceSelectionUI();
-            info = new PieceInfoScriptableObject();
+            info = ScriptableObject.CreateInstance<PieceInfoScriptableObject>();
             obj = new GameObject();
             obj.AddComponent<PieceSelectable>();
             selectable = obj.GetComponent<PieceSelectable>();

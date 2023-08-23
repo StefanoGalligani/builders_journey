@@ -18,7 +18,7 @@ namespace BuilderGame.MainMenu.LevelSelection {
         [SetUp]
         public void SetUp() {
             selectionUI = new MockSelectionUI();
-            info = new LevelInfoScriptableObject();
+            info = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
             obj = new GameObject();
             obj.AddComponent<LevelSelectable>();
             selectable = obj.GetComponent<LevelSelectable>();
