@@ -1,13 +1,15 @@
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using BuilderGame.Utils;
 
+[assembly: InternalsVisibleToAttribute("VehicleManagementTests")]
 namespace BuilderGame.BuildingPhase.VehicleManagement {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Piece : MonoBehaviour {
-        [SerializeField] private DirectionEnum[] _availableJointDirections;
-        [SerializeField] private bool _canRotate;
-        [SerializeField] private bool _canBeAttachedTo;
+        [SerializeField] internal DirectionEnum[] _availableJointDirections;
+        [SerializeField] internal bool _canRotate;
+        [SerializeField] internal bool _canBeAttachedTo;
         private Direction _facingDirection;
         private Direction _jointDirection;
         private Rigidbody2D _rb;
@@ -49,7 +51,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
         }
 
         public void PrepareForGame() {
-            _rb.simulated = true;
+            if (_rb) _rb.simulated = true;
             if (_lr) _lr.enabled = false;
             ActivateJoint();
         }
@@ -94,7 +96,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             return IsAvailableJointDirection(dir);
         }
 
-        private bool IsAvailableJointDirection(Direction dir) {
+        internal bool IsAvailableJointDirection(Direction dir) {
             return _availableJointDirections.AsEnumerable().Any(dEnum => (dir - _facingDirection).Equals(dEnum));
         }
 
