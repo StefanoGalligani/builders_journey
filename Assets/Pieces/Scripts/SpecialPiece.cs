@@ -54,15 +54,25 @@ namespace BuilderGame.Pieces {
         //bindingIndex should be 0 for single bindings, >= 1 for composites
         public void RebindButtonClicked(int bindingIndex, Action<string> callback)
         {
+            string previousBindingJson = GetBindingJson();
             _action.Disable();
             var rebindOperation = _action.PerformInteractiveRebinding()
-                .WithCancelingThrough("<Keyboard>/escape")
                 .WithExpectedControlType(typeof(KeyControl))
+                .WithMatchingEventsBeingSuppressed(true)
                 .WithTargetBinding(bindingIndex + _indexOffset)
-                .OnComplete(_ => callback(GetBindingName(bindingIndex)))
-                .OnCancel(_ => callback(GetBindingName(bindingIndex)));
+                .OnComplete(_ => CheckValidRebind(bindingIndex, previousBindingJson, callback));
             rebindOperation.Start();
             _action.Enable();
+        }
+
+        private void CheckValidRebind(int index, string previousBindingJson, Action<string> callback) {
+            string canceling = "<Keyboard>/escape";
+            
+            if (canceling.Equals(_action.bindings[index + _indexOffset].overridePath)) {
+                LoadBindingJson(previousBindingJson);
+            }
+            
+            callback(GetBindingName(index));
         }
 
         public string GetBindingName(int index) {
