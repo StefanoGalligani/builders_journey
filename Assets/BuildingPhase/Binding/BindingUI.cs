@@ -8,7 +8,7 @@ using BuilderGame.BuildingPhase;
 
 namespace BuilderGame.BuildingPhase.Binding
 {
-    public class BindingUI : BuildingPhaseUI
+    public class BindingUI : SubmenuUI
     {
         [SerializeField] private BindingInfo _bindingInfoPrefab;
         [SerializeField] private GameObject _infoContainer;
@@ -16,7 +16,7 @@ namespace BuilderGame.BuildingPhase.Binding
         private BindingInfo[] _bindingInfos;
         private SpecialPiece _piece;
 
-        protected override void Init() {
+        private void Start() {
             _bindingInfos = new BindingInfo[0];
         }
 

@@ -2,30 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
 {
-    public class SaveUI : MonoBehaviour
+    public class SaveUI : SubmenuUI
     {
-        [SerializeField] private VehicleSaveManager saveManager;
-        [SerializeField] private TMP_InputField fileName;
-        [SerializeField] private GameObject content;
-        
-        private void Start() {
-            FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
-        }
+        [SerializeField] private VehicleSaveManager _saveManager;
+        [SerializeField] private TMP_InputField _fileName;
 
         public void OnSave() {
-            saveManager.SaveOnFile(fileName.text);
+            _saveManager.SaveOnFile(_fileName.text);
         }
 
         public void OnLoad() {
-            saveManager.LoadFromFile(fileName.text);
-        }
-
-        private void OnGameStart() {
-            content.SetActive(false);
+            _saveManager.LoadFromFile(_fileName.text);
         }
     }
 }

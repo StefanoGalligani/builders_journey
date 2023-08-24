@@ -9,7 +9,7 @@ using BuilderGame.Utils;
 
 [assembly: InternalsVisibleToAttribute("PieceSelectionTests")]
 namespace BuilderGame.BuildingPhase.PieceSelection {
-    public class PieceSelectionUI : BuildingPhaseUI, ISelectionUI<PieceSelectable, PieceInfoScriptableObject> {
+    public class PieceSelectionUI : SubmenuUI, ISelectionUI<PieceSelectable, PieceInfoScriptableObject> {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
@@ -20,7 +20,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
             FindObjectOfType<PiecesDictionary>().Init(_pieceInfos);
         }
 
-        protected override void Init() {
+        private void Start() {
             selectables = new List<PieceSelectable>();
             _scrollContent.sizeDelta = new Vector2(0, 110*_pieceInfos.Length + 10);
             foreach(PieceInfoScriptableObject pieceInfo in _pieceInfos) {
