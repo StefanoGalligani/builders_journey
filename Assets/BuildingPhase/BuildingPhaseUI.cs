@@ -16,7 +16,10 @@ namespace BuilderGame.BuildingPhase {
         protected abstract void Init();
 
         private void OnGameStart() {
+            DoOnGameStart();
             _content.SetActive(false);
         }
+
+        protected virtual void DoOnGameStart(){}
     }
 }

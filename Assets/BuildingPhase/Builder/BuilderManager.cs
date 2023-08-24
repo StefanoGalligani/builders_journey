@@ -2,7 +2,6 @@ using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
 using BuilderGame.BuildingPhase.Start;
-using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 using BuilderGame.Utils;
@@ -61,14 +60,13 @@ namespace BuilderGame.BuildingPhase.Builder {
             
             if (NewPieceId >= 0) {
                 Piece p = InstantiateNewPiece(NewPieceId, gridCoords);
-                //spostare questa logica nel GridInteractionManager
-                if (p.GetComponent<SpecialPiece>()) {
-                    GameObject.FindObjectOfType<BindingUI>()
-                    .PrepareUI(p.GetComponent<SpecialPiece>(), _piecesDictionary.GetSpriteById(NewPieceId));
-                }
             }
             
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
+        }
+
+        internal Piece GetPieceAtPosition(Vector2Int gridCoords) {
+            return _placedPieces[gridCoords.x][gridCoords.y];
         }
 
         internal void RotatePiece(Vector2Int gridCoords) {
