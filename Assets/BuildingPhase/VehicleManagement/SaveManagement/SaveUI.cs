@@ -20,7 +20,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
 
         private void Start() {
             _selectables = new List<VehicleSelectable>();
-            string[] fileNames =  VehicleFileAccessSingleton.Instance.GetAllFileNames();
+            List<string> fileNames =  VehicleFileAccessSingleton.Instance.GetAllFileNames();
             _scrollContent.sizeDelta = new Vector2(0, 10);
             foreach(string fileName in fileNames) {
                 AddVehicleSelectable(fileName);
@@ -28,8 +28,9 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         }
 
         public void OnSave() {
+            bool alreadyPresent = VehicleFileAccessSingleton.Instance.GetAllFileNames().Contains(_fileNameTxt.text);
             bool saved = _saveManager.SaveOnFile(_fileNameTxt.text);
-            if (saved) {
+            if (saved && !alreadyPresent) {
                 AddVehicleSelectable(_fileNameTxt.text);
             }
         }

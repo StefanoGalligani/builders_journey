@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
@@ -28,12 +29,12 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
             return _fileRead;
         }
 
-        public string[] GetAllFileNames() {
+        public List<string> GetAllFileNames() {
             if (_fileNames == null) {
                 _fileNames = Directory.GetFiles(_filePath)
                 .Select(file => Path.GetFileName(file)).ToList();
             }
-            return _fileNames.ToArray();
+            return _fileNames;
         }
 
         internal void SetVehicleData(VehicleDataSerializable data) {
@@ -69,7 +70,12 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
             FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Open);
 
             BinaryFormatter converter = new BinaryFormatter();
-            _vehicleData = converter.Deserialize(dataStream) as VehicleDataSerializable;
+            try {
+                _vehicleData = converter.Deserialize(dataStream) as VehicleDataSerializable;
+            } catch (SerializationException e) {
+                Debug.LogError("File was not valid.\n" + e.StackTrace);
+                return false;
+            }
 
             dataStream.Close();
             _fileRead = true;
