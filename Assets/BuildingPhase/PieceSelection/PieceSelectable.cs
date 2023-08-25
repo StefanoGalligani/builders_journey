@@ -18,7 +18,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
             _selectionUI = selectionUI;
             _pieceInfo = pieceInfo;
 
-            if (_infoText) _infoText.text = "$ " + pieceInfo.Price;
+            if (_infoText) _infoText.text = pieceInfo.Price + " $";
             if (_infoText) _image.sprite = pieceInfo.Sprite;
         }
 

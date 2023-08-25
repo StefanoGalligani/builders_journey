@@ -4,7 +4,7 @@ using BuilderGame.Utils;
 
 namespace BuilderGame.BuildingPhase.PieceSelection.PieceInfo {
     [CreateAssetMenu(fileName = "PieceData", menuName = "ScriptableObjects/PieceInfoScriptableObject", order = 1)]
-    public class PieceInfoScriptableObject : ScriptableObject, IInfoScriptableObject
+    public class PieceInfoScriptableObject : ScriptableObject, ISelectionInfo
     {
         public int Id;
         public int Price;

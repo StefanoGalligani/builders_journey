@@ -33,9 +33,9 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
             VehicleFileAccessSingleton.Instance.SetVehicleData(vehicleData);
         }
 
-        public void SaveOnFile(string name) {
+        public bool SaveOnFile(string name) {
             SaveVehicle();
-            VehicleFileAccessSingleton.Instance.WriteToFile(name);
+            return VehicleFileAccessSingleton.Instance.WriteToFile(name);
         }
 
         public void LoadFromFile(string name) {

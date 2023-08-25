@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
@@ -9,6 +11,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
         private string _filePath;
         private VehicleDataSerializable _vehicleData;
         private bool _fileRead = false;
+        private List<string> _fileNames;
         private static VehicleFileAccessSingleton _instance;
         public static VehicleFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new VehicleFileAccessSingleton()) : _instance);} private set{} }
 
@@ -23,6 +26,14 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
 
         public bool IsVehicleSaved() {
             return _fileRead;
+        }
+
+        public string[] GetAllFileNames() {
+            if (_fileNames == null) {
+                _fileNames = Directory.GetFiles(_filePath)
+                .Select(file => Path.GetFileName(file)).ToList();
+            }
+            return _fileNames.ToArray();
         }
 
         internal void SetVehicleData(VehicleDataSerializable data) {
@@ -41,6 +52,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
                 Debug.LogWarning("Tried to write to file without having the data");
                 return false;
             }
+            if (!_fileNames.Contains(fileName)) _fileNames.Add(fileName);
             FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Create);
             BinaryFormatter converter = new BinaryFormatter();
             converter.Serialize(dataStream, _vehicleData);
@@ -62,6 +74,15 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
             dataStream.Close();
             _fileRead = true;
             return true;
+        }
+
+        internal void DeleteFile(string fileName) {
+            if(!File.Exists(_filePath + fileName)) {
+                Debug.LogError("Could not find file " + _filePath + fileName);
+                return;
+            }
+            if (_fileNames.Contains(fileName)) _fileNames.Remove(fileName);
+            File.Delete(_filePath + fileName);
         }
     }
 }
