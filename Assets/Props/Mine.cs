@@ -21,11 +21,12 @@ namespace BuilderGame
                 if (!rb) continue;
 
                 Vector2 direction = rb.position - (Vector2)transform.position;
-                float distance = direction.magnitude;
+                float distance = direction.magnitude - 1;
                 float actualForce = (1 - distance/_explosionRadius) * _explosionForce;
                 direction.Normalize();
                 
                 rb.AddForceAtPosition(direction * actualForce, (Vector2)transform.position, ForceMode2D.Impulse);
+                
             }
 
             Destroy(gameObject);
