@@ -35,8 +35,10 @@ namespace BuilderGame.EndingPhase
         internal void RetrieveSceneInfos(string sceneName = null) {
             _currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName(sceneName);
             string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName(sceneName);
-            _nextLevelName = nextLevelInfos[0];
-            _nextLevelSceneName = nextLevelInfos[1];
+            if (nextLevelInfos != null) {
+                _nextLevelName = nextLevelInfos[0];
+                _nextLevelSceneName = nextLevelInfos[1];
+            }
         }
 
         internal void UpdateStars(string sceneName = null) {

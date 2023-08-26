@@ -18,6 +18,7 @@ namespace BuilderGame.BuildingPhase.Price
         
         protected override void Init() {
             _starPricesLimits = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits();
+            if (_starPricesLimits == null) return;
             _threeStarsPrice.text = _starPricesLimits[0] + " $";
             _twoStarsPrice.text = _starPricesLimits[1] + " $";
             _totalPrice.text = "0 $";
@@ -29,7 +30,7 @@ namespace BuilderGame.BuildingPhase.Price
         internal void UpdatePrice(int newPrice) {
             _totalPrice.text = newPrice + " $";
             int stars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(newPrice);
-            _totalPrice.color = _textColorByStars[stars-1];
+            if (stars >= 1) _totalPrice.color = _textColorByStars[stars-1];
         }
     }
 }
