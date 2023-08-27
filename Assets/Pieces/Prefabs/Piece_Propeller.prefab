@@ -80,6 +80,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece_Propeller
       objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -110,7 +118,7 @@ FixedJoint2D:
   serializedVersion: 4
   m_EnableCollision: 0
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 1000
+  m_BreakForce: 2000
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1

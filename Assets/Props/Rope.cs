@@ -22,6 +22,7 @@ namespace BuilderGame.Props
 
         private void Start() {
             _lineRenderer = GetComponent<LineRenderer>();
+            _lineRenderer.positionCount = _ropeLength+1;
             if (_createOnStart) {
                 _ropePieces = new Joint2D[_ropeLength + 1];
                 CreateRope();
@@ -42,7 +43,7 @@ namespace BuilderGame.Props
             }
 
             _ropePieces[_ropeLength] = Instantiate(_ropeEndPrefab, transform);
-            _ropePieces[_ropeLength].transform.position = transform.position + (Vector3)_ropeDirection.normalized * _ropeLength;
+            _ropePieces[_ropeLength].transform.position = transform.position + (Vector3)_ropeDirection.normalized * _ropeLength * _pieceLength;
             _ropePieces[_ropeLength-1].connectedBody = _ropePieces[_ropeLength].GetComponent<Rigidbody2D>();
             _ropePieces[_ropeLength].connectedBody = _attachedObject;
         }

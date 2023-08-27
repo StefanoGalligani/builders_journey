@@ -116,6 +116,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece_Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1112939580242970215, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

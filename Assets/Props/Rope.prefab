@@ -45,11 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69d5913d5cadf841ab3685d6bc621f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createOnStart: 1
   _ropeStartPrefab: {fileID: 6712533363724649765, guid: e40ffed2f1976ab4f9cb9a3925047477, type: 3}
   _ropeChildPrefab: {fileID: 6712533363724649765, guid: b94aab26383d317478a87fe7b0637647, type: 3}
   _ropeEndPrefab: {fileID: 1435506900053261958, guid: db8bb071c0669c140bc0efdf45059398, type: 3}
-  _attachedObject: {fileID: 0}
   _ropeDirection: {x: 0, y: -1}
+  _attachedObject: {fileID: 0}
+  _objectOffset: {x: 0, y: 0}
   _ropeLength: 5
   _pieceLength: 1
 --- !u!120 &3851298435542087459
@@ -61,8 +63,8 @@ LineRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135985357702397058}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 0
@@ -148,7 +150,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
