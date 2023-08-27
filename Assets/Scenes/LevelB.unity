@@ -13209,6 +13209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
+    - target: {fileID: 9135935272273248126, guid: a9f7e15e0f550894da39f15545865f21, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

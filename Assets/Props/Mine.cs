@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BuilderGame
+namespace BuilderGame.Props
 {
     public class Mine : MonoBehaviour
     {

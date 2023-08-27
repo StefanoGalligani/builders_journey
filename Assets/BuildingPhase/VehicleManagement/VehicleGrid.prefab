@@ -329,7 +329,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2159890523385785403
 MonoBehaviour:
@@ -383,9 +383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a68cf23f71d7a46b51519f5d3439a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _content: {fileID: 4718502347454667458}
   _gridInfo: {fileID: 11400000, guid: af5e09801fa99984188c9687da4af5fc, type: 2}
   _vehicle: {fileID: 0}
-  _content: {fileID: 4718502347454667458}
+  _buildingSelectionUI: {fileID: 0}
+  _rebindingUI: {fileID: 0}
+  _selectionSprite: {fileID: 0}
 --- !u!1 &2933809078939915275
 GameObject:
   m_ObjectHideFlags: 0
