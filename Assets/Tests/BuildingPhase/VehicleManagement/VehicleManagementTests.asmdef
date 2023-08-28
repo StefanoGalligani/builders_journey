@@ -1,11 +1,12 @@
 {
     "name": "VehicleManagementTests",
-    "rootNamespace": "",
+    "rootNamespace": "BuilderGame.BuildingPhase.VehicleManagement",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "VehicleManagementAssembly",
-        "UtilsAssembly"
+        "UtilsAssembly",
+        "VehicleSaveManagementAssembly"
     ],
     "includePlatforms": [
         "Editor"

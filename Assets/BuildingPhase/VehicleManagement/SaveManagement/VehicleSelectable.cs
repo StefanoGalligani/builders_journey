@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using BuilderGame.Utils;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 
+[assembly: InternalsVisibleToAttribute("VehicleManagementTests")]
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement {
     public class VehicleSelectable : MonoBehaviour, ISelectable
     {
@@ -17,7 +19,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement {
         internal void Init(VehicleInfo vehicleInfo, ISelectionUI<VehicleSelectable, VehicleInfo> selectionUI) {
             _selectionUI = selectionUI;
             _vehicleInfo = vehicleInfo;
-            _nameText.text = vehicleInfo.GetVehicleName();
+            if(_nameText) _nameText.text = vehicleInfo.GetVehicleName();
         }
 
         public void OnClick() {

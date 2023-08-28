@@ -53,7 +53,7 @@ namespace BuilderGame.Pause {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
-        private void OnEndLevel() {
+        internal void OnEndLevel() {
             _canBeOpened = false;
         }
 

@@ -58,6 +58,14 @@ namespace BuilderGame.Pause
             Assert.False(settings.activeSelf);
         }
 
+        [Test]
+        public void TestCantOpenAfterEnd() {
+            pauseObj.OnEndLevel();
+
+            pauseObj.OnPause();
+            Assert.False(settings.activeSelf);
+        }
+
         [TearDown]
         public void TearDown() {
             GameObject.DestroyImmediate(pauseObj);

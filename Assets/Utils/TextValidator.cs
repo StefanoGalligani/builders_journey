@@ -1,14 +1,16 @@
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using TMPro;
 
+[assembly: InternalsVisibleToAttribute("UtilsTests")]
 namespace BuilderGame.Utils {
     [RequireComponent(typeof(TMP_InputField))]
     public class TextValidator : MonoBehaviour
     {
-        TMP_InputField _inputField;
+        private TMP_InputField _inputField;
 
-        private void Start() {
+        internal void Start() {
             _inputField = GetComponent<TMP_InputField>();
         }
 

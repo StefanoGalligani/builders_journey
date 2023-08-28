@@ -1,10 +1,11 @@
 {
     "name": "UtilsTests",
-    "rootNamespace": "",
+    "rootNamespace": "BuilderGame.Utils",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "UtilsAssembly"
+        "UtilsAssembly",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [
         "Editor"
