@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PropellerData
   m_EditorClassIdentifier: 
   Id: 4
-  Price: 8
+  Price: 7
   Prefab: {fileID: 5605249512747181554, guid: 8d2d95bf919afd24abb26a4fa960a266, type: 3}
   Sprite: {fileID: 861109403, guid: 0e1b46a170817904ebb570313caebbf4, type: 3}

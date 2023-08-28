@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level8_Data
   m_EditorClassIdentifier: 
   LevelName: 8
-  SceneName: MainMenu
+  SceneName: LevelB
   PriceLimitThreeStars: 10
   PriceLimitTwoStars: 15

@@ -43,7 +43,6 @@ namespace BuilderGame.EndingPhase {
             
             LevelFileAccessSingleton.Instance._test = true;
             LevelFileAccessSingleton.Instance.CreateFileIfNotExists(scriptableObjects);
-            Debug.Log("Set up ending phase tests");
         }
         
         [Test]

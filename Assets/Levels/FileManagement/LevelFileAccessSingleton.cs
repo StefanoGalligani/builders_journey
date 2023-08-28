@@ -13,7 +13,7 @@ namespace BuilderGame.Levels.FileManagement
 {
     public class LevelFileAccessSingleton
     {
-        public static LevelFileAccessSingleton Instance {get {Debug.Log("Getting instance");return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{_instance = value;} }
+        public static LevelFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{_instance = value;} }
         private static LevelFileAccessSingleton _instance;
         private string _fileName = "Data.bin";
         private string _filePath;
@@ -24,7 +24,6 @@ namespace BuilderGame.Levels.FileManagement
         private LevelFileAccessSingleton()
         {
             _filePath = Application.persistentDataPath + "/" + _fileName;
-            Debug.Log("Created Instance");
         }
 
         private void UpdateLevelInfo(string levelName, Action<int> action) {
@@ -82,14 +81,12 @@ namespace BuilderGame.Levels.FileManagement
         }
 
         private void UpdateExistingLevels(LevelInfoScriptableObject[] levelInfos) {
-            Debug.Log("Updating levels");
             for (int i=0; i<_levelsData.levelCount; i++) {
                 if(levelInfos.Length > i) _levelsData.data[i].levelName = levelInfos[i].LevelName;
             }
         }
 
         private void AddNewLevels(LevelInfoScriptableObject[] levelInfos) {
-            Debug.Log("Adding new levels");
             LevelsDataSerializable newLevelsData = new LevelsDataSerializable();
             int n = levelInfos.Length;
             newLevelsData = new LevelsDataSerializable();
@@ -110,7 +107,6 @@ namespace BuilderGame.Levels.FileManagement
         }
 
         private void CreateFile(LevelInfoScriptableObject[] levelInfos) {
-            Debug.Log("Created file");
             int n = levelInfos.Length;
             _levelsData = new LevelsDataSerializable();
             _levelsData.levelCount = n;

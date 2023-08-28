@@ -17,6 +17,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         [SerializeField] private TMP_InputField _fileNameTxt;
         private List<VehicleSelectable> _selectables;
         private string _fileToLoad;
+        private bool _selected = false;
 
         private void Start() {
             _selectables = new List<VehicleSelectable>();
@@ -36,17 +37,22 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         }
 
         public void OnLoad() {
-            _saveManager.LoadFromFile(_fileToLoad);
+            if (_selected)
+                _saveManager.LoadFromFile(_fileToLoad);
         }
 
         public void Selection(VehicleSelectable vehicleSelectable, VehicleInfo vehicleInfo)
         {
+            _selected = true;
             _fileToLoad = vehicleInfo.GetVehicleName();
             _selectables.ForEach(s => s.ToggleHighlight(s.Equals(vehicleSelectable)));
         }
 
         public void SelectionDelete(VehicleSelectable vehicleSelectable, VehicleInfo vehicleInfo)
         {
+            _selectables.ForEach(s => s.ToggleHighlight(false));
+            _selected = false;
+            
             string fileToDelete = vehicleInfo.GetVehicleName();
             _selectables.Remove(vehicleSelectable);
             Destroy(vehicleSelectable.gameObject);

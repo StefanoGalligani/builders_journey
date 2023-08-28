@@ -62,7 +62,6 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
         }
 
         internal bool ReadFromFile(string fileName) {
-            Debug.Log("File name: " + _filePath + fileName);
             if(!File.Exists(_filePath + fileName)) {
                 Debug.LogError("Could not find file " + _filePath + fileName);
                 return false;
