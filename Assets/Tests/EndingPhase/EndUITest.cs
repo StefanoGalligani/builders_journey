@@ -18,6 +18,8 @@ namespace BuilderGame.EndingPhase {
         public void SetUp() {
             obj = new GameObject();
             endUI = obj.AddComponent<EndUI>();
+            LevelReferenceSingleton.DestroyInstance();
+            LevelFileAccessSingleton.DestroyInstance();
 
             LevelInfoScriptableObject info1 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
             LevelInfoScriptableObject info2 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
@@ -41,6 +43,7 @@ namespace BuilderGame.EndingPhase {
             
             LevelFileAccessSingleton.Instance._test = true;
             LevelFileAccessSingleton.Instance.CreateFileIfNotExists(scriptableObjects);
+            Debug.Log("Set up ending phase tests");
         }
         
         [Test]

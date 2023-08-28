@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895638f6b1248f6419e14bf0bf62039e, type: 3}
   m_Name: Level7_Data
   m_EditorClassIdentifier: 
-  LevelName: 6
-  SceneName: Level3
+  LevelName: 7
+  SceneName: MainMenu
   PriceLimitThreeStars: 10
   PriceLimitTwoStars: 15

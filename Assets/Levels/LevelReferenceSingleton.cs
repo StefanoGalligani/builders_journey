@@ -17,15 +17,13 @@ namespace BuilderGame.Levels {
         private LevelReferenceSingleton(){}
 
         public void SetReferences(LevelInfoScriptableObject[] levelInfos) {
-            for (int i=0; i<levelInfos.Length; i++) {
-                _levelInfos = levelInfos;
-            }
+            _levelInfos = levelInfos;
         }
 
         private int GetCurrentLevelIndex(string sceneName = null) {
             if(sceneName==null) sceneName = SceneManager.GetActiveScene().name;
             List<int> indices = new List<int>();
-            if (_levelInfos != null) _levelInfos.AsEnumerable().Select((l,i) => l.SceneName==sceneName ? i : -1).Except(new int[] {-1}).ToList();
+            if (_levelInfos != null) indices = _levelInfos.AsEnumerable().Select((l,i) => l.SceneName==sceneName ? i : -1).Except(new int[] {-1}).ToList();
             if (indices.Count > 0) {
                 return indices.First();
             }

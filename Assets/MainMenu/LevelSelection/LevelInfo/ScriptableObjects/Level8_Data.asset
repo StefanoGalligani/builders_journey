@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 895638f6b1248f6419e14bf0bf62039e, type: 3}
-  m_Name: Level5_Data
+  m_Name: Level8_Data
   m_EditorClassIdentifier: 
-  LevelName: 5
+  LevelName: 8
   SceneName: MainMenu
   PriceLimitThreeStars: 10
   PriceLimitTwoStars: 15

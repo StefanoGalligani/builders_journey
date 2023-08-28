@@ -1589,13 +1589,13 @@ MonoBehaviour:
     m_Right: 10
     m_Top: 10
     m_Bottom: 10
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 120}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ConstraintCount: 6
 --- !u!114 &1649198487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1618,6 +1618,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 86ea348d271546c44b672fdb4041aef6, type: 2}
   - {fileID: 11400000, guid: 1eacdc47d6c407f4a9a54a3820dd954e, type: 2}
   - {fileID: 11400000, guid: 553aae5f05836b94b9f16f68bca805c4, type: 2}
+  - {fileID: 11400000, guid: cd10c8a42cc200040b9e6cae157af900, type: 2}
+  - {fileID: 11400000, guid: ac021839da19122458c8ab209d1fb9b2, type: 2}
+  - {fileID: 11400000, guid: 9e4c8768d6a792747a3c7df3d8f52dae, type: 2}
+  - {fileID: 11400000, guid: b3c9b705066a63048a2db7d3090a44be, type: 2}
+  - {fileID: 11400000, guid: efcd2aeee9e3e3f4cb97c106f952948d, type: 2}
 --- !u!1 &1710972007
 GameObject:
   m_ObjectHideFlags: 0
