@@ -15,4 +15,4 @@ MonoBehaviour:
   LevelName: 4
   SceneName: Level4
   PriceLimitThreeStars: 10
-  PriceLimitTwoStars: 15
+  PriceLimitTwoStars: 20

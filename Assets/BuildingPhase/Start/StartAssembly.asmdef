@@ -1,3 +1,16 @@
 {
-	"name": "StartAssembly"
+    "name": "StartAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3b6886d83f4095f4090472058f866de4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,10 +1,7 @@
 {
-    "name": "BuildingPhaseAssembly",
-    "rootNamespace": "",
-    "references": [
-        "GUID:8e3ca5666198c414d8762619bfbb254e",
-        "GUID:3b6886d83f4095f4090472058f866de4"
-    ],
+    "name": "TutorialAssembly",
+    "rootNamespace": "BuilderGame.BuildingPhase.Tutorial",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

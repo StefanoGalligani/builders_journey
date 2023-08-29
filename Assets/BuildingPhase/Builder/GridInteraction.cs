@@ -7,9 +7,10 @@ using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
+using BuilderGame.BuildingPhase.Tutorial;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class GridInteraction : BuildingPhaseUI
+    public class GridInteraction : BuildingPhaseUI, ITutorialElement
     {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;
@@ -73,6 +74,16 @@ namespace BuilderGame.BuildingPhase.Builder {
             pos -= _gridInfo.BottomLeftCoords;
             Vector2Int coords = new Vector2Int((int)pos.x, (int)pos.y);
             return coords;
+        }
+
+        void ITutorialElement.DisableInTutorial()
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        void ITutorialElement.EnableInTutorial()
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
         }
     }
 }

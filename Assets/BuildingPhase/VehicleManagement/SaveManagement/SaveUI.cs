@@ -29,6 +29,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         }
 
         public void OnSave() {
+            if (_fileNameTxt.text.Length == 0) return;
             bool alreadyPresent = VehicleFileAccessSingleton.Instance.GetAllFileNames().Contains(_fileNameTxt.text);
             bool saved = _saveManager.SaveOnFile(_fileNameTxt.text);
             if (saved && !alreadyPresent) {
