@@ -12,6 +12,7 @@ namespace BuilderGame.EndingPhase
             if (_activated || !other.gameObject.layer.Equals(LayerMask.NameToLayer("Vehicle"))) return;
 
             _activated = true;
+            PlayerPrefs.SetInt("CurrentTutorialEnabled", 1);
             GameEnd?.Invoke();
             if(_spriteRenderer) Destroy(_spriteRenderer);
         }

@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace BuilderGame.BuildingPhase.Tutorial
+{
+    public class TutorialToggle : MonoBehaviour
+    {
+        [SerializeField] private Toggle toggle;
+
+        private void Start() {
+            int tutorialEnabled = PlayerPrefs.GetInt("TutorialEnabled", 1);
+            toggle.isOn = tutorialEnabled == 1;
+            toggle.onValueChanged.AddListener(_ => OnToggle());
+
+            PlayerPrefs.SetInt("CurrentTutorialEnabled", 1);
+        }
+
+        private void OnToggle() {
+            Debug.Log("Toggled " + toggle.isOn);
+            PlayerPrefs.SetInt("TutorialEnabled", toggle.isOn ? 1 : 0);
+        }
+    }
+}

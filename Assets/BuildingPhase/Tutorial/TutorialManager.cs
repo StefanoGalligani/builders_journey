@@ -8,10 +8,12 @@ namespace BuilderGame.BuildingPhase.Tutorial
     public class TutorialManager : MonoBehaviour {
         [SerializeField] private TutorialPanel[] _panels;
         [SerializeField] private List<MonoBehaviour> _linkedElements;
-        [SerializeField] private bool _enabled;
+        private bool _enabled;
         private int _currentPanel = 0;
         void Start()
         {
+            _enabled = PlayerPrefs.GetInt("TutorialEnabled", 1) == 1 && 
+                PlayerPrefs.GetInt("CurrentTutorialEnabled", 1) == 1;
             if (!_enabled) {
                 gameObject.SetActive(false);
                 return;
@@ -35,6 +37,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
                 foreach (ITutorialElement element in _linkedElements.AsEnumerable().Select(m => (ITutorialElement)m).ToList()) {
                     element.EnableInTutorial();
                 }
+                PlayerPrefs.SetInt("CurrentTutorialEnabled", 0);
                 gameObject.SetActive(false);
             } else {
                 ActivatePanel(_currentPanel);
