@@ -18,7 +18,6 @@ namespace BuilderGame.BuildingPhase.Tutorial
         }
 
         private void OnToggle() {
-            Debug.Log("Toggled " + toggle.isOn);
             PlayerPrefs.SetInt("TutorialEnabled", toggle.isOn ? 1 : 0);
         }
     }
