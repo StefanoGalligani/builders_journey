@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level9_Data
   m_EditorClassIdentifier: 
   LevelName: 9
-  SceneName: LevelA
-  PriceLimitThreeStars: 10
-  PriceLimitTwoStars: 15
+  SceneName: Level9
+  PriceLimitThreeStars: 100
+  PriceLimitTwoStars: 150

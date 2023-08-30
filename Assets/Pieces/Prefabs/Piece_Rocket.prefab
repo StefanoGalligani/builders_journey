@@ -207,7 +207,7 @@ MonoBehaviour:
     m_SingletonActionBindings:
     - m_Name: 
       m_Id: 5f598f6b-daec-48da-9147-34347c219aeb
-      m_Path: <Keyboard>/space
+      m_Path: <Keyboard>/leftShift
       m_Interactions: 
       m_Processors: 
       m_Groups: 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlockData
   m_EditorClassIdentifier: 
   Id: 1
-  Price: 1
+  Price: 10
   Prefab: {fileID: 4739373308703222359, guid: 7f93f0f48eb30604595f5833d9e45e1a, type: 3}
   Sprite: {fileID: 21300000, guid: d70fc76e002c298499849992c7e1a0ba, type: 3}

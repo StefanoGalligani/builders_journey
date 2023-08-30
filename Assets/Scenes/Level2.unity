@@ -7576,11 +7576,11 @@ PrefabInstance:
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: _pieceInfos.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 6b11bf88fbc02404c9625efc14564f8e, type: 2}
+      objectReference: {fileID: 11400000, guid: d7314b1372992f54cb9a23115cc6fe2f, type: 2}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: _pieceInfos.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: d7314b1372992f54cb9a23115cc6fe2f, type: 2}
+      objectReference: {fileID: 11400000, guid: 6b11bf88fbc02404c9625efc14564f8e, type: 2}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: _pieceInfos.Array.data[4]
       value: 
