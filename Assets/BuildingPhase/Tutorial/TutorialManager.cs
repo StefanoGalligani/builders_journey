@@ -1,8 +1,10 @@
+using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[assembly: InternalsVisibleToAttribute("TutorialTests")]
 namespace BuilderGame.BuildingPhase.Tutorial
 {
     public class TutorialManager : MonoBehaviour {
@@ -10,7 +12,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
         [SerializeField] private List<MonoBehaviour> _linkedElements;
         private bool _enabled;
         private int _currentPanel = 0;
-        void Start()
+        internal void Start()
         {
             _enabled = PlayerPrefs.GetInt("TutorialEnabled", 1) == 1 && 
                 PlayerPrefs.GetInt("CurrentTutorialEnabled", 1) == 1;
@@ -54,8 +56,22 @@ namespace BuilderGame.BuildingPhase.Tutorial
             }
         }
 
-        private void OnValidate() {
-            _linkedElements.RemoveAll(m => !(m is ITutorialElement));
+        internal void OnValidate() {
+            if(_linkedElements != null) _linkedElements.RemoveAll(m => !(m is ITutorialElement));
+        }
+        
+
+        //FOR TESTING
+        internal List<MonoBehaviour> GetLinkedElements() {
+            return _linkedElements;
+        }
+
+        internal void SetLinkedElements(List<MonoBehaviour> linkedElements) {
+            _linkedElements = linkedElements;
+        }
+
+        internal void SetPanels(TutorialPanel[] panels) {
+            _panels = panels;
         }
     }
 }

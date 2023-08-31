@@ -271,13 +271,5 @@ namespace BuilderGame.BuildingPhase.Builder {
         private Vector2 PositionFromGridCoordinates(Vector2Int gridCoords) {
             return _gridInfo.BottomLeftCoords + new Vector2(gridCoords.x, gridCoords.y) * _gridInfo.CellSize + _gridInfo.GridOffset;
         }
-
-        private bool IsValidPosition(int x, int y) { //estrarre in una classe di utils
-            if (x < 0 || x >= _placedPieces.Length)
-                return false;
-            if (y < 0 || y >= _placedPieces[x].Length)
-                return false;
-            return true;
-        }
     }
 }

@@ -7,9 +7,9 @@ namespace BuilderGame.BuildingPhase.Tutorial
 {
     public class TutorialToggle : MonoBehaviour
     {
-        [SerializeField] private Toggle toggle;
+        [SerializeField] internal Toggle toggle;
 
-        private void Start() {
+        internal void Start() {
             int tutorialEnabled = PlayerPrefs.GetInt("TutorialEnabled", 1);
             toggle.isOn = tutorialEnabled == 1;
             toggle.onValueChanged.AddListener(_ => OnToggle());

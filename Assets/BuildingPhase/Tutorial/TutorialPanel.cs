@@ -10,9 +10,9 @@ namespace BuilderGame.BuildingPhase.Tutorial
         [SerializeField] private List<MonoBehaviour> _linkedElements;
         [SerializeField] private List<MonoBehaviour> _deactivatedElements;
 
-        private void OnValidate() {
-            _linkedElements.RemoveAll(m => !(m is ITutorialElement));
-            _deactivatedElements.RemoveAll(m => !(m is ITutorialElement));
+        internal void OnValidate() {
+            if(_linkedElements != null) _linkedElements.RemoveAll(m => !(m is ITutorialElement));
+            if(_deactivatedElements != null) _deactivatedElements.RemoveAll(m => !(m is ITutorialElement));
         }
 
         internal List<ITutorialElement> GetLinkedElements() {
@@ -21,6 +21,12 @@ namespace BuilderGame.BuildingPhase.Tutorial
 
         internal List<ITutorialElement> GetDeactivatedElements() {
             return _deactivatedElements.AsEnumerable().Select(m => (ITutorialElement)m).ToList();
+        }
+
+        //FOR TESTING
+        internal void SetLists(List<MonoBehaviour> linkedElements, List<MonoBehaviour> deactivatedElements) {
+            _linkedElements = linkedElements;
+            _deactivatedElements = deactivatedElements;
         }
     }
 }
