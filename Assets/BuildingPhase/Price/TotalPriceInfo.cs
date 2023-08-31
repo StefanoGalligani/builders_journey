@@ -10,7 +10,6 @@ namespace BuilderGame.BuildingPhase.Price
         private int _totalPrice = 0;
 
         public void SumPrice(int price) {
-            Debug.Log("Summing price " + price);
             if (price > 0) {
                 _totalPrice += price;
                 if (_priceUi) _priceUi.UpdatePrice(_totalPrice);

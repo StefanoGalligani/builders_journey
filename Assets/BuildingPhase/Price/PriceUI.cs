@@ -32,7 +32,6 @@ namespace BuilderGame.BuildingPhase.Price
         }
 
         internal void UpdatePrice(int newPrice) {
-            Debug.Log("Updating ui " + newPrice);
             Init();
             _totalPrice.text = newPrice + " $";
             int stars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(newPrice);

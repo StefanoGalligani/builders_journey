@@ -15,4 +15,4 @@ MonoBehaviour:
   LevelName: 9
   SceneName: Level9
   PriceLimitThreeStars: 100
-  PriceLimitTwoStars: 150
+  PriceLimitTwoStars: 200

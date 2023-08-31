@@ -97,7 +97,6 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private bool BuildVehicleFromData(VehicleDataSerializable vehicleData) {
-            Debug.Log("Building from data " + SceneManager.GetActiveScene().name);
             if (!_piecesDictionary.AreAllIdsValid(vehicleData.GetAllIds())) {
                 Debug.LogWarning("The loaded vehicle contains pieces that are not available in this level");
                 return false;
