@@ -15,8 +15,12 @@ namespace BuilderGame.BuildingPhase.Price
         [SerializeField] TextMeshProUGUI _totalPrice;
         [SerializeField] Color[] _textColorByStars;
         private int[] _starPricesLimits;
+        private bool _isInitialized = false;
         
         protected override void Init() {
+            if (_isInitialized) return;
+            _isInitialized = true;
+
             _starPricesLimits = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits();
             if (_starPricesLimits == null) return;
             _threeStarsPrice.text = _starPricesLimits[0] + " $";
@@ -28,6 +32,8 @@ namespace BuilderGame.BuildingPhase.Price
         }
 
         internal void UpdatePrice(int newPrice) {
+            Debug.Log("Updating ui " + newPrice);
+            Init();
             _totalPrice.text = newPrice + " $";
             int stars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(newPrice);
             if (stars >= 1) _totalPrice.color = _textColorByStars[stars-1];
