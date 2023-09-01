@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _linkedElements: []
+  _deactivatedElements: []
 --- !u!1 &2959400068731486536
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,6 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _linkedElements: []
+  _deactivatedElements: []
 --- !u!1 &4119046531037799387
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _linkedElements: []
+  _deactivatedElements: []
 --- !u!1 &5423969125310831761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _linkedElements: []
+  _deactivatedElements: []
 --- !u!1 &7407669097283272358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,7 +1692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1734,7 +1738,6 @@ MonoBehaviour:
   - {fileID: 489241275576119481}
   - {fileID: 9205746532451802592}
   _linkedElements: []
-  _enabled: 1
 --- !u!1 &8008668993603063293
 GameObject:
   m_ObjectHideFlags: 0

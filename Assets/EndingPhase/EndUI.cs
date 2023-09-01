@@ -60,6 +60,9 @@ namespace BuilderGame.EndingPhase
         public void OnMenuButtonClick() {
             SceneManager.LoadScene(_menuSceneName);
         }
+        public void OnRestartButtonClick() {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         public void OnNextLevelButtonClick() {
             SceneManager.LoadScene(_nextLevelSceneName);
         }

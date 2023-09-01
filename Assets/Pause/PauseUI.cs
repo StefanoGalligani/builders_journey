@@ -26,6 +26,7 @@ namespace BuilderGame.Pause {
             _actionAsset = new Controls();
             _actionAsset.Enable();
             _actionAsset.defaultmap.Pause.performed += ctx => OnPause();
+            _actionAsset.defaultmap.Restart.performed += ctx => OnRestart();
             if (FindObjectOfType<EndNotifier>()) {
                 FindObjectOfType<EndNotifier>().GameEnd += OnEndLevel;
             }
@@ -50,6 +51,7 @@ namespace BuilderGame.Pause {
         }
 
         public void OnRestart() {
+            if (!_canBeOpened) return;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 

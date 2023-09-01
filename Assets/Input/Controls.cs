@@ -35,7 +35,16 @@ namespace BuilderGame.Input
                     ""id"": ""47d3e7fc-867e-46f5-840f-ec3ca453b59f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap(duration=0.4)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7459140-573b-4e33-98dc-2f4f761908a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -110,6 +119,17 @@ namespace BuilderGame.Input
                     ""action"": ""CameraMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60a1716d-3e96-4690-b575-99961557ef22"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -119,6 +139,7 @@ namespace BuilderGame.Input
             // defaultmap
             m_defaultmap = asset.FindActionMap("defaultmap", throwIfNotFound: true);
             m_defaultmap_Pause = m_defaultmap.FindAction("Pause", throwIfNotFound: true);
+            m_defaultmap_Restart = m_defaultmap.FindAction("Restart", throwIfNotFound: true);
             m_defaultmap_CameraMoveActive = m_defaultmap.FindAction("CameraMoveActive", throwIfNotFound: true);
             m_defaultmap_Scroll = m_defaultmap.FindAction("Scroll", throwIfNotFound: true);
             m_defaultmap_CameraMove = m_defaultmap.FindAction("CameraMove", throwIfNotFound: true);
@@ -184,6 +205,7 @@ namespace BuilderGame.Input
         private readonly InputActionMap m_defaultmap;
         private List<IDefaultmapActions> m_DefaultmapActionsCallbackInterfaces = new List<IDefaultmapActions>();
         private readonly InputAction m_defaultmap_Pause;
+        private readonly InputAction m_defaultmap_Restart;
         private readonly InputAction m_defaultmap_CameraMoveActive;
         private readonly InputAction m_defaultmap_Scroll;
         private readonly InputAction m_defaultmap_CameraMove;
@@ -192,6 +214,7 @@ namespace BuilderGame.Input
             private @Controls m_Wrapper;
             public DefaultmapActions(@Controls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Pause => m_Wrapper.m_defaultmap_Pause;
+            public InputAction @Restart => m_Wrapper.m_defaultmap_Restart;
             public InputAction @CameraMoveActive => m_Wrapper.m_defaultmap_CameraMoveActive;
             public InputAction @Scroll => m_Wrapper.m_defaultmap_Scroll;
             public InputAction @CameraMove => m_Wrapper.m_defaultmap_CameraMove;
@@ -207,6 +230,9 @@ namespace BuilderGame.Input
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
                 @CameraMoveActive.started += instance.OnCameraMoveActive;
                 @CameraMoveActive.performed += instance.OnCameraMoveActive;
                 @CameraMoveActive.canceled += instance.OnCameraMoveActive;
@@ -223,6 +249,9 @@ namespace BuilderGame.Input
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Restart.started -= instance.OnRestart;
+                @Restart.performed -= instance.OnRestart;
+                @Restart.canceled -= instance.OnRestart;
                 @CameraMoveActive.started -= instance.OnCameraMoveActive;
                 @CameraMoveActive.performed -= instance.OnCameraMoveActive;
                 @CameraMoveActive.canceled -= instance.OnCameraMoveActive;
@@ -252,6 +281,7 @@ namespace BuilderGame.Input
         public interface IDefaultmapActions
         {
             void OnPause(InputAction.CallbackContext context);
+            void OnRestart(InputAction.CallbackContext context);
             void OnCameraMoveActive(InputAction.CallbackContext context);
             void OnScroll(InputAction.CallbackContext context);
             void OnCameraMove(InputAction.CallbackContext context);

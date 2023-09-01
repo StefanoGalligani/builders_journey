@@ -7451,8 +7451,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5313776094855770236, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: m_text
-      value: 'On the left there are three buttons: each one of them corresponds to
-        a different menu'
+      value: 'On the left there are three buttons: each one corresponds to a different
+        menu'
       objectReference: {fileID: 0}
     - target: {fileID: 6190448112359746064, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -5,7 +5,6 @@ using TMPro;
 using BuilderGame.Levels;
 using BuilderGame.Utils;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
-using UnityEditor.Experimental.GraphView;
 
 [assembly: InternalsVisibleToAttribute("MainMenuTests")]
 namespace BuilderGame.MainMenu.LevelSelection

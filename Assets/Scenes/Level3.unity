@@ -17290,7 +17290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5313776094855770236, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: m_text
-      value: 'You can rotate a piece on your vehicle: just click in it with the right
+      value: 'You can rotate a piece on your vehicle: just click on it with the right
         mouse button'
       objectReference: {fileID: 0}
     - target: {fileID: 7328990695758064750, guid: 5ccace81e79a6c3488082235d806c054, type: 3}

@@ -7217,9 +7217,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3523920591515560535, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7328990695758064750, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7902617165424330654, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: m_Name
       value: TutorialCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565648967681262550, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
+      propertyPath: m_text
+      value: You can look around by moving your mouse while pressing the middle mouse
+        button
       objectReference: {fileID: 0}
     - target: {fileID: 9205746532451802592, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: _linkedElements.Array.size

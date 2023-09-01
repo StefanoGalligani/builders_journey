@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09f777d30c142e44940b1df5b154e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionForce: 40
+  _explosionForce: 30
   _explosionRadius: 10
   _explodeOnContactWithLayers:
     serializedVersion: 2
