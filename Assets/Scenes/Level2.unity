@@ -7350,12 +7350,16 @@ PrefabInstance:
       objectReference: {fileID: 845486888}
     - target: {fileID: 2079654648279209419, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: _linkedElements.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2079654648279209419, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: _linkedElements.Array.data[0]
       value: 
       objectReference: {fileID: 1162925361}
+    - target: {fileID: 2079654648279209419, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
+      propertyPath: _linkedElements.Array.data[1]
+      value: 
+      objectReference: {fileID: 1162925362}
     - target: {fileID: 2158267766740558000, guid: 5ccace81e79a6c3488082235d806c054, type: 3}
       propertyPath: m_text
       value: 'The "mouse" icon opens the controls menu: here you can click on a piece
@@ -7571,16 +7575,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: _pieceInfos.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
-      propertyPath: _pieceInfos.Array.data[2]
+      propertyPath: _pieceInfos.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: d7314b1372992f54cb9a23115cc6fe2f, type: 2}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
-      propertyPath: _pieceInfos.Array.data[3]
+      propertyPath: _pieceInfos.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 6b11bf88fbc02404c9625efc14564f8e, type: 2}
+    - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+      propertyPath: _pieceInfos.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1293058015502d2459e585b08db5f0d0, type: 2}
     - target: {fileID: 1300990621447621690, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: _pieceInfos.Array.data[4]
       value: 
@@ -7591,7 +7599,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 1293058015502d2459e585b08db5f0d0, type: 2}
     - target: {fileID: 1300990622087553037, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.49028015
+      value: 0.49017334
       objectReference: {fileID: 0}
     - target: {fileID: 1602802636908780259, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7972,6 +7980,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5207652085fac0d4aadd4c99c63c4d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1162925362 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2854668947582741432, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+  m_PrefabInstance: {fileID: 1162925357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f86be60df52534d85ae3b2c4bd0774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

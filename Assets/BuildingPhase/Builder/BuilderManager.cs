@@ -52,17 +52,17 @@ namespace BuilderGame.BuildingPhase.Builder {
             _mainPieceCoords = _gridInfo.MainPieceCoordinates;
         }
 
-        internal void PlacePiece(Vector2Int gridCoords) {
-            if (!IsPlaceable(gridCoords)) return;
+        internal void PlacePiece(Vector2Int gridCoords, bool deleting = false) {
+            if (!IsPlaceable(gridCoords) && !deleting) return;
 
-            if (_placedPieces[gridCoords.x][gridCoords.y] != null) {
-                RemovePiece(gridCoords);
-            }
-            
-            if (NewPieceId >= 0) {
+            RemovePiece(gridCoords);
+            if (NewPieceId >= 0 && !deleting) {
                 Piece p = InstantiateNewPiece(NewPieceId, gridCoords);
             }
-            
+            ConnectPieces();
+        }
+
+        private void ConnectPieces() {
             GameObject.FindObjectOfType<StartNotifier>().CanStart = _vehicleConnectionManager.ConnectPieces(_placedPieces, _mainPieceCoords);
         }
 
@@ -77,10 +77,13 @@ namespace BuilderGame.BuildingPhase.Builder {
             _placedPieces[gridCoords.x][gridCoords.y].Rotate();
         }
 
+        private bool IsMainPiece(Vector2Int gridCoords) {
+            return (gridCoords.x == _mainPieceCoords.x && gridCoords.y == _mainPieceCoords.y);
+        }
+
         private bool IsPlaceable(Vector2Int gridCoords) {
             if (!_validSelection) return false;
-            if (gridCoords.x == _mainPieceCoords.x && gridCoords.y == _mainPieceCoords.y)
-                return false;
+            if (IsMainPiece(gridCoords)) return false;
             for (int i=-1; i<=1; i++) {
                 for (int j=-1; j<=1; j++) {
                     if (i*j != 0) continue;
@@ -151,7 +154,18 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
 
+        internal void RemoveAllPieces() {
+            for (int i=0; i<_placedPieces.Length; i++) {
+                for (int j=0; j<_placedPieces[i].Length; j++) {
+                    Vector2Int gridCoords = new Vector2Int(i, j);
+                    RemovePiece(gridCoords);
+                }
+            }     
+        }
+
         private void RemovePiece(Vector2Int gridCoords) {
+            if (_placedPieces[gridCoords.x][gridCoords.y] == null || IsMainPiece(gridCoords)) return;
+
             int price = _piecesDictionary.GetPriceById(_placedPieces[gridCoords.x][gridCoords.y].Id);
             _placedPieces[gridCoords.x][gridCoords.y].transform.SetParent(null);
             GameObject.Destroy(_placedPieces[gridCoords.x][gridCoords.y].gameObject);

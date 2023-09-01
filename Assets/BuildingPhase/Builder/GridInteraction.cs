@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 using BuilderGame.Utils;
 using BuilderGame.Pieces;
 using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using BuilderGame.BuildingPhase.Tutorial;
 
@@ -16,25 +16,54 @@ namespace BuilderGame.BuildingPhase.Builder {
         [SerializeField] private Vehicle _vehicle;
         [SerializeField] private SubmenuUI _buildingSelectionUI;
         [SerializeField] private SubmenuUI _rebindingUI;
+        [SerializeField] private SubmenuUI _savingUI;
         [SerializeField] private SpriteRenderer _selectionSprite;
+        [SerializeField] private Image _deletingSelectionImage;
         private BuilderManager _builderManager;
-        private bool _building;
-        private bool _rebinding;
+        private GridState _gridState;
+        private GridState _prevState;
 
         private void Awake() {
             _buildingSelectionUI.OnToggled += ToggledBuilding;
             _rebindingUI.OnToggled += ToggledRebinding;
+            _savingUI.OnToggled += ToggledSaving;
+            _deletingSelectionImage.enabled = false;
         }
 
-        private void ToggledBuilding(bool on) { _building = on;}
+        private void ToggledBuilding(bool on) {
+            if(on) _gridState = GridState.Building;
+            ToggledDeleting(false);
+        }
 
-        private void ToggledRebinding(bool on) { _rebinding = on; _selectionSprite.gameObject.SetActive(on);}
+        private void ToggledRebinding(bool on) {
+            if(on) _gridState = GridState.Rebinding;
+            _selectionSprite.gameObject.SetActive(on);
+        }
+
+        private void ToggledSaving(bool on) {
+            if(on) _gridState = GridState.Saving;
+        }
+
+
+        public void ToggledDeleting(bool directClick) {
+            if (_gridState == GridState.Deleting || !directClick) {
+                if(directClick) _gridState = _prevState;
+                _deletingSelectionImage.enabled = false;
+            } else {
+                _prevState = _gridState;
+                _gridState = GridState.Deleting;
+                _deletingSelectionImage.enabled = true;
+                GameObject.FindObjectOfType<BindingUI>().EmptyUI();
+                _selectionSprite.transform.position = new Vector3(0,-10000, 0);
+            }
+        }
 
         protected override void Init() {
             _builderManager = new BuilderManager(_gridInfo, _vehicle);
         }
 
         public void SetNewPieceId(int pieceId) {
+            ToggledBuilding(true);
             _builderManager.NewPieceId = pieceId;
         }
 
@@ -43,15 +72,16 @@ namespace BuilderGame.BuildingPhase.Builder {
             Vector2Int gridCoords = PositionToGridCoordinates(clickPosition);
             if (gridCoords.x >= _gridInfo.GridDimensions.x || gridCoords.y >= _gridInfo.GridDimensions.y) return;
 
-            if (_building) {
+            if (_gridState == GridState.Building) {
                 if (leftClick) {
                     _builderManager.PlacePiece(gridCoords);
                 } else {
                     _builderManager.RotatePiece(gridCoords);
                 }
-            } else if (_rebinding) {
+            } else if (_gridState == GridState.Rebinding) {
                 Piece p = _builderManager.GetPieceAtPosition(gridCoords);
                 if (p != null && p.GetComponent<SpecialPiece>()) {
+                    _selectionSprite.gameObject.SetActive(true);
                     _selectionSprite.transform.position = p.transform.position;
                     GameObject.FindObjectOfType<BindingUI>()
                     .PrepareUI(
@@ -59,7 +89,13 @@ namespace BuilderGame.BuildingPhase.Builder {
                         FindObjectOfType<PiecesDictionary>().GetSpriteById(p.Id)
                     );
                 }
+            } else if (_gridState == GridState.Deleting) {
+                _builderManager.PlacePiece(gridCoords, true);
             }
+        }
+
+        public void ClickedDeleteAll() {
+            _builderManager.RemoveAllPieces();
         }
 
         public void ClickedShift(int direction) {
@@ -85,5 +121,12 @@ namespace BuilderGame.BuildingPhase.Builder {
         {
             transform.GetChild(0).gameObject.SetActive(true);
         }
+    }
+
+    internal enum GridState {
+        Building,
+        Rebinding,
+        Saving,
+        Deleting
     }
 }

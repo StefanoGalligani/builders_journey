@@ -61,9 +61,11 @@ namespace BuilderGame.EndingPhase
             SceneManager.LoadScene(_menuSceneName);
         }
         public void OnRestartButtonClick() {
+            PlayerPrefs.SetInt("CurrentTutorialEnabled", 0);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         public void OnNextLevelButtonClick() {
+            PlayerPrefs.SetInt("CurrentTutorialEnabled", 1);
             SceneManager.LoadScene(_nextLevelSceneName);
         }
     }

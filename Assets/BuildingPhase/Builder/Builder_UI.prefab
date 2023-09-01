@@ -551,7 +551,6 @@ MonoBehaviour:
   _scrollContent: {fileID: 2935719152125563599}
   _pieceSelectablePrefab: {fileID: 9039473523712341783, guid: cc907d81a27548949b0092c81ae4fd53, type: 3}
   _pieceInfos:
-  - {fileID: 11400000, guid: f61b271a8c023ff4e9c621bcf50f2279, type: 2}
   - {fileID: 11400000, guid: 2e8666905d11afb48b7e4606086b8b96, type: 2}
   - {fileID: 11400000, guid: a40029085f6e76149bdfac9da4e1d8e5, type: 2}
   - {fileID: 11400000, guid: a4409c332e3205a45b1a61a52afcea91, type: 2}

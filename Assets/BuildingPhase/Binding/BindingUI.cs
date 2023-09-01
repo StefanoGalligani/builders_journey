@@ -41,6 +41,16 @@ namespace BuilderGame.BuildingPhase.Binding
             _image.sprite = sprite;
         }
 
+        public void EmptyUI() {
+            foreach(BindingInfo g in _bindingInfos) {
+                g.OnRebind -= RebindAction;
+                Destroy(g.gameObject);
+            }
+            _bindingInfos = new BindingInfo[0];
+            _hintText.gameObject.SetActive(true);
+            _image.gameObject.SetActive(false);
+        }
+
         private void RebindAction(int actionNumber) {
             _piece.RebindButtonClicked(actionNumber, _bindingInfos[actionNumber].UpdateBindingName);
         }
