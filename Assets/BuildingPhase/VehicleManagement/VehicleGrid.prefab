@@ -60,14 +60,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5849056, g: 0.26694804, b: 0.12912066, a: 1}
+  m_Color: {r: 0.99590755, g: 1, b: 0.20188677, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1b6c3c7aaad3dea41a7365d6cfb94b00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2159890523385785404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +495,7 @@ MonoBehaviour:
   _vehicle: {fileID: 0}
   _buildingSelectionUI: {fileID: 0}
   _rebindingUI: {fileID: 0}
+  _savingUI: {fileID: 0}
   _selectionSprite: {fileID: 0}
   _deletingSelectionImage: {fileID: 6738091442240416697}
 --- !u!1 &2933809078939915275
@@ -690,7 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9150943, g: 0.40056953, b: 0.40056953, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1247,7 +1248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 889217e96f988d047bb8ce568f735e1e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e30eeac68bd34a2419a877356ec97bdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
