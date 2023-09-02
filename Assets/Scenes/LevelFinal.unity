@@ -588,6 +588,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4229945546574953617, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4229945546637546920, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_Name
       value: LevelObjects
@@ -720,6 +724,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5529625766421575882, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+      propertyPath: m_Size
+      value: 0.5271657
+      objectReference: {fileID: 0}
+    - target: {fileID: 5529625766421575882, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6220253782651925387, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -738,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6290512259386478262, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 149.94681
+      value: -0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 6306287503440529919, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchorMax.y
@@ -754,6 +766,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6306287503440529919, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491813432688532660, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7258213446737257145, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
@@ -810,7 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
-    - {fileID: 4229945546171032814, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
+    - {fileID: 3271637269317494576, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
