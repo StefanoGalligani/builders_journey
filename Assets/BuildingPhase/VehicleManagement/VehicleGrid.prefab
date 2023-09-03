@@ -644,6 +644,7 @@ GameObject:
   - component: {fileID: 2365673617533671157}
   - component: {fileID: 5589038974343881715}
   - component: {fileID: 1092053439725032501}
+  - component: {fileID: 7822760949894700476}
   m_Layer: 0
   m_Name: DeleteAll
   m_TagString: Untagged
@@ -738,6 +739,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7822760949894700476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754086134027133337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d9925bfebcf7f4fa9e0fd93b712879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipText: Remove all pieces
 --- !u!1 &4473222232461404647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1208,7 @@ GameObject:
   - component: {fileID: 978392628103994815}
   - component: {fileID: 6471864489518034708}
   - component: {fileID: 8126154896749053866}
+  - component: {fileID: 7729291022657456026}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1288,6 +1303,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &7729291022657456026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6843445821284192243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d9925bfebcf7f4fa9e0fd93b712879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipText: Remove one piece
 --- !u!1 &7695266185304083532
 GameObject:
   m_ObjectHideFlags: 0
