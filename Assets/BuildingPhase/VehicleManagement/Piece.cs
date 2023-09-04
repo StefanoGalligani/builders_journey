@@ -50,13 +50,19 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             UpdateLineRenderer();
         }
 
-        public void PrepareForGame() {
+        internal void PrepareForGame() {
             if (_rb) {
                 _rb.simulated = true;
                 _rb.bodyType = RigidbodyType2D.Dynamic;
             }
             if (_lr) _lr.enabled = false;
             ActivateJoint();
+        }
+
+        internal void Interrupt() {
+            if (_rb) {
+                _rb.simulated = false;
+            }
         }
 
         public void Rotate() {

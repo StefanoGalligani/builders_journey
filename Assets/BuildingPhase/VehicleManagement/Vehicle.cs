@@ -1,6 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using BuilderGame.BuildingPhase.Start;
+using BuilderGame.PlayPhase;
 using BuilderGame.BuildingPhase.Tutorial;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement {
@@ -12,6 +13,11 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
 
         private void OnGameStart() {
             GetComponentsInChildren<Piece>().ToList().ForEach(p => p.PrepareForGame());
+            GetComponentInChildren<OutOfBoundsNotifier>().OutOfBounds += OnOutOfBounds;
+        }
+
+        private void OnOutOfBounds() {
+            GetComponentsInChildren<Piece>().ToList().ForEach(p => p.Interrupt());
         }
 
         void ITutorialElement.DisableInTutorial()
