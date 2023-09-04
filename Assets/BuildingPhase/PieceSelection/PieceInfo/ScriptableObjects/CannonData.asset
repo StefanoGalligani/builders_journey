@@ -16,3 +16,4 @@ MonoBehaviour:
   Price: 40
   Prefab: {fileID: 5047077340171750696, guid: 6cf853e4291e50c4e90ea89754c8d7e7, type: 3}
   Sprite: {fileID: 21300000, guid: 24c76c7670783a246a8480a7901f98ca, type: 3}
+  PieceName: Cannon

@@ -10,5 +10,6 @@ namespace BuilderGame.BuildingPhase.PieceSelection.PieceInfo {
         public int Price;
         public Piece Prefab;
         public Sprite Sprite;
+        public string PieceName;
     }
 }

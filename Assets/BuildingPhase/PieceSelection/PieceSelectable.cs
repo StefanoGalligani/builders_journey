@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using BuilderGame.Utils;
 using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
+using BuilderGame.BuildingPhase.Tooltip;
 
 namespace BuilderGame.BuildingPhase.PieceSelection {
     public class PieceSelectable : MonoBehaviour, ISelectable
@@ -20,6 +21,8 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
 
             if (_infoText) _infoText.text = pieceInfo.Price + " $";
             if (_infoText) _image.sprite = pieceInfo.Sprite;
+            TooltipInteractable tooltip = GetComponent<TooltipInteractable>();
+            if (tooltip != null) tooltip.TooltipText = pieceInfo.PieceName;
         }
 
         public void OnClick() {

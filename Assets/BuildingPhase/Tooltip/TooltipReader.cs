@@ -17,40 +17,35 @@ namespace BuilderGame.BuildingPhase.Tooltip
         [SerializeField] private GraphicRaycaster[] _raycasters;
 
         private void Update() {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-            bool found = false;
+            Vector2 mousePositionScreen = Mouse.current.position.value;
+            Vector2 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);
             TooltipInteractable tooltip = null;
 
-            tooltip = AnalyzeUI();
+            tooltip = AnalyzeUI(mousePositionScreen);
             if (tooltip == null)
-                tooltip = AnalyzeColliders(mousePosition);
+                tooltip = AnalyzeColliders(mousePositionWorld);
 
             if (tooltip != null) {
                 _tooltipContainer.SetActive(true);
                 _tooltipText.text = tooltip.TooltipText;
-                _tooltipContainer.transform.position = mousePosition + _textOffset;
+                _tooltipContainer.transform.position = mousePositionWorld + _textOffset;
+
+                Vector2 mousePosPercentage = new Vector2(
+                                                mousePositionScreen.x / Screen.currentResolution.width, 
+                                                mousePositionScreen.y / Screen.currentResolution.height);
+                if (mousePosPercentage.x > 0.6)
+                    _tooltipContainer.transform.position += new Vector3(-2*_textOffset.x, 0, 0);
+                if (mousePosPercentage.y > 0.6)
+                    _tooltipContainer.transform.position += new Vector3(0, -2*_textOffset.y, 0);
             } else {
                 _tooltipContainer.SetActive(false);
             }
         }
-
-        private TooltipInteractable AnalyzeColliders(Vector2 mousePosition) {
-            TooltipInteractable tooltip = null;
-            Collider2D[] colliders = Physics2D.OverlapPointAll(mousePosition);
-            foreach(Collider2D c in colliders) {
-                tooltip = c.gameObject.GetComponent<TooltipInteractable>();
-                if (tooltip != null) {
-                    break;
-                }
-            }
-            return tooltip;
-        }
-
-        private TooltipInteractable AnalyzeUI() {
+        private TooltipInteractable AnalyzeUI(Vector2 mousePositionScreen) {
             TooltipInteractable tooltip = null;
 
             PointerEventData pointerEventData = new PointerEventData(_eventSystem);
-            pointerEventData.position = Mouse.current.position.value;
+            pointerEventData.position = mousePositionScreen;
             List<RaycastResult> results = new List<RaycastResult>();
             foreach (GraphicRaycaster raycaster in _raycasters) {
                 List<RaycastResult> currentResults = new List<RaycastResult>();
@@ -65,5 +60,18 @@ namespace BuilderGame.BuildingPhase.Tooltip
             }
             return tooltip;
         }
+
+        private TooltipInteractable AnalyzeColliders(Vector2 mousePositionWorld) {
+            TooltipInteractable tooltip = null;
+            Collider2D[] colliders = Physics2D.OverlapPointAll(mousePositionWorld);
+            foreach(Collider2D c in colliders) {
+                tooltip = c.gameObject.GetComponent<TooltipInteractable>();
+                if (tooltip != null) {
+                    break;
+                }
+            }
+            return tooltip;
+        }
+
     }
 }
