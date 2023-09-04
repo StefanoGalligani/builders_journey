@@ -3,7 +3,8 @@
     "rootNamespace": "BuilderGame.Pieces",
     "references": [
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:8e3ca5666198c414d8762619bfbb254e"
+        "GUID:8e3ca5666198c414d8762619bfbb254e",
+        "GUID:bf8d4408479f5e244a5b0a9d80401a43"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

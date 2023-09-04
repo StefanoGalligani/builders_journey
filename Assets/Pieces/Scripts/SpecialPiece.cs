@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase.Tooltip;
 using UnityEngine.InputSystem.Controls;
 using Unity.Properties;
 
@@ -25,6 +26,7 @@ namespace BuilderGame.Pieces {
 
             if(_action!=null) _action.performed += ctx => OnActionExecuted(ctx);
             _indexOffset = ActionNames.Length > 1 ? 1 : 0;
+            SetTooltipText();
         }
 
         protected abstract void InitController();
@@ -71,12 +73,24 @@ namespace BuilderGame.Pieces {
             if (canceling.Equals(_action.bindings[index + _indexOffset].overridePath)) {
                 LoadBindingJson(previousBindingJson);
             }
-            
+            SetTooltipText();
             callback(GetBindingName(index));
         }
 
+        private void SetTooltipText() {
+            TooltipInteractable tooltip = GetComponent<TooltipInteractable>();
+            if (tooltip != null) {
+                string tooltipText = "";
+                for (int i=0; i<ActionNames.Length; i++) {
+                    tooltipText += GetBindingName(i);
+                    if (i < ActionNames.Length-1) tooltipText += "/";
+                }
+                tooltip.TooltipText = tooltipText;
+            }
+        }
+
         public string GetBindingName(int index) {
-            _indexOffset = ActionNames.Length > 1 ? 1 : 0; //si potrà rimuovere quando i pezzi non saranno rebindati alla creazione
+//            _indexOffset = ActionNames.Length > 1 ? 1 : 0; //si potrà rimuovere quando i pezzi non saranno rebindati alla creazione
             return _action.bindings[index + _indexOffset].effectivePath.Split("/")[1].ToUpper();
         }
 
