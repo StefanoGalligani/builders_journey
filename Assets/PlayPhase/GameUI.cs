@@ -13,11 +13,12 @@ namespace BuilderGame.PlayPhase
         private void Start() {
             _content.SetActive(false);
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
-            FindObjectOfType<EndNotifier>().GameEnd += OnGameEnd;
         }
 
         private void OnGameStart() {
             _content.SetActive(true);
+            FindObjectOfType<OutOfBoundsNotifier>().OutOfBounds += OnGameEnd;
+            FindObjectOfType<EndNotifier>().GameEnd += OnGameEnd;
         }
 
         private void OnGameEnd() {

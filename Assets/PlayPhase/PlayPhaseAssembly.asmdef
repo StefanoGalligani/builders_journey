@@ -1,6 +1,6 @@
 {
     "name": "PlayPhaseAssembly",
-    "rootNamespace": "BuilderGame.PlayPhaseAssembly",
+    "rootNamespace": "BuilderGame.PlayPhase",
     "references": [
         "GUID:8e3ca5666198c414d8762619bfbb254e",
         "GUID:f483e291e9deef54883b20e31a013fe0"
