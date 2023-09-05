@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.05
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &966901791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2307,6 +2307,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4351425750467051765, guid: 5a939b26de9dda948bd9da5cf315a20d, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5110203321889833476, guid: 5a939b26de9dda948bd9da5cf315a20d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2894,7 +2898,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.05
+  m_PixelsPerUnitMultiplier: 0.5
 --- !u!222 &2064503814
 CanvasRenderer:
   m_ObjectHideFlags: 0

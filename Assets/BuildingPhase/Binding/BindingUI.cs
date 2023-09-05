@@ -13,7 +13,8 @@ namespace BuilderGame.BuildingPhase.Binding
     {
         [SerializeField] private BindingInfo _bindingInfoPrefab;
         [SerializeField] private GameObject _infoContainer;
-        [SerializeField] private Image _image;
+        [SerializeField] private Image _bgImage;
+        [SerializeField] private Image _pieceImage;
         [SerializeField] private TextMeshProUGUI _hintText;
         private BindingInfo[] _bindingInfos;
         private SpecialPiece _piece;
@@ -21,7 +22,7 @@ namespace BuilderGame.BuildingPhase.Binding
         private void Start() {
             _bindingInfos = new BindingInfo[0];
             _hintText.gameObject.SetActive(true);
-            _image.gameObject.SetActive(false);
+            _bgImage.gameObject.SetActive(false);
         }
 
         public void PrepareUI(SpecialPiece piece, Sprite sprite) {
@@ -37,8 +38,8 @@ namespace BuilderGame.BuildingPhase.Binding
                 _bindingInfos[i].OnRebind += RebindAction;
             }
             _hintText.gameObject.SetActive(false);
-            _image.gameObject.SetActive(true);
-            _image.sprite = sprite;
+            _bgImage.gameObject.SetActive(true);
+            _pieceImage.sprite = sprite;
         }
 
         public void EmptyUI() {
@@ -50,7 +51,7 @@ namespace BuilderGame.BuildingPhase.Binding
             }
             _bindingInfos = new BindingInfo[0];
             _hintText.gameObject.SetActive(true);
-            _image.gameObject.SetActive(false);
+            _bgImage.gameObject.SetActive(false);
         }
 
         private void RebindAction(int actionNumber) {
