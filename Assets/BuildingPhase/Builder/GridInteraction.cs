@@ -37,6 +37,10 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         private void ToggledRebinding(bool on) {
             if(on) _gridState = GridState.Rebinding;
+            else {
+                GameObject.FindObjectOfType<BindingUI>().EmptyUI();
+                _selectionSprite.transform.position = new Vector3(0,-10000, 0);
+            }
             _selectionSprite.gameObject.SetActive(on);
         }
 
@@ -72,7 +76,37 @@ namespace BuilderGame.BuildingPhase.Builder {
             Vector2Int gridCoords = PositionToGridCoordinates(clickPosition);
             if (gridCoords.x >= _gridInfo.GridDimensions.x || gridCoords.y >= _gridInfo.GridDimensions.y) return;
 
-            if (_gridState == GridState.Building) {
+            switch (_gridState) {
+                case GridState.Building:
+                    if (leftClick) {
+                        _builderManager.PlacePiece(gridCoords);
+                    } else {
+                        _builderManager.RotatePiece(gridCoords);
+                    }
+                    break;
+                case GridState.Rebinding:
+                    Piece p = _builderManager.GetPieceAtPosition(gridCoords);
+                    if (p != null && p.GetComponent<SpecialPiece>()) {
+                        _selectionSprite.gameObject.SetActive(true);
+                        _selectionSprite.transform.position = p.transform.position;
+                        GameObject.FindObjectOfType<BindingUI>()
+                        .PrepareUI(
+                            p.GetComponent<SpecialPiece>(),
+                            FindObjectOfType<PiecesDictionary>().GetSpriteById(p.Id)
+                        );
+                    }
+                    break;
+                case GridState.Saving:
+                    if (!leftClick) {
+                        _builderManager.RotatePiece(gridCoords);
+                    }
+                    break;
+                case GridState.Deleting:
+                    _builderManager.PlacePiece(gridCoords, true);
+                    break;
+            }
+
+            /*if (_gridState == GridState.Building) {
                 if (leftClick) {
                     _builderManager.PlacePiece(gridCoords);
                 } else {
@@ -91,7 +125,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 }
             } else if (_gridState == GridState.Deleting) {
                 _builderManager.PlacePiece(gridCoords, true);
-            }
+            }*/
         }
 
         public void ClickedDeleteAll() {

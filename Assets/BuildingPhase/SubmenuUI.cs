@@ -15,10 +15,10 @@ namespace BuilderGame.BuildingPhase {
         }
 
         public void DisableInTutorial() {
-            _content.SetActive(false);
+            ToggleContent(false);
         }
         public void EnableInTutorial() {
-            _content.SetActive(true);
+            ToggleContent(true);
         }
     }
 }

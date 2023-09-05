@@ -42,9 +42,11 @@ namespace BuilderGame.BuildingPhase.Binding
         }
 
         public void EmptyUI() {
-            foreach(BindingInfo g in _bindingInfos) {
-                g.OnRebind -= RebindAction;
-                Destroy(g.gameObject);
+            if (_bindingInfos != null) {
+                foreach(BindingInfo g in _bindingInfos) {
+                    g.OnRebind -= RebindAction;
+                    Destroy(g.gameObject);
+                }
             }
             _bindingInfos = new BindingInfo[0];
             _hintText.gameObject.SetActive(true);

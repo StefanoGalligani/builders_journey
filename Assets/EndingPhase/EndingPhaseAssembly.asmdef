@@ -1,9 +1,10 @@
 {
     "name": "EndingPhaseAssembly",
-    "rootNamespace": "",
+    "rootNamespace": "BuilderGame.EndingPhase",
     "references": [
         "GUID:cbf8bf83bf0c10e48891f31b85d5aca8",
-        "GUID:936a0029030a7484dbf3603e53d10c85"
+        "GUID:936a0029030a7484dbf3603e53d10c85",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

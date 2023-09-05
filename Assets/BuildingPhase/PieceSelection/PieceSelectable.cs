@@ -19,8 +19,13 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
             _selectionUI = selectionUI;
             _pieceInfo = pieceInfo;
 
-            if (_infoText) _infoText.text = pieceInfo.Price + " $";
-            if (_infoText) _image.sprite = pieceInfo.Sprite;
+            bool competitiveMode = PlayerPrefs.GetInt("CompetitiveMode", 0) == 1;
+
+            if (_infoText) {
+                _infoText.text = pieceInfo.Price + " $";
+                if (!competitiveMode) _infoText.enabled = false;
+            }
+            if (_image) _image.sprite = pieceInfo.Sprite;
             TooltipInteractable tooltip = GetComponent<TooltipInteractable>();
             if (tooltip != null) tooltip.TooltipText = pieceInfo.PieceName;
         }

@@ -23,11 +23,15 @@ namespace BuilderGame.BuildingPhase {
 
         protected virtual void DoOnGameStart(){}
 
-        public void DisableInTutorial() {
-            _content.SetActive(false);
+        public virtual void DisableInTutorial() {
+            ToggleContent(false);
         }
-        public void EnableInTutorial() {
-            _content.SetActive(true);
+        public virtual void EnableInTutorial() {
+            ToggleContent(true);
+        }
+
+        protected void ToggleContent(bool active) {
+            _content.SetActive(active);
         }
     }
 }

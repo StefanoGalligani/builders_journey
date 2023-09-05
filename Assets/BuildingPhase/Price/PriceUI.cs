@@ -15,10 +15,16 @@ namespace BuilderGame.BuildingPhase.Price
         [SerializeField] Color[] _textColorByStars;
         private int[] _starPricesLimits;
         private bool _isInitialized = false;
+        private int _competitiveMode;
         
         protected override void Init() {
             if (_isInitialized) return;
             _isInitialized = true;
+            
+            _competitiveMode = PlayerPrefs.GetInt("CompetitiveMode", 0);
+            if (_competitiveMode == 0) {
+                ToggleContent(false);
+            }
 
             _starPricesLimits = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits();
             if (_starPricesLimits == null) return;
@@ -35,6 +41,10 @@ namespace BuilderGame.BuildingPhase.Price
             _totalPrice.text = newPrice + " $";
             int stars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(newPrice);
             if (stars >= 1) _totalPrice.color = _textColorByStars[stars-1];
+        }
+
+        public override void EnableInTutorial() {
+            ToggleContent(_competitiveMode == 1);
         }
     }
 }

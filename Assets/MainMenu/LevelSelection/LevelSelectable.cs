@@ -24,10 +24,12 @@ namespace BuilderGame.MainMenu.LevelSelection
             _selectionUI = selectionUI;
             _clickable = levelState != LevelState.Blocked;
 
+            bool starsActive = PlayerPrefs.GetInt("CompetitiveMode", 0) == 1;
+
             if(_infoText) _infoText.text = levelInfo.LevelName;
             if (_starsImages != null)
                 for (int i=0; i<_starsImages.Length; i++) {
-                    _starsImages[i].enabled = i<levelStars;
+                    _starsImages[i].enabled = i<levelStars && starsActive;
                 }
 
             if(_background) _background.color = colors[(int)levelState];
