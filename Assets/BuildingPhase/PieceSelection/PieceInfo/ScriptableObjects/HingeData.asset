@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 3
   Price: 40
-  Prefab: {fileID: 8905659374273624105, guid: dbc19cefd02071f4b9812ed283b6147f, type: 3}
+  Prefab: {fileID: 1872686768338719406, guid: dbc19cefd02071f4b9812ed283b6147f, type: 3}
   Sprite: {fileID: 159151793, guid: e7e46ddbee252da498adc674cb141b04, type: 3}
   PieceName: Hinge

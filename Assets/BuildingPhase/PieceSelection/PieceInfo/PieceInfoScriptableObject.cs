@@ -1,5 +1,4 @@
 using UnityEngine;
-using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.Utils;
 
 namespace BuilderGame.BuildingPhase.PieceSelection.PieceInfo {
@@ -8,7 +7,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection.PieceInfo {
     {
         public int Id;
         public int Price;
-        public Piece Prefab;
+        public GameObject Prefab;
         public Sprite Sprite;
         public string PieceName;
     }

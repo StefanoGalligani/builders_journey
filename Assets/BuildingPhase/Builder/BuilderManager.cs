@@ -2,6 +2,7 @@ using UnityEngine;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Price;
 using BuilderGame.BuildingPhase.Start;
+using BuilderGame.BuildingPhase.UINotifications;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 using BuilderGame.Utils;
@@ -119,7 +120,6 @@ namespace BuilderGame.BuildingPhase.Builder {
             }
             for (int i=0; i<vehicleData.data.Length; i++) {
                 int id = vehicleData.data[i].pieceId;
-                Piece prefab = _piecesDictionary.GetPrefabById(id);
                 int[] coords = vehicleData.data[i].pieceCoordinates;
                 Piece newPiece = InstantiateNewPiece(id, new Vector2Int(coords[0], coords[1]));
                 newPiece.SetRotation(vehicleData.data[i].pieceRotation);
@@ -176,9 +176,9 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         private Piece InstantiateNewPiece(int id, Vector2Int gridCoords) {
             int price = _piecesDictionary.GetPriceById(id);
-            Piece prefab = _piecesDictionary.GetPrefabById(id);
+            GameObject prefab = _piecesDictionary.GetPrefabById(id);
 
-            Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform);
+            Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform).GetComponent<Piece>();
             newPiece.transform.position = PositionFromGridCoordinates(gridCoords);
             _placedPieces[gridCoords.x][gridCoords.y] = newPiece;
 
@@ -234,7 +234,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 break;
             }
             if (!shiftIsValid) {
-                Debug.LogWarning("Pieces cannot be shifted in direction " + ((Vector2)dir).x + "," + ((Vector2)dir).y);
+                GameObject.FindObjectOfType<NotificationsSpawner>()?.SpawnNotification("The vehicle can no longer be shifted in this direction");
                 return;
             }
             _mainPieceCoords.x += ((Vector2Int)dir).x;

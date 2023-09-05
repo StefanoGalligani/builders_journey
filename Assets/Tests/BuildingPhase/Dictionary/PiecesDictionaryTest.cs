@@ -48,20 +48,20 @@ namespace BuilderGame.BuildingPhase.Dictionary {
             info1.Price = 10;
             info2.Price = 20;
             info3.Price = 30;
-            info1.Prefab = piece1;
-            info2.Prefab = piece2;
-            info3.Prefab = piece3;
+            info1.Prefab = prefab1;
+            info2.Prefab = prefab2;
+            info3.Prefab = prefab3;
 
-            dictionary._mainPiecePrefab = mainPiece;
+            dictionary._mainPiecePrefab = mainPrefab;
             dictionary.Init(new PieceInfoScriptableObject[] {info1, info2, info3});
         }
         
         [Test]
         public void TestGetPrefabById() {
-            Piece prefab = dictionary.GetPrefabById(0);
-            Assert.AreEqual(mainPiece, prefab);
+            GameObject prefab = dictionary.GetPrefabById(0);
+            Assert.AreEqual(mainPrefab, prefab);
             prefab = dictionary.GetPrefabById(1);
-            Assert.AreEqual(piece1, prefab);
+            Assert.AreEqual(prefab1, prefab);
             prefab = dictionary.GetPrefabById(4);
             Assert.AreEqual(null, prefab);
         }

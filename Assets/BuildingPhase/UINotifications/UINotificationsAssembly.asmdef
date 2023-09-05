@@ -1,9 +1,9 @@
 {
-    "name": "StartAssembly",
+    "name": "UINotificationsAssembly",
     "rootNamespace": "",
     "references": [
-        "GUID:3b6886d83f4095f4090472058f866de4",
-        "GUID:4097fdc2ec569ef42978d1e5b9530fe6"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
-using BuilderGame.BuildingPhase.VehicleManagement;
 
 [assembly: InternalsVisibleToAttribute("DictionaryTests")]
 namespace BuilderGame.BuildingPhase.Dictionary {
     public class PiecesDictionary : MonoBehaviour {
-        [SerializeField] internal Piece _mainPiecePrefab;
-        private Dictionary<int, Piece> _prefabDictionary;
+        [SerializeField] internal GameObject _mainPiecePrefab;
+        private Dictionary<int, GameObject> _prefabDictionary;
         private Dictionary<int, int> _priceDictionary;
         private Dictionary<int, Sprite> _spriteDictionary;
         public void Init(PieceInfoScriptableObject[] pieceInfos) {
-            _prefabDictionary = new Dictionary<int, Piece>();
+            _prefabDictionary = new Dictionary<int, GameObject>();
             foreach (PieceInfoScriptableObject pieceSo in pieceInfos) {
                 _prefabDictionary.Add(pieceSo.Id, pieceSo.Prefab);
             }
@@ -31,8 +30,8 @@ namespace BuilderGame.BuildingPhase.Dictionary {
             _spriteDictionary.Add(0, _mainPiecePrefab.GetComponent<SpriteRenderer>().sprite);
         }
 
-        public Piece GetPrefabById(int id) {
-            Piece prefab = null;
+        public GameObject GetPrefabById(int id) {
+            GameObject prefab = null;
             _prefabDictionary.TryGetValue(id, out prefab);
             return prefab;
         }

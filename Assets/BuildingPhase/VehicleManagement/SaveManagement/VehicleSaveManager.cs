@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using BuilderGame.BuildingPhase.Dictionary;
+using BuilderGame.BuildingPhase.UINotifications;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 using BuilderGame.Pieces;
@@ -10,9 +12,13 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
     public class VehicleSaveManager : MonoBehaviour
     {
         [SerializeField] private Transform _vehicleTransform;
+        private PiecesDictionary _piecesDictionary;
+        private NotificationsSpawner _notificationsSpawner;
         void Start()
         {
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
+            _piecesDictionary = FindObjectOfType<PiecesDictionary>();
+            _notificationsSpawner = FindObjectOfType<NotificationsSpawner>();
         }
 
         private void SaveVehicle() {
@@ -40,8 +46,13 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
 
         public void LoadFromFile(string name) {
             bool loaded = VehicleFileAccessSingleton.Instance.ReadFromFile(name);
-            if (loaded)
+            if (loaded) {
+                if (!_piecesDictionary.AreAllIdsValid(VehicleFileAccessSingleton.Instance.GetVehicleData().GetAllIds())) {
+                    _notificationsSpawner.SpawnNotification("The loaded vehicle contains pieces that are not available in this level");
+                    return;
+                }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
 
 
