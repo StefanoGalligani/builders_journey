@@ -42,6 +42,7 @@ namespace BuilderGame.BuildingPhase.Tooltip
             if (tooltip != null) {
                 _tooltipContainer.SetActive(true);
                 _tooltipText.text = tooltip.TooltipText;
+                Debug.Log("Text: " + tooltip.TooltipText);
                 _tooltipContainer.transform.position = mousePositionWorld + _textOffset;
 
                 Vector2 mousePosPercentage = new Vector2(
