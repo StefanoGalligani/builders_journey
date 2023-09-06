@@ -17,11 +17,13 @@ namespace BuilderGame.EndingPhase
         internal string _nextLevelName;
         internal string _nextLevelSceneName;
         internal int _totalPrice;
+        internal LevelFileAccess _fileManager;
 
         internal void Start()
         {
             if (_uiPanel) _uiPanel.SetActive(false);
             FindObjectOfType<EndNotifier>().GameEnd += OnEndLevel;
+            _fileManager = FindObjectOfType<LevelFileAccess>();
         }
 
         private void OnEndLevel() {
@@ -42,18 +44,18 @@ namespace BuilderGame.EndingPhase
         }
 
         internal void UpdateStars(string sceneName = null) {
-            int previousStars = LevelFileAccessSingleton.Instance.GetLevelStars(_currentLevelName);
+            int previousStars = _fileManager.GetLevelStars(_currentLevelName);
             int newStars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(_totalPrice, sceneName);
             if (newStars > previousStars) {
-                LevelFileAccessSingleton.Instance.SetLevelStars(_currentLevelName, newStars);
+                _fileManager.SetLevelStars(_currentLevelName, newStars);
             }
         }
 
         internal void UpdateStates() {
-            LevelState previousState = LevelFileAccessSingleton.Instance.GetLevelState(_currentLevelName);
+            LevelState previousState = _fileManager.GetLevelState(_currentLevelName);
             if (previousState != LevelState.Passed) {
-                LevelFileAccessSingleton.Instance.SetLevelState(_currentLevelName, Levels.LevelState.Passed);
-                LevelFileAccessSingleton.Instance.SetLevelState(_nextLevelName, Levels.LevelState.NotPassed);
+                _fileManager.SetLevelState(_currentLevelName, Levels.LevelState.Passed);
+                _fileManager.SetLevelState(_nextLevelName, Levels.LevelState.NotPassed);
             }
         }
 

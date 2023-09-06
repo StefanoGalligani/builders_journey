@@ -2,26 +2,24 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using UnityEngine.UIElements;
+using System.Runtime.Serialization.Formatters.Binary;
+using BuilderGame.MainMenu.LevelSelection.LevelInfo;
+using BuilderGame.Utils;
 
 namespace BuilderGame.Levels.FileManagement
 {
-    public class LevelFileAccessSingleton
+    public class LevelFileAccess : MonoBehaviour
     {
-        public static LevelFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new LevelFileAccessSingleton()) : _instance);} private set{_instance = value;} }
-        private static LevelFileAccessSingleton _instance;
-        private string _fileName = "Data.bin";
+        [SerializeField] private string _fileName = "Data.bin";
         private string _filePath;
         private LevelsDataSerializable _levelsData;
         private bool _fileRead = false;
         internal bool _test;
 
-        private LevelFileAccessSingleton()
+        private void Start()
         {
             _filePath = Application.persistentDataPath + "/" + _fileName;
         }
@@ -148,11 +146,6 @@ namespace BuilderGame.Levels.FileManagement
             } else {
                 Debug.LogError("Could not find file " + _filePath);
             }
-        }
-
-        //FOR TESTING
-        internal static void DestroyInstance() {
-            Instance = null;
         }
     }
 }

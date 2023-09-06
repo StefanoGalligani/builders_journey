@@ -12,12 +12,12 @@ namespace BuilderGame.MainMenu.LevelSelection {
         [SerializeField] private LevelSelectable _levelSelectablePrefab;
         [SerializeField] private LevelInfoScriptableObject[] _levelInfos;
         private List<LevelSelectable> _selectables;
-        private LevelFileAccessSingleton _fileManager;
+        private LevelFileAccess _fileManager;
         
         private void Start() {
             _selectables = new List<LevelSelectable>();
             LevelReferenceSingleton.Instance.SetReferences(_levelInfos);
-            _fileManager = LevelFileAccessSingleton.Instance;
+            _fileManager = FindObjectOfType<LevelFileAccess>();
             _fileManager.CreateFileIfNotExists(_levelInfos);
 
             foreach(LevelInfoScriptableObject levelInfo in _levelInfos) {

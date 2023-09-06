@@ -13,13 +13,13 @@ namespace BuilderGame.EndingPhase {
         private LevelInfoScriptableObject[] scriptableObjects;
         private GameObject obj;
         private EndUI endUI;
+        private LevelFileAccess levelFileAccess;
 
         [SetUp]
         public void SetUp() {
             obj = new GameObject();
             endUI = obj.AddComponent<EndUI>();
             LevelReferenceSingleton.DestroyInstance();
-            LevelFileAccessSingleton.DestroyInstance();
 
             LevelInfoScriptableObject info1 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
             LevelInfoScriptableObject info2 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
@@ -38,11 +38,13 @@ namespace BuilderGame.EndingPhase {
             info3.PriceLimitTwoStars = 30;
             scriptableObjects = new LevelInfoScriptableObject[] {info1, info2, info3};
 
+            levelFileAccess = obj.AddComponent<LevelFileAccess>();
+            levelFileAccess._test = true;
+            levelFileAccess.CreateFileIfNotExists(scriptableObjects);
+            endUI._fileManager = levelFileAccess;
+
             LevelReferenceSingleton.Instance.SetReferences(scriptableObjects);
             LevelReferenceSingleton.Instance._warnings = false;
-            
-            LevelFileAccessSingleton.Instance._test = true;
-            LevelFileAccessSingleton.Instance.CreateFileIfNotExists(scriptableObjects);
         }
         
         [Test]
@@ -61,48 +63,48 @@ namespace BuilderGame.EndingPhase {
 
             endUI.UpdateStars("Scene2");
 
-            Assert.AreEqual(2, LevelFileAccessSingleton.Instance.GetLevelStars("Level2"));
+            Assert.AreEqual(2, levelFileAccess.GetLevelStars("Level2"));
         }
         
         [Test]
         public void TestDontUpdateStarsWhenLower() {
-            LevelFileAccessSingleton.Instance.SetLevelStars("Level2", 3);
+            levelFileAccess.SetLevelStars("Level2", 3);
             endUI._currentLevelName = "Level2";
             endUI._totalPrice = 20;
 
             endUI.UpdateStars("Scene2");
 
-            Assert.AreEqual(3, LevelFileAccessSingleton.Instance.GetLevelStars("Level2"));
+            Assert.AreEqual(3, levelFileAccess.GetLevelStars("Level2"));
         }
         
         [Test]
         public void TestUpdateStatesWhenUnlocking() {
-            LevelFileAccessSingleton.Instance.SetLevelState("Level2", LevelState.NotPassed);
+            levelFileAccess.SetLevelState("Level2", LevelState.NotPassed);
             endUI._currentLevelName = "Level2";
             endUI._nextLevelName = "Level3";
 
             endUI.UpdateStates();
 
-            Assert.AreEqual(Levels.LevelState.Passed, LevelFileAccessSingleton.Instance.GetLevelState("Level2"));
-            Assert.AreEqual(Levels.LevelState.NotPassed, LevelFileAccessSingleton.Instance.GetLevelState("Level3"));
+            Assert.AreEqual(Levels.LevelState.Passed, levelFileAccess.GetLevelState("Level2"));
+            Assert.AreEqual(Levels.LevelState.NotPassed, levelFileAccess.GetLevelState("Level3"));
         }
 
         [Test]
         public void TestUpdateStatesWhenAlreadyPassed() {
-            LevelFileAccessSingleton.Instance.SetLevelState("Level2", LevelState.Passed);
-            LevelFileAccessSingleton.Instance.SetLevelState("Level3", LevelState.Passed);
+            levelFileAccess.SetLevelState("Level2", LevelState.Passed);
+            levelFileAccess.SetLevelState("Level3", LevelState.Passed);
             endUI._currentLevelName = "Level2";
             endUI._nextLevelName = "Level3";
 
             endUI.UpdateStates();
 
-            Assert.AreEqual(Levels.LevelState.Passed, LevelFileAccessSingleton.Instance.GetLevelState("Level3"));
+            Assert.AreEqual(Levels.LevelState.Passed, levelFileAccess.GetLevelState("Level3"));
         }
 
         [TearDown]
         public void TearDown() {
             LevelReferenceSingleton.DestroyInstance();
-            LevelFileAccessSingleton.DestroyInstance();
+            levelFileAccess = null;
             endUI = null;
             GameObject.DestroyImmediate(obj);
         }
