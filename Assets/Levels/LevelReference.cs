@@ -9,12 +9,9 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleToAttribute("LevelsTests")]
 [assembly: InternalsVisibleToAttribute("EndingPhaseTests")]
 namespace BuilderGame.Levels {
-    public class LevelReferenceSingleton {
+    public class LevelReference : MonoBehaviour{
         private LevelInfoScriptableObject[] _levelInfos;
-        private static LevelReferenceSingleton _instance;
         internal bool _warnings = true;
-        public static LevelReferenceSingleton Instance {get {return (_instance==null ? (_instance = new LevelReferenceSingleton()) : _instance);} private set{_instance = value;} }
-        private LevelReferenceSingleton(){}
 
         public void SetReferences(LevelInfoScriptableObject[] levelInfos) {
             _levelInfos = levelInfos;
@@ -62,10 +59,6 @@ namespace BuilderGame.Levels {
 
         public int[] GetCurrentScenePriceLimits(string sceneName = null) {
             return GetCurrentLevelInfo(l => new int[]{l.PriceLimitThreeStars, l.PriceLimitTwoStars}, sceneName);
-        }
-
-        internal static void DestroyInstance() {
-            Instance = null;
         }
     }
 }

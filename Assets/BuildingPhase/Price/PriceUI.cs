@@ -13,6 +13,7 @@ namespace BuilderGame.BuildingPhase.Price
         [SerializeField] TextMeshProUGUI _twoStarsPrice;
         [SerializeField] TextMeshProUGUI _totalPrice;
         [SerializeField] Color[] _textColorByStars;
+        private LevelReference _levelReference;
         private int[] _starPricesLimits;
         private bool _isInitialized = false;
         private int _competitiveMode;
@@ -26,8 +27,10 @@ namespace BuilderGame.BuildingPhase.Price
                 ToggleContent(false);
             }
 
-            _starPricesLimits = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits();
+            _levelReference = FindObjectOfType<LevelReference>();
+            _starPricesLimits = _levelReference.GetCurrentScenePriceLimits();
             if (_starPricesLimits == null) return;
+            
             _threeStarsPrice.text = _starPricesLimits[0] + " $";
             _twoStarsPrice.text = _starPricesLimits[1] + " $";
             _totalPrice.text = "0 $";
@@ -39,7 +42,7 @@ namespace BuilderGame.BuildingPhase.Price
         internal void UpdatePrice(int newPrice) {
             Init();
             _totalPrice.text = newPrice + " $";
-            int stars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(newPrice);
+            int stars = _levelReference.GetCurrentSceneLevelStars(newPrice);
             if (stars >= 1) _totalPrice.color = _textColorByStars[stars-1];
         }
 

@@ -18,12 +18,14 @@ namespace BuilderGame.EndingPhase
         internal string _nextLevelSceneName;
         internal int _totalPrice;
         internal LevelFileAccess _fileManager;
+        internal LevelReference _levelReference;
 
         internal void Start()
         {
             if (_uiPanel) _uiPanel.SetActive(false);
             FindObjectOfType<EndNotifier>().GameEnd += OnEndLevel;
             _fileManager = FindObjectOfType<LevelFileAccess>();
+            _levelReference = FindObjectOfType<LevelReference>();
         }
 
         private void OnEndLevel() {
@@ -35,8 +37,8 @@ namespace BuilderGame.EndingPhase
         }
 
         internal void RetrieveSceneInfos(string sceneName = null) {
-            _currentLevelName = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName(sceneName);
-            string[] nextLevelInfos = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName(sceneName);
+            _currentLevelName = _levelReference.GetCurrentSceneLevelName(sceneName);
+            string[] nextLevelInfos = _levelReference.GetNextLevelNameAndSceneName(sceneName);
             if (nextLevelInfos != null) {
                 _nextLevelName = nextLevelInfos[0];
                 _nextLevelSceneName = nextLevelInfos[1];
@@ -45,7 +47,7 @@ namespace BuilderGame.EndingPhase
 
         internal void UpdateStars(string sceneName = null) {
             int previousStars = _fileManager.GetLevelStars(_currentLevelName);
-            int newStars = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(_totalPrice, sceneName);
+            int newStars = _levelReference.GetCurrentSceneLevelStars(_totalPrice, sceneName);
             if (newStars > previousStars) {
                 _fileManager.SetLevelStars(_currentLevelName, newStars);
             }

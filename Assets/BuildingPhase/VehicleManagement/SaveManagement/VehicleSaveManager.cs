@@ -14,11 +14,13 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         [SerializeField] private Transform _vehicleTransform;
         private PiecesDictionary _piecesDictionary;
         private NotificationsSpawner _notificationsSpawner;
+        private VehicleFileAccess _fileManager;
         void Start()
         {
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
             _piecesDictionary = FindObjectOfType<PiecesDictionary>();
             _notificationsSpawner = FindObjectOfType<NotificationsSpawner>();
+            _fileManager = FindObjectOfType<VehicleFileAccess>();
         }
 
         private void SaveVehicle() {
@@ -36,25 +38,24 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
                     vehicleData.data[i].binding = sp.GetBindingJson();
                 }
             }
-            VehicleFileAccessSingleton.Instance.SetVehicleData(vehicleData);
+            _fileManager.SetVehicleData(vehicleData);
         }
 
         public bool SaveOnFile(string name) {
             SaveVehicle();
-            return VehicleFileAccessSingleton.Instance.WriteToFile(name);
+            return _fileManager.WriteToFile(name);
         }
 
         public void LoadFromFile(string name) {
-            bool loaded = VehicleFileAccessSingleton.Instance.ReadFromFile(name);
+            bool loaded = _fileManager.ReadFromFile(name);
             if (loaded) {
-                if (!_piecesDictionary.AreAllIdsValid(VehicleFileAccessSingleton.Instance.GetVehicleData().GetAllIds())) {
+                if (!_piecesDictionary.AreAllIdsValid(_fileManager.GetVehicleData().GetAllIds())) {
                     _notificationsSpawner.SpawnNotification("The loaded vehicle contains pieces that are not available in this level");
                     return;
                 }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-
 
         private void OnGameStart() {
             SaveVehicle();

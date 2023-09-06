@@ -16,7 +16,7 @@ namespace BuilderGame.MainMenu.LevelSelection {
         
         private void Start() {
             _selectables = new List<LevelSelectable>();
-            LevelReferenceSingleton.Instance.SetReferences(_levelInfos);
+            FindObjectOfType<LevelReference>().SetReferences(_levelInfos);
             _fileManager = FindObjectOfType<LevelFileAccess>();
             _fileManager.CreateFileIfNotExists(_levelInfos);
 

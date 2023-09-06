@@ -6,9 +6,11 @@ using UnityEngine.TestTools;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 
 namespace BuilderGame.Levels {
-    public class LevelReferenceSingletonTest
+    public class LevelReferenceTest
     {
         private LevelInfoScriptableObject[] scriptableObjects;
+        private GameObject obj;
+        private LevelReference levelReference;
 
         [SetUp]
         public void SetUp() {
@@ -28,46 +30,49 @@ namespace BuilderGame.Levels {
             info3.PriceLimitThreeStars = 3;
             info3.PriceLimitTwoStars = 30;
             scriptableObjects = new LevelInfoScriptableObject[] {info1, info2, info3};
-            LevelReferenceSingleton.Instance.SetReferences(scriptableObjects);
-            LevelReferenceSingleton.Instance._warnings = false;
+
+            obj = new GameObject();
+            levelReference = obj.AddComponent<LevelReference>();
+            levelReference.SetReferences(scriptableObjects);
+            levelReference._warnings = false;
         }
 
         [Test]
         public void TestNextLevelNameAndSceneName() {
-            string[] info2 = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName("Scene1");
+            string[] info2 = levelReference.GetNextLevelNameAndSceneName("Scene1");
             Assert.AreEqual("Level2", info2[0]);
             Assert.AreEqual("Scene2", info2[1]);
         }
 
         [Test]
         public void TestNextLevelWrongScene() {
-            string[] info5 = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName("Scene4");
+            string[] info5 = levelReference.GetNextLevelNameAndSceneName("Scene4");
             Assert.IsNull(info5);
         }
 
         [Test]
         public void TestNextLevelFinalScene() {
-            string[] info4 = LevelReferenceSingleton.Instance.GetNextLevelNameAndSceneName("Scene3");
+            string[] info4 = levelReference.GetNextLevelNameAndSceneName("Scene3");
             Assert.IsNull(info4);
         }
 
         [Test]
         public void TestCurrentSceneLevelName() {
-            string name = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName("Scene3");
+            string name = levelReference.GetCurrentSceneLevelName("Scene3");
             Assert.AreEqual("Level3", name);
         }
 
         [Test]
         public void TestWrongSceneName() {
-            string name = LevelReferenceSingleton.Instance.GetCurrentSceneLevelName("scene3");
+            string name = levelReference.GetCurrentSceneLevelName("scene3");
             Assert.IsNull(name);
         }
 
         [Test]
         public void TestCurrentSceneLevelStars() {
-            int stars1 = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(11, "Scene1");
-            int stars2 = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(20, "Scene2");
-            int stars3 = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(3, "Scene3");
+            int stars1 = levelReference.GetCurrentSceneLevelStars(11, "Scene1");
+            int stars2 = levelReference.GetCurrentSceneLevelStars(20, "Scene2");
+            int stars3 = levelReference.GetCurrentSceneLevelStars(3, "Scene3");
 
             Assert.AreEqual(1, stars1);
             Assert.AreEqual(2, stars2);
@@ -76,27 +81,22 @@ namespace BuilderGame.Levels {
 
         [Test]
         public void TestWrongSceneStars() {
-            int stars1 = LevelReferenceSingleton.Instance.GetCurrentSceneLevelStars(11, "scene1");
+            int stars1 = levelReference.GetCurrentSceneLevelStars(11, "scene1");
 
             Assert.AreEqual(0, stars1);
         }
 
         [Test]
         public void TestCurrentSceneLevelPriceLimits() {
-            int[] limits1 = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits("Scene1");
+            int[] limits1 = levelReference.GetCurrentScenePriceLimits("Scene1");
             Assert.AreEqual(1, limits1[0]);
             Assert.AreEqual(10, limits1[1]);
         }
 
         [Test]
         public void TestWrongScenePriceLimits() {
-            int[] limits1 = LevelReferenceSingleton.Instance.GetCurrentScenePriceLimits("scene1");
+            int[] limits1 = levelReference.GetCurrentScenePriceLimits("scene1");
             Assert.IsNull(limits1);
-        }
-
-        [TearDown]
-        public void TearDown() {
-            LevelReferenceSingleton.DestroyInstance();
         }
     }
 }

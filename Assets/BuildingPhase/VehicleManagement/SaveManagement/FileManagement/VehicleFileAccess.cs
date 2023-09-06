@@ -7,18 +7,16 @@ using System.Runtime.Serialization;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
-    public class VehicleFileAccessSingleton
-    {
+    public class VehicleFileAccess : MonoBehaviour {
+        [SerializeField ] private string _directory = "Vehicles";
         private string _filePath;
         private VehicleDataSerializable _vehicleData;
         private bool _fileRead = false;
         private List<string> _fileNames;
-        private static VehicleFileAccessSingleton _instance;
-        public static VehicleFileAccessSingleton Instance {get {return (_instance==null ? (_instance = new VehicleFileAccessSingleton()) : _instance);} private set{} }
 
-        private VehicleFileAccessSingleton()
+        private void Start()
         {
-            _filePath = Application.persistentDataPath + "/Vehicles/";
+            _filePath = Application.persistentDataPath + "/" + _directory + "/";
             if (!Directory.Exists(_filePath))  
             {  
                 Directory.CreateDirectory(_filePath);  

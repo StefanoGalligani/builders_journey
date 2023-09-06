@@ -37,8 +37,9 @@ namespace BuilderGame.BuildingPhase.Builder {
             _totalPriceInfo = GameObject.FindObjectOfType<TotalPriceInfo>();
 
             bool vehicleBuilt = false;
-            if (VehicleFileAccessSingleton.Instance.IsVehicleSaved()) {
-                vehicleBuilt = BuildVehicleFromData(VehicleFileAccessSingleton.Instance.GetVehicleData());
+            VehicleFileAccess vehicleFileAccess = GameObject.FindObjectOfType<VehicleFileAccess>();
+            if (vehicleFileAccess.IsVehicleSaved()) {
+                vehicleBuilt = BuildVehicleFromData(vehicleFileAccess.GetVehicleData());
             }
             if (!vehicleBuilt) {
                 PlaceMainPiece();

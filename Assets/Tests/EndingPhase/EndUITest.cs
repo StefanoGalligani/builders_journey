@@ -14,12 +14,12 @@ namespace BuilderGame.EndingPhase {
         private GameObject obj;
         private EndUI endUI;
         private LevelFileAccess levelFileAccess;
+        private LevelReference levelReference;
 
         [SetUp]
         public void SetUp() {
             obj = new GameObject();
             endUI = obj.AddComponent<EndUI>();
-            LevelReferenceSingleton.DestroyInstance();
 
             LevelInfoScriptableObject info1 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
             LevelInfoScriptableObject info2 = ScriptableObject.CreateInstance<LevelInfoScriptableObject>();
@@ -43,8 +43,10 @@ namespace BuilderGame.EndingPhase {
             levelFileAccess.CreateFileIfNotExists(scriptableObjects);
             endUI._fileManager = levelFileAccess;
 
-            LevelReferenceSingleton.Instance.SetReferences(scriptableObjects);
-            LevelReferenceSingleton.Instance._warnings = false;
+            levelReference = obj.AddComponent<LevelReference>();
+            levelReference.SetReferences(scriptableObjects);
+            levelReference._warnings = false;
+            endUI._levelReference = levelReference;
         }
         
         [Test]
@@ -103,7 +105,6 @@ namespace BuilderGame.EndingPhase {
 
         [TearDown]
         public void TearDown() {
-            LevelReferenceSingleton.DestroyInstance();
             levelFileAccess = null;
             endUI = null;
             GameObject.DestroyImmediate(obj);
