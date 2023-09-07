@@ -7,7 +7,7 @@ namespace BuilderGame.Effects.Particles {
         [SerializeField] ParticleSystem _particle;
 
         public override void StartEffect() {
-            FindObjectOfType<ParticlesSpawner>()?.SpawnParticle(_particle, transform.position - Vector3.forward, Quaternion.identity);
+            FindObjectOfType<ParticlesSpawner>()?.SpawnParticle(_particle, transform.position - Vector3.forward, transform.rotation);
         }
     }
 }
