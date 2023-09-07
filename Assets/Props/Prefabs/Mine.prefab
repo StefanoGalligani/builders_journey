@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4715948263365891780}
   - component: {fileID: 7235043896497623563}
   - component: {fileID: -774380553682307674}
+  - component: {fileID: -2407344035900179630}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -166,3 +167,18 @@ MonoBehaviour:
   _explodeOnContactWithLayers:
     serializedVersion: 2
     m_Bits: 200
+  _effects:
+  - {fileID: -2407344035900179630}
+--- !u!114 &-2407344035900179630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7235043896497623560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd574cca4e208534b99d41167e8816ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particle: {fileID: 297891855339900071, guid: aa9affa5ccc7a4d4d92162a036dd3ceb, type: 3}

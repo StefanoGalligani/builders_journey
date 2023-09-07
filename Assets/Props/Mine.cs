@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BuilderGame.Effects;
 
 namespace BuilderGame.Props
 {
@@ -9,9 +10,8 @@ namespace BuilderGame.Props
         [SerializeField] private float _explosionForce;
         [SerializeField] private float _explosionRadius;
         [SerializeField] private LayerMask _explodeOnContactWithLayers;
+        [SerializeField] private List<EffectHandler> _effects;
 
-        //probabilmente poco realistico il fatto che se ci sono più blocchi del veicolo vicini alla mina
-        //si ripete più volte la forza dell'esplosione, oppure ha senso perché c'è più superficie colpita?
         public void OnCollisionEnter2D(Collision2D other) {
             if ((_explodeOnContactWithLayers.value & 1<<other.gameObject.layer) == 0) return;
 
@@ -28,6 +28,8 @@ namespace BuilderGame.Props
                 rb.AddForceAtPosition(direction * actualForce, (Vector2)transform.position, ForceMode2D.Impulse);
                 
             }
+
+            foreach(EffectHandler effect in _effects) effect.StartEffect();
 
             Destroy(gameObject);
         }
