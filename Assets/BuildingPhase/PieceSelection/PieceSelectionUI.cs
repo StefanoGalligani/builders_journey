@@ -6,6 +6,7 @@ using BuilderGame.BuildingPhase.Builder;
 using BuilderGame.BuildingPhase.PieceSelection.PieceInfo;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.Utils;
+using BuilderGame.Effects;
 
 [assembly: InternalsVisibleToAttribute("PieceSelectionTests")]
 namespace BuilderGame.BuildingPhase.PieceSelection {
@@ -14,6 +15,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
         [SerializeField] private PieceSelectable _pieceSelectablePrefab;
         [SerializeField] private PieceInfoScriptableObject[] _pieceInfos;
         [SerializeField] private GridInteraction _gridInteractionManager;
+        [SerializeField] private EffectHandler[] _effects;
         private List<PieceSelectable> _selectables;
         
         private void Awake() {
@@ -33,6 +35,7 @@ namespace BuilderGame.BuildingPhase.PieceSelection {
         public void Selection(PieceSelectable pieceSelectable, PieceInfoScriptableObject pieceInfo) {
             _gridInteractionManager.SetNewPieceId(pieceInfo.Id);
             _selectables.ForEach(s => s.ToggleHighlight(s.Equals(pieceSelectable)));
+            foreach (EffectHandler effect in _effects) effect.StartEffect();
         }
     }
 }

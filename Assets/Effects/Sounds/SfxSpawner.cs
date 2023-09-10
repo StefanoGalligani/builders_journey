@@ -13,7 +13,8 @@ namespace BuilderGame.Effects.Sounds {
 
         private IEnumerator DestroySound(AudioSource sound, float duration) {
             yield return new WaitForSeconds(duration);
-            Destroy(sound.gameObject);
+            if (sound != null)
+                Destroy(sound.gameObject);
         }
     }
 }

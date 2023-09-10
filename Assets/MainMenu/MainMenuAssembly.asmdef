@@ -1,3 +1,16 @@
 {
-	"name": "MainMenuAssembly"
+    "name": "MainMenuAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6d9ac6a825b6ce648b8a2bcfeb5f1087"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

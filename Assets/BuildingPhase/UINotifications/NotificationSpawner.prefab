@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4396541319336781550}
   - component: {fileID: 733583415147925836}
+  - component: {fileID: 1939840279320617187}
   m_Layer: 0
   m_Name: NotificationSpawner
   m_TagString: Untagged
@@ -45,3 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _notificationPrefab: {fileID: 7890907064598320786, guid: d8d022d59445c9e4f82ab216f7df6d97, type: 3}
+  _effects:
+  - {fileID: 1939840279320617187}
+--- !u!114 &1939840279320617187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2936372579003670388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 046fc1afc922d97498d955cc778dea9e, type: 3}
+  _isSoundPrefab: 1

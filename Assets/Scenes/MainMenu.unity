@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61713353}
   - component: {fileID: 61713354}
+  - component: {fileID: 61713355}
   m_Layer: 5
   m_Name: Menus
   m_TagString: Untagged
@@ -174,6 +175,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fd0a8916d87d24b9fb3292a1af2d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effects:
+  - {fileID: 61713355}
+--- !u!114 &61713355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61713352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 2d36ba9f91962044c977caf7169a097c, type: 3}
+  _isSoundPrefab: 1
 --- !u!1 &190408459
 GameObject:
   m_ObjectHideFlags: 0

@@ -714,6 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8176065612615226884}
   - component: {fileID: 3230348628004570933}
+  - component: {fileID: -8537616435997853485}
   m_Layer: 5
   m_Name: Save_UI
   m_TagString: Untagged
@@ -758,6 +759,22 @@ MonoBehaviour:
   _vehicleSelectablePrefab: {fileID: 1570280098724268325, guid: 9f317683f1bbd0b408e7492759beca9f, type: 3}
   _saveManager: {fileID: 0}
   _fileNameTxt: {fileID: 8176065613871930572}
+  _effects:
+  - {fileID: -8537616435997853485}
+--- !u!114 &-8537616435997853485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8176065612615226904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 2d36ba9f91962044c977caf7169a097c, type: 3}
+  _isSoundPrefab: 1
 --- !u!1 &8176065612936716380
 GameObject:
   m_ObjectHideFlags: 0

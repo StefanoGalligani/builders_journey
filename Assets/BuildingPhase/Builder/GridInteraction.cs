@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using BuilderGame.Utils;
+using BuilderGame.Effects;
 using BuilderGame.Pieces;
 using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
-using UnityEngine.InputSystem;
 using BuilderGame.BuildingPhase.Tutorial;
 
 namespace BuilderGame.BuildingPhase.Builder {
@@ -19,6 +20,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         [SerializeField] private SubmenuUI _savingUI;
         [SerializeField] private SpriteRenderer _selectionSprite;
         [SerializeField] private Image _deletingSelectionImage;
+        [SerializeField] private EffectHandler[] _effects;
         private BuilderManager _builderManager;
         private GridState _gridState;
         private GridState _prevState;
@@ -48,7 +50,6 @@ namespace BuilderGame.BuildingPhase.Builder {
             if(on) _gridState = GridState.Saving;
         }
 
-
         public void ToggledDeleting(bool directClick) {
             if (_gridState == GridState.Deleting || !directClick) {
                 if(directClick) _gridState = _prevState;
@@ -60,6 +61,8 @@ namespace BuilderGame.BuildingPhase.Builder {
                 GameObject.FindObjectOfType<BindingUI>().EmptyUI();
                 _selectionSprite.transform.position = new Vector3(0,-10000, 0);
             }
+            if (directClick)
+                foreach(EffectHandler effect in _effects) effect.StartEffect();
         }
 
         protected override void Init() {

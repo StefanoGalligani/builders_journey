@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 2159890523385785403}
   - component: {fileID: 2159890523385785404}
   - component: {fileID: 2159890523385785400}
+  - component: {fileID: 715279462176807072}
   m_Layer: 5
   m_Name: VehicleGrid
   m_TagString: Untagged
@@ -496,6 +497,22 @@ MonoBehaviour:
   _savingUI: {fileID: 0}
   _selectionSprite: {fileID: 0}
   _deletingSelectionImage: {fileID: 6738091442240416697}
+  _effects:
+  - {fileID: 715279462176807072}
+--- !u!114 &715279462176807072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2159890523385785405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 2d36ba9f91962044c977caf7169a097c, type: 3}
+  _isSoundPrefab: 1
 --- !u!1 &2933809078939915275
 GameObject:
   m_ObjectHideFlags: 0

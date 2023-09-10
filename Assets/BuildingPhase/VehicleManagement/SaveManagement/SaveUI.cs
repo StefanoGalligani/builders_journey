@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using BuilderGame.Utils;
+using BuilderGame.Effects;
 using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 
@@ -15,6 +16,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
         [SerializeField] private VehicleSelectable _vehicleSelectablePrefab;
         [SerializeField] private VehicleSaveManager _saveManager;
         [SerializeField] private TMP_InputField _fileNameTxt;
+        [SerializeField] private EffectHandler[] _effects;
         private List<VehicleSelectable> _selectables;
         private VehicleFileAccess _fileManager;
         private string _fileToLoad;
@@ -49,6 +51,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
             _selected = true;
             _fileToLoad = vehicleInfo.GetVehicleName();
             _selectables.ForEach(s => s.ToggleHighlight(s.Equals(vehicleSelectable)));
+            foreach (EffectHandler effect in _effects) effect.StartEffect();
         }
 
         public void SelectionDelete(VehicleSelectable vehicleSelectable, VehicleInfo vehicleInfo)

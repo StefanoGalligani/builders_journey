@@ -11,7 +11,8 @@ namespace BuilderGame.Effects.Particles {
 
         private IEnumerator DestroyParticle(ParticleSystem particle, float duration) {
             yield return new WaitForSeconds(duration);
-            Destroy(particle.gameObject);
+            if (particle != null)
+                Destroy(particle.gameObject);
         }
     }
 }

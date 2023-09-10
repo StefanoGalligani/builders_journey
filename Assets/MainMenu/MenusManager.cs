@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using BuilderGame.Effects;
 
 [assembly: InternalsVisibleToAttribute("MainMenuTests")]
 namespace BuilderGame.MainMenu
 {
     public class MenusManager : MonoBehaviour
     {
+        [SerializeField] EffectHandler[] _effects;
         private GameObject[] menus;
 
         internal void Start() {
@@ -22,6 +24,7 @@ namespace BuilderGame.MainMenu
             for (int i=0; i<menus.Length; i++) {
                 menus[i].SetActive(index == i);
             }
+            foreach(EffectHandler effect in _effects) effect.StartEffect();
         }
 
         public void Quit() {

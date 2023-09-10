@@ -285,8 +285,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2935719151742347734}
   m_HandleRect: {fileID: 2935719151742347733}
   m_Direction: 2
-  m_Value: 0.9999994
-  m_Size: 0.8809446
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 2935719152765501175}
   - component: {fileID: 2935719152765501176}
   - component: {fileID: 5334199330530696658}
+  - component: {fileID: 4317961215836434093}
   m_Layer: 5
   m_Name: Builder_UI
   m_TagString: Untagged
@@ -527,6 +528,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7314b1372992f54cb9a23115cc6fe2f, type: 2}
   - {fileID: 11400000, guid: 1293058015502d2459e585b08db5f0d0, type: 2}
   _gridInteractionManager: {fileID: 0}
+  _effects:
+  - {fileID: 4317961215836434093}
 --- !u!114 &5334199330530696658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +543,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainPiecePrefab: {fileID: 4694104614960997814, guid: 7801cf4973b0b704aab3ff5dad16dccf, type: 3}
+--- !u!114 &4317961215836434093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935719152765501171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 2d36ba9f91962044c977caf7169a097c, type: 3}
+  _isSoundPrefab: 1
 --- !u!1 &4233078987642841192
 GameObject:
   m_ObjectHideFlags: 0
