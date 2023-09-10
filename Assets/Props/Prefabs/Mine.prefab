@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7235043896497623563}
   - component: {fileID: -774380553682307674}
   - component: {fileID: -2407344035900179630}
+  - component: {fileID: -8755282353924781566}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -169,6 +170,7 @@ MonoBehaviour:
     m_Bits: 200
   _effects:
   - {fileID: -2407344035900179630}
+  - {fileID: -8755282353924781566}
 --- !u!114 &-2407344035900179630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,3 +184,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particle: {fileID: 297891855339900071, guid: aa9affa5ccc7a4d4d92162a036dd3ceb, type: 3}
+--- !u!114 &-8755282353924781566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7235043896497623560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: a4fc0c3921ca7924d99c5a0d0b01f24b, type: 3}
+  _isSoundPrefab: 1

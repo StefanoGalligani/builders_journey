@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5052414314544757765}
   - component: {fileID: 1102479272995633477}
   - component: {fileID: 1871921586319930185}
+  - component: {fileID: 2450951812580861605}
   m_Layer: 0
   m_Name: EndTrigger
   m_TagString: Untagged
@@ -166,6 +167,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5052414314544757763}
   _effects:
   - {fileID: 1871921586319930185}
+  - {fileID: 2450951812580861605}
 --- !u!114 &1102479272995633477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,3 +194,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particle: {fileID: 297891855339900071, guid: 778eae594985db04fadb35a3300e78d8, type: 3}
+--- !u!114 &2450951812580861605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5052414314544757760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: ddbcd74a394b2064bb046297f96b0664, type: 3}
+  _isSoundPrefab: 1

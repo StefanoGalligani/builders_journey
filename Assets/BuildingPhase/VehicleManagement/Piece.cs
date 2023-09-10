@@ -114,7 +114,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
 
             if (_jointDirection) {
                 _lr.enabled = true;
-                _lr.SetPositions(new[] {transform.position - Vector3.forward, transform.position + _jointDirection - Vector3.forward});
+                _lr.SetPositions(new[] {transform.position - Vector3.forward/2, transform.position + _jointDirection - Vector3.forward/2});
             } else {
                 _lr.enabled = false;
             }

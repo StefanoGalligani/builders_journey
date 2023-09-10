@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4229945545705273906, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4229945545782078202, guid: 1dbdd616bafd5fa4d873431e472fec51, type: 3}
       propertyPath: m_TrackedObjectOffset.x

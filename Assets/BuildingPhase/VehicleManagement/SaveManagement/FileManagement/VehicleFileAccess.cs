@@ -14,8 +14,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
         private bool _fileRead = false;
         private List<string> _fileNames;
 
-        private void Start()
-        {
+        private void Awake() {
             _filePath = Application.persistentDataPath + "/" + _directory + "/";
             if (!Directory.Exists(_filePath))  
             {  

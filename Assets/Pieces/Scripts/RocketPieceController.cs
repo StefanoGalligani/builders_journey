@@ -1,6 +1,7 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using BuilderGame.Effects;
 
 namespace BuilderGame.Pieces {
     public class RocketPieceController : SpecialPieceController {
@@ -8,10 +9,12 @@ namespace BuilderGame.Pieces {
         private Rigidbody2D _rb;
         private bool _on = false;
         private Animator _animator;
+        private List<EffectHandler> _effects;
 
-        internal RocketPieceController(float force, Animator animator) {
+        internal RocketPieceController(float force, Animator animator, List<EffectHandler> effects) {
             _force = force;
             _animator = animator;
+            _effects = effects;
         }
 
         internal override void StartPiece() {
@@ -28,8 +31,10 @@ namespace BuilderGame.Pieces {
         internal override void OnActionExecuted(InputAction.CallbackContext context) {
             if (context.ReadValue<float>() > 0.5) {
                 _on = true;
+                foreach(EffectHandler effect in _effects) effect.StartEffect();
             } else {
                 _on = false;
+                foreach(EffectHandler effect in _effects) effect.StopEffect();
             }
             _animator.SetBool("Active", _on);
         }
