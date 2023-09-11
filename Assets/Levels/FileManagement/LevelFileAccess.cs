@@ -9,18 +9,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using BuilderGame.Utils;
 
-namespace BuilderGame.Levels.FileManagement
-{
-    public class LevelFileAccess : MonoBehaviour
-    {
+namespace BuilderGame.Levels.FileManagement {
+    public class LevelFileAccess : MonoBehaviour {
         [SerializeField] private string _fileName = "Data.bin";
         private string _filePath;
         private LevelsDataSerializable _levelsData;
         private bool _fileRead = false;
         internal bool _test;
 
-        private void Start()
-        {
+        private void Start() {
             _filePath = Application.persistentDataPath + "/" + _fileName;
         }
 

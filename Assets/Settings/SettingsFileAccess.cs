@@ -17,7 +17,6 @@ namespace BuilderGame.Settings {
         private void Awake()
         {
             _filePath = Application.persistentDataPath + "/" + _fileName;
-            CreateFileIfNotExists();
         }
 
         public void UpdateMusicVolume(float volume) {
@@ -51,22 +50,27 @@ namespace BuilderGame.Settings {
         }
 
         public float GetMusicVolume() {
+            if (!_fileRead) CreateFileIfNotExists();
             return _settingsData.MusicVolume;
         }
 
         public float GetSfxVolume() {
+            if (!_fileRead) CreateFileIfNotExists();
             return _settingsData.SfxVolume;
         }
 
         public float GetCameraSensitivity() {
+            if (!_fileRead) CreateFileIfNotExists();
             return _settingsData.CameraSensitivity;
         }
 
         public bool GetTooltipsOn() {
+            if (!_fileRead) CreateFileIfNotExists();
             return _settingsData.TooltipsOn;
         }
 
         public bool GetParticlesOn() {
+            if (!_fileRead) CreateFileIfNotExists();
             return _settingsData.ParticlesOn;
         }
 
