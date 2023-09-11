@@ -53,6 +53,13 @@ namespace BuilderGame.Pieces {
             if (_pieceEnabled && _controller != null) _controller.OnActionExecuted(context);
         }
 
+        public void Interrupt() {
+            if (_pieceEnabled && _controller != null) {
+                _controller.Interrupt();
+                if(_action!=null) _action.Disable();
+            }
+        }
+
         //bindingIndex should be 0 for single bindings, >= 1 for composites
         public void RebindButtonClicked(int bindingIndex, Action<string> callback)
         {

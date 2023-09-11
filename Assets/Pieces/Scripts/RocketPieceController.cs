@@ -21,7 +21,7 @@ namespace BuilderGame.Pieces {
             _rb = gameObject.GetComponent<Rigidbody2D>();
         }
 
-        internal override void UpdatePiece()
+        internal override void FixedUpdatePiece()
         {
             if (_on) {
                 _rb.AddForce(transform.right*_force);
@@ -37,6 +37,12 @@ namespace BuilderGame.Pieces {
                 foreach(EffectHandler effect in _effects) effect.StopEffect();
             }
             _animator.SetBool("Active", _on);
+        }
+
+        internal override void Interrupt() {
+            _on = false;
+            foreach(EffectHandler effect in _effects) effect.StopEffect();
+            _animator.SetBool("Active", false);
         }
     }
 }

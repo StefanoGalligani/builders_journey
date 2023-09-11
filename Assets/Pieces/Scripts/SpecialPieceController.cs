@@ -20,5 +20,7 @@ namespace BuilderGame.Pieces {
         internal virtual void FixedUpdatePiece(){}
 
         internal abstract void OnActionExecuted(InputAction.CallbackContext context);
+
+        internal abstract void Interrupt();
     }
 }

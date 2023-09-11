@@ -30,5 +30,9 @@ namespace BuilderGame.Pieces {
                 foreach(EffectHandler effect in _effects) effect.StartEffect();
             }
         }
+
+        internal override void Interrupt() {
+            
+        }
     }
 }

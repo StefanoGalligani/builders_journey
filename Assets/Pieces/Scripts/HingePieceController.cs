@@ -31,6 +31,10 @@ namespace BuilderGame.Pieces {
             UpdateMotorSpeed();
         }
 
+        internal override void Interrupt() {
+            _motorSpeed = 0;
+        }
+
         private void UpdateMotorSpeed() {
             if (!_joint) return;
             JointMotor2D m = _joint.motor;

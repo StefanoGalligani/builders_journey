@@ -1,8 +1,9 @@
 using System.Linq;
 using UnityEngine;
 using BuilderGame.BuildingPhase.Start;
-using BuilderGame.PlayPhase;
 using BuilderGame.BuildingPhase.Tutorial;
+using BuilderGame.PlayPhase;
+using BuilderGame.Pieces;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement {
     public class Vehicle : MonoBehaviour, ITutorialElement
@@ -18,6 +19,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
 
         private void OnOutOfBounds() {
             GetComponentsInChildren<Piece>().ToList().ForEach(p => p.Interrupt());
+            GetComponentsInChildren<SpecialPiece>().ToList().ForEach(p => p.Interrupt());
         }
 
         void ITutorialElement.DisableInTutorial()

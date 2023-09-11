@@ -19,7 +19,7 @@ namespace BuilderGame.Pieces {
             _joint = gameObject.GetComponent<WheelJoint2D>();
         }
 
-        internal override void UpdatePiece()
+        internal override void FixedUpdatePiece()
         {
             AdjustSupensionDir();
         }
@@ -29,6 +29,9 @@ namespace BuilderGame.Pieces {
             UpdateMotorSpeed();
         }
 
+        internal override void Interrupt() {
+            _motorSpeed = 0;
+        }
 
         private void UpdateMotorSpeed() {
             if (!_joint) return;

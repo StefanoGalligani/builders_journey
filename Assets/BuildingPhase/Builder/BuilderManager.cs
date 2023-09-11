@@ -54,14 +54,17 @@ namespace BuilderGame.BuildingPhase.Builder {
             _mainPieceCoords = _gridInfo.MainPieceCoordinates;
         }
 
-        internal void PlacePiece(Vector2Int gridCoords, bool deleting = false) {
-            if (!IsPlaceable(gridCoords) && !deleting) return;
+        internal bool PlacePiece(Vector2Int gridCoords, bool deleting = false) {
+            if (!IsPlaceable(gridCoords) && !deleting) return false;
+            bool success = false;
 
-            RemovePiece(gridCoords);
+            success = RemovePiece(gridCoords);
             if (NewPieceId >= 0 && !deleting) {
                 Piece p = InstantiateNewPiece(NewPieceId, gridCoords);
+                success = true;
             }
             ConnectPieces();
+            return success;
         }
 
         private void ConnectPieces() {
@@ -161,11 +164,11 @@ namespace BuilderGame.BuildingPhase.Builder {
                     Vector2Int gridCoords = new Vector2Int(i, j);
                     RemovePiece(gridCoords);
                 }
-            }     
+            }
         }
 
-        private void RemovePiece(Vector2Int gridCoords) {
-            if (_placedPieces[gridCoords.x][gridCoords.y] == null || IsMainPiece(gridCoords)) return;
+        private bool RemovePiece(Vector2Int gridCoords) {
+            if (_placedPieces[gridCoords.x][gridCoords.y] == null || IsMainPiece(gridCoords)) return false;
 
             int price = _piecesDictionary.GetPriceById(_placedPieces[gridCoords.x][gridCoords.y].Id);
             _placedPieces[gridCoords.x][gridCoords.y].transform.SetParent(null);
@@ -173,6 +176,7 @@ namespace BuilderGame.BuildingPhase.Builder {
             _placedPieces[gridCoords.x][gridCoords.y] = null;
 
             _totalPriceInfo.SubtractPrice(price);
+            return true;
         }
 
         private Piece InstantiateNewPiece(int id, Vector2Int gridCoords) {
@@ -193,10 +197,11 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         internal void ShiftAllPieces(Direction dir) {
             bool shiftIsValid = true;
+            int i = 0, j = 0;
             switch(dir) {
                 case Direction.Right:
-                    int i=_gridInfo.GridDimensions.x-1;
-                    for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                    i=_gridInfo.GridDimensions.x-1;
+                    for (j=0; j<_gridInfo.GridDimensions.y; j++) {
                         if (_placedPieces[i][j]) {
                             shiftIsValid = false;
                             break;
@@ -204,27 +209,27 @@ namespace BuilderGame.BuildingPhase.Builder {
                     }
                 break;
                 case Direction.Up:
-                    int j1=_gridInfo.GridDimensions.y-1;
+                    j=_gridInfo.GridDimensions.y-1;
                     for (i=0; i<_gridInfo.GridDimensions.x; i++) {
-                        if (_placedPieces[i][j1]) {
+                        if (_placedPieces[i][j]) {
                             shiftIsValid = false;
                             break;
                         }
                     }
                 break;
                 case Direction.Left:
-                    int i1=0;
-                    for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
-                        if (_placedPieces[i1][j]) {
+                    i=0;
+                    for (j=0; j<_gridInfo.GridDimensions.y; j++) {
+                        if (_placedPieces[i][j]) {
                             shiftIsValid = false;
                             break;
                         }
                     }
                 break;
                 case Direction.Down:
-                    int j2=0;
+                    j=0;
                     for (i=0; i<_gridInfo.GridDimensions.x; i++) {
-                        if (_placedPieces[i][j2]) {
+                        if (_placedPieces[i][j]) {
                             shiftIsValid = false;
                             break;
                         }
@@ -242,29 +247,29 @@ namespace BuilderGame.BuildingPhase.Builder {
             _mainPieceCoords.y += ((Vector2Int)dir).y;
             switch(dir) {
                 case Direction.Right:
-                    for (int i=_gridInfo.GridDimensions.x-2; i>=0; i--) {
-                        for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                    for (i=_gridInfo.GridDimensions.x-2; i>=0; i--) {
+                        for (j=0; j<_gridInfo.GridDimensions.y; j++) {
                             ShiftPiece(new Vector2Int(i, j), dir);
                         }
                     }
                 break;
                 case Direction.Up:
-                    for (int j=_gridInfo.GridDimensions.y-2; j>=0; j--) {
-                        for (int i=_gridInfo.GridDimensions.x-1; i>=0; i--) {
+                    for (j=_gridInfo.GridDimensions.y-2; j>=0; j--) {
+                        for (i=_gridInfo.GridDimensions.x-1; i>=0; i--) {
                             ShiftPiece(new Vector2Int(i, j), dir);
                         }
                     }
                 break;
                 case Direction.Left:
-                    for (int i=1; i<_gridInfo.GridDimensions.x; i++) {
-                        for (int j=0; j<_gridInfo.GridDimensions.y; j++) {
+                    for (i=1; i<_gridInfo.GridDimensions.x; i++) {
+                        for (j=0; j<_gridInfo.GridDimensions.y; j++) {
                             ShiftPiece(new Vector2Int(i, j), dir);
                         }
                     }
                 break;
                 case Direction.Down:
-                    for (int j=1; j<_gridInfo.GridDimensions.y; j++) {
-                        for (int i=0; i<_gridInfo.GridDimensions.x; i++) {
+                    for (j=1; j<_gridInfo.GridDimensions.y; j++) {
+                        for (i=0; i<_gridInfo.GridDimensions.x; i++) {
                             ShiftPiece(new Vector2Int(i, j), dir);
                         }
                     }

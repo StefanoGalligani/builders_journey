@@ -43,11 +43,13 @@ namespace BuilderGame.Pieces {
             pieceObj.Update();
             pieceObj.FixedUpdate();
             pieceObj.OnActionExecuted(default);
+            pieceObj.Interrupt();
 
             Assert.False(((MockSpecialPieceController)pieceController).StartCalled);
             Assert.False(((MockSpecialPieceController)pieceController).UpdateCalled);
             Assert.False(((MockSpecialPieceController)pieceController).FixedUpdateCalled);
             Assert.False(((MockSpecialPieceController)pieceController).ActionExecuted);
+            Assert.False(((MockSpecialPieceController)pieceController).Interrupted);
         }
 
         [Test]
@@ -58,11 +60,13 @@ namespace BuilderGame.Pieces {
             pieceObj.Update();
             pieceObj.FixedUpdate();
             pieceObj.OnActionExecuted(default);
+            pieceObj.Interrupt();
 
             Assert.True(((MockSpecialPieceController)pieceController).StartCalled);
             Assert.True(((MockSpecialPieceController)pieceController).UpdateCalled);
             Assert.True(((MockSpecialPieceController)pieceController).FixedUpdateCalled);
             Assert.True(((MockSpecialPieceController)pieceController).ActionExecuted);
+            Assert.True(((MockSpecialPieceController)pieceController).Interrupted);
         }
 
         [TearDown]
@@ -91,6 +95,7 @@ namespace BuilderGame.Pieces {
         public bool UpdateCalled = false;
         public bool FixedUpdateCalled = false;
         public bool ActionExecuted = false;
+        public bool Interrupted = false;
         internal override void StartPiece() {
             StartCalled = true;
         }
@@ -102,6 +107,9 @@ namespace BuilderGame.Pieces {
         }
         internal override void OnActionExecuted(InputAction.CallbackContext context) {
             ActionExecuted = true;
+        }
+        internal override void Interrupt() {
+            Interrupted = true;
         }
 
         internal GameObject GetGameObject() {

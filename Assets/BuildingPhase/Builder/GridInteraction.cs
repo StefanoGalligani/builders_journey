@@ -20,7 +20,9 @@ namespace BuilderGame.BuildingPhase.Builder {
         [SerializeField] private SubmenuUI _savingUI;
         [SerializeField] private SpriteRenderer _selectionSprite;
         [SerializeField] private Image _deletingSelectionImage;
-        [SerializeField] private EffectHandler[] _effects;
+        [SerializeField] private EffectHandler[] _selectionEffects;
+        [SerializeField] private EffectHandler[] _placeEffects;
+        [SerializeField] private EffectHandler[] _removeEffects;
         private BuilderManager _builderManager;
         private GridState _gridState;
         private GridState _prevState;
@@ -62,7 +64,7 @@ namespace BuilderGame.BuildingPhase.Builder {
                 _selectionSprite.transform.position = new Vector3(0,-10000, 0);
             }
             if (directClick)
-                foreach(EffectHandler effect in _effects) effect.StartEffect();
+                foreach(EffectHandler effect in _selectionEffects) effect.StartEffect();
         }
 
         protected override void Init() {
@@ -82,7 +84,10 @@ namespace BuilderGame.BuildingPhase.Builder {
             switch (_gridState) {
                 case GridState.Building:
                     if (leftClick) {
-                        _builderManager.PlacePiece(gridCoords);
+                        bool placedSuccessfully = _builderManager.PlacePiece(gridCoords);
+                        if (placedSuccessfully) {
+                            foreach(EffectHandler effect in _placeEffects) effect.StartEffect();
+                        }
                     } else {
                         _builderManager.RotatePiece(gridCoords);
                     }
@@ -105,34 +110,17 @@ namespace BuilderGame.BuildingPhase.Builder {
                     }
                     break;
                 case GridState.Deleting:
-                    _builderManager.PlacePiece(gridCoords, true);
+                    bool removedSuccessfully = _builderManager.PlacePiece(gridCoords, true);
+                    if (removedSuccessfully) {
+                        foreach(EffectHandler effect in _removeEffects) effect.StartEffect();
+                    }
                     break;
             }
-
-            /*if (_gridState == GridState.Building) {
-                if (leftClick) {
-                    _builderManager.PlacePiece(gridCoords);
-                } else {
-                    _builderManager.RotatePiece(gridCoords);
-                }
-            } else if (_gridState == GridState.Rebinding) {
-                Piece p = _builderManager.GetPieceAtPosition(gridCoords);
-                if (p != null && p.GetComponent<SpecialPiece>()) {
-                    _selectionSprite.gameObject.SetActive(true);
-                    _selectionSprite.transform.position = p.transform.position;
-                    GameObject.FindObjectOfType<BindingUI>()
-                    .PrepareUI(
-                        p.GetComponent<SpecialPiece>(),
-                        FindObjectOfType<PiecesDictionary>().GetSpriteById(p.Id)
-                    );
-                }
-            } else if (_gridState == GridState.Deleting) {
-                _builderManager.PlacePiece(gridCoords, true);
-            }*/
         }
 
         public void ClickedDeleteAll() {
             _builderManager.RemoveAllPieces();
+            foreach(EffectHandler effect in _removeEffects) effect.StartEffect();
         }
 
         public void ClickedShift(int direction) {
