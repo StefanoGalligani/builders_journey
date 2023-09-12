@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 using BuilderGame.EndingPhase;
+using BuilderGame.Settings;
 
 namespace BuilderGame.BuildingPhase.Tooltip
 {
@@ -16,11 +17,18 @@ namespace BuilderGame.BuildingPhase.Tooltip
         [SerializeField] private Vector2 _textOffset;
         [SerializeField] private TextMeshProUGUI _tooltipText;
         [SerializeField] private GraphicRaycaster[] _raycasters;
+        private SettingsFileAccess _settings;
         private bool _active;
+        private bool _tooltipsOn;
 
         private void Start() {
             _active = true;
+            _tooltipContainer.SetActive(false);
             FindObjectOfType<EndNotifier>().GameEnd += OnGameEnd;
+
+            _settings = FindObjectOfType<SettingsFileAccess>();
+            _tooltipsOn = _settings.GetTooltipsOn();
+            _settings.SettingsUpdated += data => _tooltipsOn = data.TooltipsOn;
         }
 
         private void OnGameEnd() {
@@ -29,7 +37,7 @@ namespace BuilderGame.BuildingPhase.Tooltip
         }
 
         private void Update() {
-            if (!_active) return;
+            if (!_active || !_tooltipsOn) return;
 
             Vector2 mousePositionScreen = Mouse.current.position.value;
             Vector2 mousePositionWorld = Camera.main.ScreenToWorldPoint(mousePositionScreen);

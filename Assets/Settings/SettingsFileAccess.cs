@@ -19,31 +19,31 @@ namespace BuilderGame.Settings {
             _filePath = Application.persistentDataPath + "/" + _fileName;
         }
 
-        public void UpdateMusicVolume(float volume) {
+        internal void UpdateMusicVolume(float volume) {
             _settingsData.MusicVolume = volume;
             SettingsUpdated?.Invoke(_settingsData);
             WriteToFile();
         }
 
-        public void UpdateSfxVolume(float volume) {
+        internal void UpdateSfxVolume(float volume) {
             _settingsData.SfxVolume = volume;
             SettingsUpdated?.Invoke(_settingsData);
             WriteToFile();
         }
 
-        public void UpdateCameraSensitivity(float sensitivity) {
+        internal void UpdateCameraSensitivity(float sensitivity) {
             _settingsData.CameraSensitivity = sensitivity;
             SettingsUpdated?.Invoke(_settingsData);
             WriteToFile();
         }
 
-        public void UpdateTooltipsOn(bool on) {
+        internal void UpdateTooltipsOn(bool on) {
             _settingsData.TooltipsOn = on;
             SettingsUpdated?.Invoke(_settingsData);
             WriteToFile();
         }
 
-        public void UpdateParticlesOn(bool on) {
+        internal void UpdateParticlesOn(bool on) {
             _settingsData.ParticlesOn = on;
             SettingsUpdated?.Invoke(_settingsData);
             WriteToFile();
@@ -90,7 +90,7 @@ namespace BuilderGame.Settings {
             _settingsData = new SettingsDataSerializable();
             _settingsData.MusicVolume = 1;
             _settingsData.SfxVolume = 1;
-            _settingsData.CameraSensitivity = 1;
+            _settingsData.CameraSensitivity = 0.25f;
             _settingsData.TooltipsOn = true;
             _settingsData.ParticlesOn = true;
 

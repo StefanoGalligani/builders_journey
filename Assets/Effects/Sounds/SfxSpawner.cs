@@ -8,13 +8,14 @@ namespace BuilderGame.Effects.Sounds {
         public void SpawnSound(AudioSource sound, Vector3 position, float duration = 1) {
             AudioSource instance = Instantiate(sound, position, Quaternion.identity);
             instance.Play();
-            StartCoroutine(DestroySound(instance, duration));
+            StartCoroutine(DestroySound(instance.gameObject, duration));
         }
 
-        private IEnumerator DestroySound(AudioSource sound, float duration) {
-            yield return new WaitForSeconds(duration);
-            if (sound != null)
-                Destroy(sound.gameObject);
+        private IEnumerator DestroySound(GameObject instance, float duration) {
+            yield return new WaitForSecondsRealtime(duration);
+            if (instance != null){
+                Destroy(instance);
+            }
         }
     }
 }

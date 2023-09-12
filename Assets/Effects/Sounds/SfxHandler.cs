@@ -12,7 +12,7 @@ namespace BuilderGame.Effects.Sounds {
         private void Start() {
             _settings = FindObjectOfType<SettingsFileAccess>();
             _sound.volume = _settings.GetSfxVolume();
-            _settings.SettingsUpdated += UpdateSoundVolume;
+            _settings.SettingsUpdated += data => _sound.volume = data.SfxVolume;
         }
 
         public override void StartEffect() {
@@ -28,10 +28,6 @@ namespace BuilderGame.Effects.Sounds {
             if (!_isSoundPrefab) {
                 _sound.Stop();
             }
-        }
-
-        private void UpdateSoundVolume(SettingsDataSerializable settingsData) {
-            _sound.volume = settingsData.SfxVolume;
         }
     }
 }
