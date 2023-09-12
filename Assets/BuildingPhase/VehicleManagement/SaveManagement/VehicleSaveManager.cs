@@ -54,6 +54,8 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
                     return;
                 }
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            } else {
+                _notificationsSpawner.SpawnNotification("Error reading the file");
             }
         }
 

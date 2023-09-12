@@ -115,33 +115,30 @@ namespace BuilderGame.Levels.FileManagement {
             WriteToFile();
         }
 
-        private void WriteToFile() {
-            if (_test) return;
+        private bool WriteToFile() {
+            if (_test) return true;
             if (!_fileRead) {
                 Debug.LogWarning("Tried to write to file without having the data");
-                return;
+                return false;
             }
-            FileStream dataStream = new FileStream(_filePath, FileMode.Create);
-            BinaryFormatter converter = new BinaryFormatter();
-            converter.Serialize(dataStream, _levelsData);
-            dataStream.Close();
+            bool success;
+            FileHelper.Write(_levelsData, _filePath, out success);
+            return success;
         }
 
-        private void ReadFromFile() {
+        private bool ReadFromFile() {
             if (_test) {
                 _fileRead = true;
-                return;
+                return true;
             }
             if(File.Exists(_filePath)) {
-                FileStream dataStream = new FileStream(_filePath, FileMode.Open);
-
-                BinaryFormatter converter = new BinaryFormatter();
-                _levelsData = converter.Deserialize(dataStream) as LevelsDataSerializable;
-
-                dataStream.Close();
+                bool success;
+                _levelsData = FileHelper.Read<LevelsDataSerializable>(_filePath, out success);
                 _fileRead = true;
+                return success;
             } else {
                 Debug.LogError("Could not find file " + _filePath);
+                return false;
             }
         }
     }

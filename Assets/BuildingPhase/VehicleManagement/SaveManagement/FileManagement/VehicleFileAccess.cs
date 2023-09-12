@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using BuilderGame.Utils;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement
 {
@@ -51,11 +52,9 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
                 return false;
             }
             if (!_fileNames.Contains(fileName)) _fileNames.Add(fileName);
-            FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Create);
-            BinaryFormatter converter = new BinaryFormatter();
-            converter.Serialize(dataStream, _vehicleData);
-            dataStream.Close();
-            return true;
+            bool success;
+            FileHelper.Write(_vehicleData, _filePath + fileName, out success);
+            return success;
         }
 
         internal bool ReadFromFile(string fileName) {
@@ -63,19 +62,10 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagem
                 Debug.LogError("Could not find file " + _filePath + fileName);
                 return false;
             }
-            FileStream dataStream = new FileStream(_filePath + fileName, FileMode.Open);
-
-            BinaryFormatter converter = new BinaryFormatter();
-            try {
-                _vehicleData = converter.Deserialize(dataStream) as VehicleDataSerializable;
-            } catch (SerializationException e) {
-                Debug.LogError("File was not valid.\n" + e.StackTrace);
-                return false;
-            }
-
-            dataStream.Close();
+            bool success;
+            _vehicleData = FileHelper.Read<VehicleDataSerializable>(_filePath + fileName, out success);
             _fileRead = true;
-            return true;
+            return success;
         }
 
         internal void DeleteFile(string fileName) {

@@ -1,10 +1,9 @@
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System;
+using BuilderGame.Utils;
 
 [assembly: InternalsVisibleToAttribute("SettingsTests")]
 namespace BuilderGame.Settings {
@@ -100,33 +99,30 @@ namespace BuilderGame.Settings {
             WriteToFile();
         }
 
-        private void WriteToFile() {
-            if (_test) return;
+        private bool WriteToFile() {
+            if (_test) return true;
             if (!_fileRead) {
                 Debug.LogWarning("Tried to write to file without having the data");
-                return;
+                return false;
             }
-            FileStream dataStream = new FileStream(_filePath, FileMode.Create);
-            BinaryFormatter converter = new BinaryFormatter();
-            converter.Serialize(dataStream, _settingsData);
-            dataStream.Close();
+            bool success;
+            FileHelper.Write(_settingsData, _filePath, out success);
+            return success;
         }
 
-        private void ReadFromFile() {
+        private bool ReadFromFile() {
             if (_test) {
                 _fileRead = true;
-                return;
+                return true;
             }
             if(File.Exists(_filePath)) {
-                FileStream dataStream = new FileStream(_filePath, FileMode.Open);
-
-                BinaryFormatter converter = new BinaryFormatter();
-                _settingsData = converter.Deserialize(dataStream) as SettingsDataSerializable;
-
-                dataStream.Close();
+                bool success;
+                _settingsData = FileHelper.Read<SettingsDataSerializable>(_filePath, out success);
                 _fileRead = true;
+                return success;
             } else {
                 Debug.LogError("Could not find file " + _filePath);
+                return false;
             }
         }
     }
