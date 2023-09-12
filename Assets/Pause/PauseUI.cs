@@ -41,13 +41,17 @@ namespace BuilderGame.Pause {
             if (_settings) _settings.SetActive(false);
             if (_content) _content.SetActive(_isContentOpen);
             Time.timeScale = _isContentOpen ? 0 : 1;
-            foreach(EffectHandler effect in _effects) effect.StartEffect();
+            if (_effects != null) {
+                foreach(EffectHandler effect in _effects) effect.StartEffect();
+            }
         }
 
         public void OnToggleSettings(bool on) {
             if (!_isContentOpen) return;
             if (_settings) _settings.SetActive(on);
-            foreach(EffectHandler effect in _effects) effect.StartEffect();
+            if (_effects != null) {
+                foreach(EffectHandler effect in _effects) effect.StartEffect();
+            }
         }
 
         public void OnLoadMenu() {

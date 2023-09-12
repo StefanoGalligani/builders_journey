@@ -7,8 +7,7 @@ using BuilderGame.MainMenu.LevelSelection.LevelInfo;
 using BuilderGame.Levels.FileManagement;
 
 namespace BuilderGame.Levels {
-    public class LevelFileAccessTest
-    {
+    public class LevelFileAccessTest {
         private LevelInfoScriptableObject[] scriptableObjects;
         private GameObject obj;
         private LevelFileAccess levelFileAccess;

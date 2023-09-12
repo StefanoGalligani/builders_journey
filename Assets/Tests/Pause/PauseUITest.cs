@@ -4,10 +4,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace BuilderGame.Pause
-{
-    public class PauseUITest
-    {
+namespace BuilderGame.Pause {
+    public class PauseUITest {
         private GameObject obj;
         private GameObject content;
         private GameObject settings;

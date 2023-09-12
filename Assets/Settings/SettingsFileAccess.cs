@@ -1,10 +1,12 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using System;
 
+[assembly: InternalsVisibleToAttribute("SettingsTests")]
 namespace BuilderGame.Settings {
     public class SettingsFileAccess : MonoBehaviour {
         public Action<SettingsDataSerializable> SettingsUpdated;
@@ -14,9 +16,9 @@ namespace BuilderGame.Settings {
         private bool _fileRead = false;
         internal bool _test;
 
-        private void Awake()
-        {
+        internal void Awake() {
             _filePath = Application.persistentDataPath + "/" + _fileName;
+            CreateFileIfNotExists();
         }
 
         internal void UpdateMusicVolume(float volume) {

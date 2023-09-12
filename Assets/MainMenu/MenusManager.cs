@@ -9,7 +9,7 @@ namespace BuilderGame.MainMenu
 {
     public class MenusManager : MonoBehaviour
     {
-        [SerializeField] EffectHandler[] _effects;
+        [SerializeField] private EffectHandler[] _effects;
         private GameObject[] menus;
 
         internal void Start() {
@@ -24,7 +24,9 @@ namespace BuilderGame.MainMenu
             for (int i=0; i<menus.Length; i++) {
                 menus[i].SetActive(index == i);
             }
-            foreach(EffectHandler effect in _effects) effect.StartEffect();
+            if (_effects != null) {
+                foreach(EffectHandler effect in _effects) effect.StartEffect();
+            }
         }
 
         public void Quit() {
