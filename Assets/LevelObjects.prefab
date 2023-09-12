@@ -1678,7 +1678,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2935719151967284258, guid: d6e0e3bc99add0d4c8ed7e04bcab0768, type: 3}
       propertyPath: m_Size
-      value: 0.9483519
+      value: 0.9478532
       objectReference: {fileID: 0}
     - target: {fileID: 2935719151967284258, guid: d6e0e3bc99add0d4c8ed7e04bcab0768, type: 3}
       propertyPath: m_Value
@@ -2133,6 +2133,18 @@ PrefabInstance:
     - target: {fileID: 6419215265535358248, guid: 9a6cdc8ed745353489c10c46620fd231, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655524892699433917, guid: 9a6cdc8ed745353489c10c46620fd231, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655524892699433917, guid: 9a6cdc8ed745353489c10c46620fd231, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnToggleSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655524892699433917, guid: 9a6cdc8ed745353489c10c46620fd231, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuilderGame.Pause.PauseUI, PauseAssembly
       objectReference: {fileID: 0}
     - target: {fileID: 7684526718352048529, guid: 9a6cdc8ed745353489c10c46620fd231, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2644,6 +2656,10 @@ PrefabInstance:
       value: -0.5255102
       objectReference: {fileID: 0}
     - target: {fileID: 5918859990544884926, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
+      propertyPath: _gridTransform
+      value: 
+      objectReference: {fileID: 2831270945949776867}
+    - target: {fileID: 5918859990544884926, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: _vehicleTransform
       value: 
       objectReference: {fileID: 5476689206760914967}
@@ -2697,19 +2713,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5918859990712412479, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5918859990712412479, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5918859990805968046, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5918859990805968046, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5918859991106049528, guid: 1a2e62e6246420544bb4b8ba26803cba, type: 3}
       propertyPath: m_SortingOrder

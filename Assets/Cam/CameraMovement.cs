@@ -8,11 +8,12 @@ namespace BuilderGame.Cam {
     public class CameraMovement : MonoBehaviour {
         [SerializeField] private CinemachineVirtualCamera _cinemachine;
         [SerializeField] private CamTracker _camTracker;
+        [SerializeField] private Transform _gridTransform;
         [SerializeField] private Transform _vehicleTransform;
         [SerializeField] private Vector3 _defaultOffset;
 
         private void Start() {
-            _camTracker.transform.position = _vehicleTransform.position + _defaultOffset;
+            _camTracker.transform.position = _gridTransform.position + _defaultOffset;
             FindObjectOfType<StartNotifier>().GameStart += OnGameStart;
         }
 

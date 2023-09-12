@@ -1,7 +1,9 @@
 {
     "name": "EffectsAssembly",
     "rootNamespace": "BuilderGame.Effects",
-    "references": [],
+    "references": [
+        "GUID:0af0ecacba2ed2947bbb5790f28d857c"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

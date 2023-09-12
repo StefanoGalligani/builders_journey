@@ -87,12 +87,12 @@ namespace BuilderGame.Settings {
         }
 
         private void CreateFile() {
-            SettingsDataSerializable data = new SettingsDataSerializable();
-            data.MusicVolume = 1;
-            data.SfxVolume = 1;
-            data.CameraSensitivity = 1;
-            data.TooltipsOn = true;
-            data.ParticlesOn = true;
+            _settingsData = new SettingsDataSerializable();
+            _settingsData.MusicVolume = 1;
+            _settingsData.SfxVolume = 1;
+            _settingsData.CameraSensitivity = 1;
+            _settingsData.TooltipsOn = true;
+            _settingsData.ParticlesOn = true;
 
             _fileRead = true;
             WriteToFile();
