@@ -692,6 +692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7684526720381424907}
   - component: {fileID: 6164401714949537080}
+  - component: {fileID: 6005962787216050074}
   m_Layer: 5
   m_Name: Pause_UI
   m_TagString: Untagged
@@ -734,6 +735,22 @@ MonoBehaviour:
   _content: {fileID: 924374251886754886}
   _settings: {fileID: 6419215265535358248}
   _menuSceneName: MainMenu
+  _effects:
+  - {fileID: 6005962787216050074}
+--- !u!114 &6005962787216050074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7684526720381424904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ba3c511f99fed4cbae263d2f766111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: -7014670271175321084, guid: 2d36ba9f91962044c977caf7169a097c, type: 3}
+  _isSoundPrefab: 1
 --- !u!1 &8272014071067136413
 GameObject:
   m_ObjectHideFlags: 0
