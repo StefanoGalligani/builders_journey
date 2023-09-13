@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[assembly: InternalsVisibleToAttribute("UtilsTestsPlayMode")]
 namespace BuilderGame.Utils {
     public class LimitedPool : IObjectPool<GameObject> {
-        private Queue<GameObject> _inactiveQueue;
-        private Queue<GameObject> _activeQueue;
+        internal Queue<GameObject> _inactiveQueue;
+        internal Queue<GameObject> _activeQueue;
         private GameObject _prefab;
         private int _maxCount;
         
@@ -62,7 +64,7 @@ namespace BuilderGame.Utils {
             if (!_activeQueue.Contains(element)) return;
 
             _activeQueue = new Queue<GameObject>(_activeQueue.Where(x => x != element));
-            _inactiveQueue.Append(element);
+            _inactiveQueue.Enqueue(element);
             element.SetActive(false);
         }
     }
