@@ -17,7 +17,7 @@ namespace BuilderGame.EndingPhase
             _activated = true;
             GameEnd?.Invoke();
             if(_spriteRenderer) Destroy(_spriteRenderer);
-            _effects.StartEffects();
+            if(_effects != null) _effects.StartEffects();
         }
     }
 }
