@@ -10,7 +10,7 @@ namespace BuilderGame.Props
         [SerializeField] private float _explosionForce;
         [SerializeField] private float _explosionRadius;
         [SerializeField] private LayerMask _explodeOnContactWithLayers;
-        [SerializeField] private List<EffectHandler> _effects;
+        [SerializeField] private EffectContainer _effects;
 
         public void OnCollisionEnter2D(Collision2D other) {
             if ((_explodeOnContactWithLayers.value & 1<<other.gameObject.layer) == 0) return;
@@ -29,7 +29,7 @@ namespace BuilderGame.Props
                 
             }
 
-            foreach(EffectHandler effect in _effects) effect.StartEffect();
+            _effects.StartEffects();
 
             Destroy(gameObject);
         }

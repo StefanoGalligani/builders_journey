@@ -5,11 +5,9 @@ using UnityEngine;
 using BuilderGame.Effects;
 
 [assembly: InternalsVisibleToAttribute("MainMenuTests")]
-namespace BuilderGame.MainMenu
-{
-    public class MenusManager : MonoBehaviour
-    {
-        [SerializeField] private EffectHandler[] _effects;
+namespace BuilderGame.MainMenu {
+    public class MenusManager : MonoBehaviour {
+        [SerializeField] private EffectContainer _effects;
         private GameObject[] menus;
 
         internal void Start() {
@@ -25,7 +23,7 @@ namespace BuilderGame.MainMenu
                 menus[i].SetActive(index == i);
             }
             if (_effects != null) {
-                foreach(EffectHandler effect in _effects) effect.StartEffect();
+                _effects.StartEffects();
             }
         }
 

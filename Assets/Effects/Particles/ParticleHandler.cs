@@ -4,7 +4,7 @@ using UnityEngine;
 using BuilderGame.Settings;
 
 namespace BuilderGame.Effects.Particles {
-    public class ParticleHandler : EffectHandler {
+    internal class ParticleHandler : EffectHandler {
         [SerializeField] private ParticleSystem _particle;
         private SettingsFileAccess _settings;
         private bool _on;
@@ -15,12 +15,12 @@ namespace BuilderGame.Effects.Particles {
             _settings.SettingsUpdated += data => _on = data.ParticlesOn;
         }
 
-        public override void StartEffect() {
+        internal override void StartEffect() {
             if(!_on) return;
             FindObjectOfType<ParticlesSpawner>()?.SpawnParticle(_particle, transform.position - Vector3.forward/2, transform.rotation);
         }
 
-        public override void StopEffect() {
+        internal override void StopEffect() {
             
         }
     }

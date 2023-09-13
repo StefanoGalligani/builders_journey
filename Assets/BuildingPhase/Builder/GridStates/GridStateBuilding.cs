@@ -3,9 +3,9 @@ using BuilderGame.Effects;
 
 namespace BuilderGame.BuildingPhase.Builder {
     internal class GridStateBuilding : GridState {
-        private EffectHandler[] _placeEffects;
+        private EffectContainer _placeEffects;
 
-        internal GridStateBuilding(EffectHandler[] placeEffects) {
+        internal GridStateBuilding(EffectContainer placeEffects) {
             _placeEffects = placeEffects;
         }
         internal override void OnEnterState() {}
@@ -14,7 +14,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         internal override void OnLeftClick(BuilderManager builder, Vector2Int gridCoords) {
             bool placedSuccessfully = builder.PlacePiece(gridCoords);
             if (placedSuccessfully) {
-                foreach(EffectHandler effect in _placeEffects) effect.StartEffect();
+                _placeEffects.StartEffects();
             }
         }
 

@@ -7,16 +7,13 @@ using BuilderGame.Effects;
 using BuilderGame.BuildingPhase;
 using BuilderGame.BuildingPhase.VehicleManagement.SaveManagement.FileManagement;
 
-namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
-{
-    public class SaveUI : SubmenuUI, ISelectionUI<VehicleSelectable, VehicleInfo>
-    {
-
+namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement {
+    public class SaveUI : SubmenuUI, ISelectionUI<VehicleSelectable, VehicleInfo> {
         [SerializeField] private RectTransform _scrollContent;
         [SerializeField] private VehicleSelectable _vehicleSelectablePrefab;
         [SerializeField] private VehicleSaveManager _saveManager;
         [SerializeField] private TMP_InputField _fileNameTxt;
-        [SerializeField] private EffectHandler[] _effects;
+        [SerializeField] private EffectContainer _effects;
         private List<VehicleSelectable> _selectables;
         private VehicleFileAccess _fileManager;
         private string _fileToLoad;
@@ -51,7 +48,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement.SaveManagement
             _selected = true;
             _fileToLoad = vehicleInfo.GetVehicleName();
             _selectables.ForEach(s => s.ToggleHighlight(s.Equals(vehicleSelectable)));
-            foreach (EffectHandler effect in _effects) effect.StartEffect();
+            _effects.StartEffects();
         }
 
         public void SelectionDelete(VehicleSelectable vehicleSelectable, VehicleInfo vehicleInfo)

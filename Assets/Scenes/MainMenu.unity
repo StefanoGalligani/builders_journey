@@ -176,7 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effects:
-  - {fileID: 61713355}
+    _effects:
+    - {fileID: 61713355}
 --- !u!114 &61713355
 MonoBehaviour:
   m_ObjectHideFlags: 0

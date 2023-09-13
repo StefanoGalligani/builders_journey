@@ -1,5 +1,6 @@
 using UnityEngine;
 using BuilderGame.Pieces;
+using BuilderGame.Effects;
 using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.Dictionary;
 using BuilderGame.BuildingPhase.VehicleManagement;
@@ -8,9 +9,11 @@ namespace BuilderGame.BuildingPhase.Builder {
 
     internal class GridStateRebinding : GridState {
         private SpriteRenderer _selectionSprite;
+        private EffectContainer _selectionEffects;
 
-        internal GridStateRebinding(SpriteRenderer selectionSprite) {
+        internal GridStateRebinding(SpriteRenderer selectionSprite, EffectContainer selectionEffects) {
             _selectionSprite = selectionSprite;
+            _selectionEffects = selectionEffects;
         }
         internal override void OnEnterState() {
             _selectionSprite.gameObject.SetActive(true);
@@ -22,6 +25,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
         internal override void OnLeftClick(BuilderManager builder, Vector2Int gridCoords) {
             Rebind(builder, gridCoords);
+            _selectionEffects.StartEffects();
         }
         
         internal override void OnRightClick(BuilderManager builder, Vector2Int gridCoords) {

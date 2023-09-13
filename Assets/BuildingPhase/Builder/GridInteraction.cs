@@ -17,9 +17,9 @@ namespace BuilderGame.BuildingPhase.Builder {
         [SerializeField] private SubmenuUI _savingUI;
         [SerializeField] private SpriteRenderer _selectionSprite;
         [SerializeField] private Image _deletingSelectionImage;
-        [SerializeField] private EffectHandler[] _selectionEffects;
-        [SerializeField] private EffectHandler[] _placeEffects;
-        [SerializeField] private EffectHandler[] _removeEffects;
+        [SerializeField] private EffectContainer _selectionEffects;
+        [SerializeField] private EffectContainer _placeEffects;
+        [SerializeField] private EffectContainer _removeEffects;
         private BuilderManager _builderManager;
         private GridState _gridState;
         private GridState _prevState;
@@ -33,15 +33,18 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
 
         private void ChangeState(GridState newState) {
-            if (firstEffect) {
-                firstEffect = false;
-            } else {
-                foreach(EffectHandler effect in _selectionEffects) effect.StartEffect();
-            }
-
+            PlayChangeStateEffects();
             if(_gridState != null) _gridState.OnExitState();
             _gridState = newState;
             _gridState.OnEnterState();
+        }
+
+        private void PlayChangeStateEffects() {
+            if (firstEffect) {
+                firstEffect = false;
+            } else {
+                _selectionEffects.StartEffects();
+            }
         }
 
         private void ToggledBuilding(bool on) {
@@ -52,7 +55,7 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         private void ToggledRebinding(bool on) {
             if(on) {
-                ChangeState(new GridStateRebinding(_selectionSprite));
+                ChangeState(new GridStateRebinding(_selectionSprite, _selectionEffects));
             }
         }
 
@@ -94,11 +97,12 @@ namespace BuilderGame.BuildingPhase.Builder {
 
         public void ClickedDeleteAll() {
             _builderManager.RemoveAllPieces();
-            foreach(EffectHandler effect in _removeEffects) effect.StartEffect();
+            _removeEffects.StartEffects();
         }
 
         public void ClickedShift(int direction) {
             _builderManager.ShiftAllPieces(direction);
+            _selectionEffects.StartEffects();
         }
 
         protected override void DoOnGameStart() {

@@ -6,7 +6,7 @@ namespace BuilderGame.Pieces {
     [RequireComponent(typeof(Animator))]
     public class PropellerPiece : SpecialPiece {
         [SerializeField] private float _force;
-        [SerializeField] private List<EffectHandler> _effects;
+        [SerializeField] private EffectContainer _effects;
 
         protected override void InitController()
         {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace BuilderGame.Effects {
-    public abstract class EffectHandler : MonoBehaviour {
-        public abstract void StartEffect();
-        public abstract void StopEffect();
+    internal abstract class EffectHandler : MonoBehaviour {
+        internal abstract void StartEffect();
+        internal abstract void StopEffect();
     }
 }

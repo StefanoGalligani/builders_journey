@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BuilderGame.Effects;
 
 namespace BuilderGame.BuildingPhase {
-    public class CompositeUI : BuildingPhaseUI
-    {
+    public class CompositeUI : BuildingPhaseUI {
         [SerializeField] private SubmenuUI[] submenus;
-        [SerializeField] private EffectHandler[] _effects;
         protected override void Init()
         {
             OpenMenu(0);

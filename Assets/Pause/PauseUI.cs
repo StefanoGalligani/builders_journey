@@ -14,7 +14,7 @@ namespace BuilderGame.Pause {
         [SerializeField] internal GameObject _content;
         [SerializeField] internal GameObject _settings;
         [SerializeField] internal string _menuSceneName;
-        [SerializeField] private EffectHandler[] _effects;
+        [SerializeField] private EffectContainer _effects;
         private Controls _actionAsset;
         private bool _isContentOpen;
         private bool _canBeOpened;
@@ -41,17 +41,13 @@ namespace BuilderGame.Pause {
             if (_settings) _settings.SetActive(false);
             if (_content) _content.SetActive(_isContentOpen);
             Time.timeScale = _isContentOpen ? 0 : 1;
-            if (_effects != null) {
-                foreach(EffectHandler effect in _effects) effect.StartEffect();
-            }
+            _effects.StartEffects();
         }
 
         public void OnToggleSettings(bool on) {
             if (!_isContentOpen) return;
             if (_settings) _settings.SetActive(on);
-            if (_effects != null) {
-                foreach(EffectHandler effect in _effects) effect.StartEffect();
-            }
+            _effects.StartEffects();
         }
 
         public void OnLoadMenu() {

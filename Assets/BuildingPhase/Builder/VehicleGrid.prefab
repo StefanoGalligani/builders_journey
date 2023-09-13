@@ -500,11 +500,14 @@ MonoBehaviour:
   _selectionSprite: {fileID: 0}
   _deletingSelectionImage: {fileID: 6738091442240416697}
   _selectionEffects:
-  - {fileID: 715279462176807072}
+    _effects:
+    - {fileID: 715279462176807072}
   _placeEffects:
-  - {fileID: 6191630289673523263}
+    _effects:
+    - {fileID: 6191630289673523263}
   _removeEffects:
-  - {fileID: -6982202608467460606}
+    _effects:
+    - {fileID: -6982202608467460606}
 --- !u!114 &715279462176807072
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -166,8 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 5052414314544757763}
   _effects:
-  - {fileID: 1871921586319930185}
-  - {fileID: 2450951812580861605}
+    _effects:
+    - {fileID: 1871921586319930185}
+    - {fileID: 2450951812580861605}
 --- !u!114 &1102479272995633477
 MonoBehaviour:
   m_ObjectHideFlags: 0

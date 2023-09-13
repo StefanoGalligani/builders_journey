@@ -9,7 +9,7 @@ namespace BuilderGame.EndingPhase
     {
         public event Action GameEnd;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private List<EffectHandler> _effects;
+        [SerializeField] private EffectContainer _effects;
         private bool _activated = false;
         internal void OnTriggerEnter2D(Collider2D other) {
             if (_activated || !other.gameObject.layer.Equals(LayerMask.NameToLayer("Vehicle"))) return;
@@ -17,7 +17,7 @@ namespace BuilderGame.EndingPhase
             _activated = true;
             GameEnd?.Invoke();
             if(_spriteRenderer) Destroy(_spriteRenderer);
-            if (_effects != null) foreach (EffectHandler effect in _effects) effect.StartEffect();
+            _effects.StartEffects();
         }
     }
 }

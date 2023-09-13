@@ -5,11 +5,11 @@ using BuilderGame.BuildingPhase.Binding;
 
 namespace BuilderGame.BuildingPhase.Builder {
     internal class GridStateDeleting : GridState {
-        private EffectHandler[] _removeEffects;
+        private EffectContainer _removeEffects;
         private SpriteRenderer _selectionSprite;
         private Image _deletingSelectionImage;
 
-        internal GridStateDeleting(EffectHandler[] removeEffects, SpriteRenderer selectionSprite, Image deletingSelectionImage) {
+        internal GridStateDeleting(EffectContainer removeEffects, SpriteRenderer selectionSprite, Image deletingSelectionImage) {
             _removeEffects = removeEffects;
             _selectionSprite = selectionSprite;
             _deletingSelectionImage = deletingSelectionImage;
@@ -33,7 +33,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         private void Delete(BuilderManager builder, Vector2Int gridCoords) {
             bool removedSuccessfully = builder.PlacePiece(gridCoords, true);
             if (removedSuccessfully) {
-                foreach(EffectHandler effect in _removeEffects) effect.StartEffect();
+                _removeEffects.StartEffects();
             }
         }
     }

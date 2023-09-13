@@ -760,7 +760,8 @@ MonoBehaviour:
   _saveManager: {fileID: 0}
   _fileNameTxt: {fileID: 8176065613871930572}
   _effects:
-  - {fileID: -8537616435997853485}
+    _effects:
+    - {fileID: -8537616435997853485}
 --- !u!114 &-8537616435997853485
 MonoBehaviour:
   m_ObjectHideFlags: 0

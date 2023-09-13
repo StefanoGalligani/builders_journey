@@ -169,8 +169,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 200
   _effects:
-  - {fileID: -2407344035900179630}
-  - {fileID: -8755282353924781566}
+    _effects:
+    - {fileID: -2407344035900179630}
+    - {fileID: -8755282353924781566}
 --- !u!114 &-2407344035900179630
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ namespace BuilderGame.Pieces {
         private Rigidbody2D _rb;
         private bool _on = false;
         private Animator _animator;
-        private List<EffectHandler> _effects;
+        private EffectContainer _effects;
 
-        internal PropellerPieceController(float force, Animator animator, List<EffectHandler> effects) {
+        internal PropellerPieceController(float force, Animator animator, EffectContainer effects) {
             _force = force;
             _animator = animator;
             _effects = effects;
@@ -31,17 +31,17 @@ namespace BuilderGame.Pieces {
         internal override void OnActionExecuted(InputAction.CallbackContext context) {
             if (context.ReadValue<float>() > 0.5) {
                 _on = true;
-                foreach(EffectHandler effect in _effects) effect.StartEffect();
+                _effects.StartEffects();
             } else {
                 _on = false;
-                foreach(EffectHandler effect in _effects) effect.StopEffect();
+                _effects.StopEffects();
             }
             _animator.SetBool("Active", _on);
         }
 
         internal override void Interrupt() {
             _on = false;
-            foreach(EffectHandler effect in _effects) effect.StopEffect();
+            _effects.StopEffects();
             _animator.SetBool("Active", false);
         }
     }

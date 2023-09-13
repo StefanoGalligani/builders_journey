@@ -186,7 +186,8 @@ MonoBehaviour:
     m_Flags: 0
   _force: 25
   _effects:
-  - {fileID: 6555146302397610018}
+    _effects:
+    - {fileID: 6555146302397610018}
 --- !u!114 &6555146302397610018
 MonoBehaviour:
   m_ObjectHideFlags: 0

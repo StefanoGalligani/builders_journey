@@ -4,7 +4,7 @@ using UnityEngine;
 using BuilderGame.Settings;
 
 namespace BuilderGame.Effects.Sounds {
-    public class SfxHandler : EffectHandler {
+    internal class SfxHandler : EffectHandler {
         [SerializeField] private AudioSource _sound;
         [SerializeField] private bool _isSoundPrefab;
         private SettingsFileAccess _settings;
@@ -15,7 +15,7 @@ namespace BuilderGame.Effects.Sounds {
             _settings.SettingsUpdated += data => _sound.volume = data.SfxVolume;
         }
 
-        public override void StartEffect() {
+        internal override void StartEffect() {
             if (_settings.GetSfxVolume() == 0) return;
             if (_isSoundPrefab) {
                 FindObjectOfType<SfxSpawner>()?.SpawnSound(_sound, transform.position - Vector3.forward);
@@ -24,7 +24,7 @@ namespace BuilderGame.Effects.Sounds {
             }
         }
         
-        public override void StopEffect() {
+        internal override void StopEffect() {
             if (!_isSoundPrefab) {
                 _sound.Stop();
             }

@@ -207,8 +207,9 @@ MonoBehaviour:
   _cannonBall: {fileID: 7626289463306717519, guid: 2a8f3534f337f24419f281be1cc1e803, type: 3}
   _force: 20
   _effects:
-  - {fileID: 6546217452269820673}
-  - {fileID: 5072737894690169460}
+    _effects:
+    - {fileID: 6546217452269820673}
+    - {fileID: 5072737894690169460}
 --- !u!114 &6546217452269820673
 MonoBehaviour:
   m_ObjectHideFlags: 0

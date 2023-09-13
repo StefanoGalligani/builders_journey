@@ -736,7 +736,8 @@ MonoBehaviour:
   _settings: {fileID: 6419215265535358248}
   _menuSceneName: MainMenu
   _effects:
-  - {fileID: 6005962787216050074}
+    _effects:
+    - {fileID: 6005962787216050074}
 --- !u!114 &6005962787216050074
 MonoBehaviour:
   m_ObjectHideFlags: 0
