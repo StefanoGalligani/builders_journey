@@ -5,8 +5,7 @@ using BuilderGame.BuildingPhase.Tutorial;
 using UnityEngine;
 
 namespace BuilderGame.BuildingPhase {
-    public abstract class SubmenuUI : MonoBehaviour, ITutorialElement
-    {
+    public abstract class SubmenuUI : MonoBehaviour, ITutorialElement {
         public event Action<bool> OnToggled;
         [SerializeField] private GameObject _content;
         public void ToggleContent(bool on) {

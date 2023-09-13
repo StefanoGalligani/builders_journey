@@ -2030,7 +2030,20 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -1397969724550390556, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 8126154896749053866, guid: ab16ca190b671754aa22fd033497d420, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426702641725974764, guid: ab16ca190b671754aa22fd033497d420, type: 3}
+      propertyPath: m_Delegates.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426702641725974764, guid: ab16ca190b671754aa22fd033497d420, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8426702641725974764, guid: ab16ca190b671754aa22fd033497d420, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

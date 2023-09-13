@@ -3,16 +3,13 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using BuilderGame.Utils;
 using BuilderGame.Effects;
-using BuilderGame.Pieces;
 using BuilderGame.BuildingPhase;
-using BuilderGame.BuildingPhase.Dictionary;
-using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.VehicleManagement;
 using BuilderGame.BuildingPhase.Tutorial;
+using System.Linq.Expressions;
 
 namespace BuilderGame.BuildingPhase.Builder {
-    public class GridInteraction : BuildingPhaseUI, ITutorialElement
-    {
+    public class GridInteraction : BuildingPhaseUI, ITutorialElement {
         [SerializeField] private GridInfoScriptableObject _gridInfo;
         [SerializeField] private Vehicle _vehicle;
         [SerializeField] private SubmenuUI _buildingSelectionUI;
@@ -26,6 +23,7 @@ namespace BuilderGame.BuildingPhase.Builder {
         private BuilderManager _builderManager;
         private GridState _gridState;
         private GridState _prevState;
+        private bool firstEffect = true;
 
         private void Awake() {
             _buildingSelectionUI.OnToggled += ToggledBuilding;
@@ -34,37 +32,43 @@ namespace BuilderGame.BuildingPhase.Builder {
             _deletingSelectionImage.enabled = false;
         }
 
+        private void ChangeState(GridState newState) {
+            if (firstEffect) {
+                firstEffect = false;
+            } else {
+                foreach(EffectHandler effect in _selectionEffects) effect.StartEffect();
+            }
+
+            if(_gridState != null) _gridState.OnExitState();
+            _gridState = newState;
+            _gridState.OnEnterState();
+        }
+
         private void ToggledBuilding(bool on) {
-            if(on) _gridState = GridState.Building;
-            ToggledDeleting(false);
+            if(on) {
+                ChangeState(new GridStateBuilding(_placeEffects));
+            }
         }
 
         private void ToggledRebinding(bool on) {
-            if(on) _gridState = GridState.Rebinding;
-            else {
-                GameObject.FindObjectOfType<BindingUI>().EmptyUI();
-                _selectionSprite.transform.position = new Vector3(0,-10000, 0);
+            if(on) {
+                ChangeState(new GridStateRebinding(_selectionSprite));
             }
-            _selectionSprite.gameObject.SetActive(on);
         }
 
         private void ToggledSaving(bool on) {
-            if(on) _gridState = GridState.Saving;
+            if(on) {
+                ChangeState(new GridStateSaving());
+            }
         }
 
-        public void ToggledDeleting(bool directClick) {
-            if (_gridState == GridState.Deleting || !directClick) {
-                if(directClick) _gridState = _prevState;
-                _deletingSelectionImage.enabled = false;
+        public void ToggledDeleting() {
+            if (_gridState is GridStateDeleting) {
+                ChangeState(_prevState);
             } else {
                 _prevState = _gridState;
-                _gridState = GridState.Deleting;
-                _deletingSelectionImage.enabled = true;
-                GameObject.FindObjectOfType<BindingUI>().EmptyUI();
-                _selectionSprite.transform.position = new Vector3(0,-10000, 0);
+                ChangeState(new GridStateDeleting(_removeEffects, _selectionSprite, _deletingSelectionImage));
             }
-            if (directClick)
-                foreach(EffectHandler effect in _selectionEffects) effect.StartEffect();
         }
 
         protected override void Init() {
@@ -81,40 +85,10 @@ namespace BuilderGame.BuildingPhase.Builder {
             Vector2Int gridCoords = PositionToGridCoordinates(clickPosition);
             if (gridCoords.x >= _gridInfo.GridDimensions.x || gridCoords.y >= _gridInfo.GridDimensions.y) return;
 
-            switch (_gridState) {
-                case GridState.Building:
-                    if (leftClick) {
-                        bool placedSuccessfully = _builderManager.PlacePiece(gridCoords);
-                        if (placedSuccessfully) {
-                            foreach(EffectHandler effect in _placeEffects) effect.StartEffect();
-                        }
-                    } else {
-                        _builderManager.RotatePiece(gridCoords);
-                    }
-                    break;
-                case GridState.Rebinding:
-                    Piece p = _builderManager.GetPieceAtPosition(gridCoords);
-                    if (p != null && p.GetComponent<SpecialPiece>()) {
-                        _selectionSprite.gameObject.SetActive(true);
-                        _selectionSprite.transform.position = p.transform.position;
-                        GameObject.FindObjectOfType<BindingUI>()
-                        .PrepareUI(
-                            p.GetComponent<SpecialPiece>(),
-                            FindObjectOfType<PiecesDictionary>().GetSpriteById(p.Id)
-                        );
-                    }
-                    break;
-                case GridState.Saving:
-                    if (!leftClick) {
-                        _builderManager.RotatePiece(gridCoords);
-                    }
-                    break;
-                case GridState.Deleting:
-                    bool removedSuccessfully = _builderManager.PlacePiece(gridCoords, true);
-                    if (removedSuccessfully) {
-                        foreach(EffectHandler effect in _removeEffects) effect.StartEffect();
-                    }
-                    break;
+            if (leftClick) {
+                _gridState.OnLeftClick(_builderManager, gridCoords);
+            } else {
+                _gridState.OnRightClick(_builderManager, gridCoords);
             }
         }
 
@@ -148,10 +122,5 @@ namespace BuilderGame.BuildingPhase.Builder {
         }
     }
 
-    internal enum GridState {
-        Building,
-        Rebinding,
-        Saving,
-        Deleting
-    }
+
 }

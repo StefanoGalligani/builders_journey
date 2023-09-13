@@ -1,6 +1,6 @@
 {
     "name": "BuilderAssembly",
-    "rootNamespace": "",
+    "rootNamespace": "BuilderGame.BuildingPhase.Builder",
     "references": [
         "GUID:b5704b815afc15946b32529fb8b6225d",
         "GUID:14c474927b07356438945d9c7911b7d2",
