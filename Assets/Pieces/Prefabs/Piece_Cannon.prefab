@@ -168,7 +168,7 @@ FixedJoint2D:
   m_BreakForce: 3000
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: -1.1, y: 0}
   m_DampingRatio: 0
@@ -204,7 +204,6 @@ MonoBehaviour:
       m_Action: Element 0
       m_Flags: 0
     m_Flags: 0
-  _cannonBall: {fileID: 7626289463306717519, guid: 2a8f3534f337f24419f281be1cc1e803, type: 3}
   _force: 20
   _effects:
     _effects:

@@ -105,6 +105,15 @@ namespace BuilderGame.Utils {
             return new Direction(value);
         }
 
+        public static implicit operator Direction(Vector2 value)
+        {
+            if (value.x == 0 && value.y == 0) return Direction.Null;
+            if (value.x >= Mathf.Abs(value.y)) return Direction.Right;
+            else if (value.x <= -Mathf.Abs(value.y)) return Direction.Left;
+            else if (value.y > 0) return Direction.Up;
+            else return Direction.Down;
+        }
+
         public static implicit operator Direction(DirectionEnum value)
         {
             return new Direction(value);

@@ -25,8 +25,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
         public bool CanBeAttachedTo {get { return _canBeAttachedTo;}}
         public bool IsConnected {get { return (_isConnected || _isMainPiece);}}
 
-        public void Init(int id, Vector2Int gridPosition, bool isMainPiece = false)
-        {
+        public void Init(int id, Vector2Int gridPosition, Vector3 position, bool isMainPiece = false) {
             _rb = GetComponent<Rigidbody2D>();
             _lr = GetComponent<LineRenderer>();
             _joint = GetComponent<AnchoredJoint2D>();
@@ -38,6 +37,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             _facingDirection = Direction.Right;
             _jointDirection = Direction.Null;
 
+            transform.position = position;
             if (_lr) {
                 _lr.SetPositions(new[] {transform.position, transform.position});
             }
@@ -70,7 +70,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
 
             for (int i=0; i<4; i++) {
                 _facingDirection = _facingDirection + 1;
-                transform.Rotate(Vector3.forward * 90);
+                _rb.rotation += 90;
 
                 bool isValidRotationForJoint = _jointDirection.Equals(Direction.Null) || IsAvailableJointDirection(_jointDirection);
                 if (isValidRotationForJoint) break;
@@ -81,7 +81,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             if(!_canRotate) return;
 
             _facingDirection = newRot;
-            transform.Rotate(Vector3.forward * 90 * newRot);
+            _rb.rotation = 90 * newRot;
         }
 
         public void DetachJoint() {
@@ -124,7 +124,12 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             if (!_joint) return;
 
             _joint.connectedBody = _bodyToConnectTo;
-            Vector2 anchorDir = _joint.attachedRigidbody.position - _joint.connectedBody.position;
+            Vector2 dir = _rb.position - _bodyToConnectTo.position;
+            Debug.Log("Id: " + Id + ", direction of attachment: " + dir);
+            Debug.Log("The direction is " + (int)(Direction) dir + ", other object is " + (int)(_bodyToConnectTo.GetComponent<Piece>().FacingDirection));
+            Direction anchorDir = (Direction) dir - (_bodyToConnectTo.GetComponent<Piece>().FacingDirection);
+            Debug.Log("The result is " + (int)anchorDir + ", or " + (Vector2)anchorDir);
+            
             _joint.connectedAnchor = anchorDir;
         }
     }

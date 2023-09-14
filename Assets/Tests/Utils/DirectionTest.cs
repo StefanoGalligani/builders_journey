@@ -24,7 +24,7 @@ namespace BuilderGame.Utils
         }
 
         [Test]
-        public void TestImplicitOperators()
+        public void TestImplicitOperatorsFromDirection()
         {
             Direction dir = new Direction(Direction.Up);
             Direction dirNull = new Direction(Direction.Null);
@@ -36,6 +36,24 @@ namespace BuilderGame.Utils
             Assert.AreEqual(new Vector3Int(0,1,0), (Vector3Int)dir);
             Assert.AreEqual(true, (bool)dir);
             Assert.AreEqual(false, (bool)dirNull);
+        }
+
+        [Test]
+        public void TestImplicitOperatorsToDirection()
+        {
+            Direction r = new Direction(Direction.Right);
+            Direction u = new Direction(Direction.Up);
+            Direction l = new Direction(Direction.Left);
+            Direction d = new Direction(Direction.Down);
+            Direction dirNull = new Direction(Direction.Null);
+
+            Assert.AreEqual(r, (Direction)new Vector2(3,2));
+            Assert.AreEqual(r, (Direction)new Vector2(3,3));
+            Assert.AreEqual(r, (Direction)new Vector2(3,-3));
+            Assert.AreEqual(l, (Direction)new Vector2(-3,-3));
+            Assert.AreEqual(u, (Direction)new Vector2(-2,3));
+            Assert.AreEqual(d, (Direction)new Vector2(2,-3));
+            Assert.AreEqual(dirNull, (Direction)new Vector2(0, 0));
         }
 
         [Test]

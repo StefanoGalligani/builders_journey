@@ -44,6 +44,18 @@ PrefabInstance:
       propertyPath: _availableJointDirections.Array.data[0]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: _availableJointDirections.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: _availableJointDirections.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1361309661910176544, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
+      propertyPath: _availableJointDirections.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1112939580242970202, guid: b41942115ba69db4a828a26a868f47c6, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -190,7 +202,7 @@ WheelJoint2D:
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: 1000
+  m_BreakForce: 1500
   m_BreakTorque: Infinity
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0

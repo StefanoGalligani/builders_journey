@@ -184,11 +184,10 @@ namespace BuilderGame.BuildingPhase.Builder {
             GameObject prefab = _piecesDictionary.GetPrefabById(id);
 
             Piece newPiece = GameObject.Instantiate(prefab, _vehicle.transform).GetComponent<Piece>();
-            newPiece.transform.position = PositionFromGridCoordinates(gridCoords);
             _placedPieces[gridCoords.x][gridCoords.y] = newPiece;
 
             bool isMain = id==0;
-            newPiece.Init(id, gridCoords, isMain);
+            newPiece.Init(id, gridCoords, PositionFromGridCoordinates(gridCoords), isMain);
 
             _totalPriceInfo.SumPrice(price);
 

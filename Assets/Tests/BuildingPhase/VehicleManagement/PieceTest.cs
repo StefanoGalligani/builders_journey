@@ -6,8 +6,7 @@ using UnityEngine.TestTools;
 using BuilderGame.Utils;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement {
-    public class PieceTest
-    {
+    public class PieceTest {
         GameObject obj;
         Piece pieceObj;
 
@@ -16,7 +15,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
             obj = new GameObject();
             pieceObj = obj.AddComponent<Piece>();
             pieceObj._availableJointDirections = new DirectionEnum[] {DirectionEnum.Down, DirectionEnum.Right};
-            pieceObj.Init(1, new Vector2Int(3, 4));
+            pieceObj.Init(1, new Vector2Int(3, 4), Vector3.zero);
         }
 
         [Test]
