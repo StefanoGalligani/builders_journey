@@ -68,6 +68,19 @@ namespace BuilderGame.Utils {
             Assert.True(pool._inactiveQueue.Contains(fromPool));
             Assert.False(pool._activeQueue.Contains(fromPool));
         }
+        
+        [UnityTest]
+        public IEnumerator TestLimitReleases() {
+            pool = new LimitedPool(prefab, 1, 1, true);
+            GameObject fromPool = pool.Get();
+            pool.Get();
+            pool.Release(fromPool);
+            yield return null;
+            Assert.True(fromPool.activeSelf);
+            pool.Release(fromPool);
+            yield return null;
+            Assert.False(fromPool.activeSelf);
+        }
 
         [UnityTearDown]
         public IEnumerator TearDown() {
