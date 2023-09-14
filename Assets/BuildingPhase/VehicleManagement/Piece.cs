@@ -125,10 +125,7 @@ namespace BuilderGame.BuildingPhase.VehicleManagement {
 
             _joint.connectedBody = _bodyToConnectTo;
             Vector2 dir = _rb.position - _bodyToConnectTo.position;
-            Debug.Log("Id: " + Id + ", direction of attachment: " + dir);
-            Debug.Log("The direction is " + (int)(Direction) dir + ", other object is " + (int)(_bodyToConnectTo.GetComponent<Piece>().FacingDirection));
             Direction anchorDir = (Direction) dir - (_bodyToConnectTo.GetComponent<Piece>().FacingDirection);
-            Debug.Log("The result is " + (int)anchorDir + ", or " + (Vector2)anchorDir);
             
             _joint.connectedAnchor = anchorDir;
         }

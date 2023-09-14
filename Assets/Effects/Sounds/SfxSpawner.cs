@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace BuilderGame.Effects.Sounds {
-    public class SfxSpawner : MonoBehaviour {
+    public class SfxSpawner : EffectSpawner {
 
-        public void SpawnSound(AudioSource sound, Vector3 position, float duration = 1) {
-            AudioSource instance = Instantiate(sound, position, Quaternion.identity);
-            instance.Play();
-            StartCoroutine(DestroySound(instance.gameObject, duration));
+        public void SpawnSound(int key, Vector3 position, float duration = 1) {
+            GameObject instance = base.GetEffect(key);
+            AudioSource audioSource = instance.GetComponent<AudioSource>();
+            instance.transform.position = position;
+            audioSource.Play();
+            StartCoroutine(DestroySound(key, instance, duration));
         }
 
-        private IEnumerator DestroySound(GameObject instance, float duration) {
+        private IEnumerator DestroySound(int key, GameObject instance, float duration) {
             yield return new WaitForSecondsRealtime(duration);
             if (instance != null){
-                Destroy(instance);
+                base.Release(key, instance);
             }
         }
     }

@@ -5,10 +5,8 @@ using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 using BuilderGame.Input;
 
-namespace BuilderGame.Utils
-{
-    public class ChiScrollRect : ScrollRect, IPointerEnterHandler, IPointerExitHandler
-    {
+namespace BuilderGame.Utils {
+    public class ChiScrollRect : ScrollRect, IPointerEnterHandler, IPointerExitHandler {
         private Controls _actionAsset;
         private bool _swallowMouseWheelScrolls = true;
         private bool _isMouseOver = false;

@@ -11,23 +11,31 @@ namespace BuilderGame.Utils {
     public class LimitedPool : IObjectPool<GameObject> {
         internal Queue<GameObject> _inactiveQueue;
         internal Queue<GameObject> _activeQueue;
+        internal List<GameObject> _notToRelease;
         private GameObject _prefab;
         private int _maxCount;
+        private bool _limitReleases;
         
         public int CountInactive => _inactiveQueue.Count;
         public int CountActive => _activeQueue.Count;
 
-        public LimitedPool(GameObject prefab, int initialCount, int maxCount) {
+        public LimitedPool(GameObject prefab, int initialCount, int maxCount, bool limitReleases = false) {
             _inactiveQueue = new Queue<GameObject>();
             _activeQueue = new Queue<GameObject>();
+            _notToRelease = new List<GameObject>();
             _prefab = prefab;
             _maxCount = maxCount;
+            _limitReleases = limitReleases;
 
             for (int i=0; i<initialCount; i++) {
                 GameObject g = GameObject.Instantiate(_prefab);
                 _inactiveQueue.Enqueue(g);
                 g.SetActive(false);
             }
+        }
+
+        public GameObject GetPrefab() {
+            return _prefab;
         }
 
         public void Clear() {
@@ -51,6 +59,7 @@ namespace BuilderGame.Utils {
                 } else { //If there are too many elements, take from existing
                     GameObject g = _activeQueue.Dequeue();
                     _activeQueue.Enqueue(g);
+                    if(_limitReleases) _notToRelease.Add(g);
                     return g;
                 }
             }
@@ -62,6 +71,10 @@ namespace BuilderGame.Utils {
 
         public void Release(GameObject element) {
             if (!_activeQueue.Contains(element)) return;
+            if (_limitReleases && _notToRelease.Contains(element)) {
+                _notToRelease.Remove(element);
+                return;
+            }
 
             _activeQueue = new Queue<GameObject>(_activeQueue.Where(x => x != element));
             _inactiveQueue.Enqueue(element);
