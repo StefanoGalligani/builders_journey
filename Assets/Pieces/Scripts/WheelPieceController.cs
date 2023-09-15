@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
 using UnityEngine.InputSystem.Controls;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(WheelJoint2D))]
     public class WheelPieceController : SpecialPieceController {
         private int _speed;

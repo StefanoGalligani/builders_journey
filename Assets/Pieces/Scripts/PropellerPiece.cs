@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BuilderGame.Effects;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(Animator))]
     public class PropellerPiece : SpecialPiece {
         [SerializeField] private float _force;

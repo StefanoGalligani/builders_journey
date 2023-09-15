@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using BuilderGame.Effects;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     public class RocketPieceController : SpecialPieceController {
         private float _force;
         private Rigidbody2D _rb;

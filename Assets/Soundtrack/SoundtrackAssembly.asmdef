@@ -1,0 +1,16 @@
+{
+    "name": "SoundtrackAssembly",
+    "rootNamespace": "BuilderGame.Soundtrack",
+    "references": [
+        "GUID:0af0ecacba2ed2947bbb5790f28d857c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

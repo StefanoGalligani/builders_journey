@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BuilderGame.Effects;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     public class CannonPiece : SpecialPiece {
         [SerializeField] private float _force;
         [SerializeField] private EffectContainer _effects;

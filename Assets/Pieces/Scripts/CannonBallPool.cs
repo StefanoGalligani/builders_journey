@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BuilderGame.Utils;
 using UnityEngine;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     public class CannonBallPool : MonoBehaviour {
         [SerializeField] Rigidbody2D _prefab;
         [SerializeField] int _initialPoolSize;

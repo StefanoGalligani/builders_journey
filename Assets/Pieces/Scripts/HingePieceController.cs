@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(HingeJoint2D))]
     public class HingePieceController : SpecialPieceController {
         private int _speed;

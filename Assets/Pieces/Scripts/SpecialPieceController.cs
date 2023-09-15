@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class SpecialPieceController {
 

@@ -1,5 +1,5 @@
 using UnityEngine;
-using BuilderGame.Pieces;
+using BuilderGame.SpecialPieces;
 using BuilderGame.Effects;
 using BuilderGame.BuildingPhase.Binding;
 using BuilderGame.BuildingPhase.Dictionary;

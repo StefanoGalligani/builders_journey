@@ -3,7 +3,7 @@ using UnityEngine;
 using BuilderGame.BuildingPhase.Start;
 using BuilderGame.BuildingPhase.Tutorial;
 using BuilderGame.PlayPhase;
-using BuilderGame.Pieces;
+using BuilderGame.SpecialPieces;
 
 namespace BuilderGame.BuildingPhase.VehicleManagement {
     public class Vehicle : MonoBehaviour, ITutorialElement

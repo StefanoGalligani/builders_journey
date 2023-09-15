@@ -7,8 +7,8 @@ using BuilderGame.BuildingPhase.Tooltip;
 using UnityEngine.InputSystem.Controls;
 using Unity.Properties;
 
-[assembly: InternalsVisibleToAttribute("PiecesTests")]
-namespace BuilderGame.Pieces {
+[assembly: InternalsVisibleToAttribute("SpecialPiecesTests")]
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class SpecialPiece : MonoBehaviour {
         public string[] ActionNames;

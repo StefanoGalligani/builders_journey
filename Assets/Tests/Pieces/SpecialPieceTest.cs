@@ -6,9 +6,8 @@ using UnityEngine.TestTools;
 using BuilderGame.BuildingPhase.Start;
 using UnityEngine.InputSystem;
 
-namespace BuilderGame.Pieces {
-    public class SpecialPieceTest
-    {
+namespace BuilderGame.SpecialPieces {
+    public class SpecialPieceTest {
         private GameObject obj;
         private SpecialPiece pieceObj;
         private GameObject startObj;
@@ -78,8 +77,7 @@ namespace BuilderGame.Pieces {
             GameObject.DestroyImmediate(startObj);
         }
     }
-    public class MockSpecialPiece : SpecialPiece
-    {
+    public class MockSpecialPiece : SpecialPiece {
         protected override void InitController()
         {
             _controller = new MockSpecialPieceController();
@@ -89,8 +87,7 @@ namespace BuilderGame.Pieces {
             return _controller;
         }
     }
-    public class MockSpecialPieceController : SpecialPieceController
-    {
+    public class MockSpecialPieceController : SpecialPieceController {
         public bool StartCalled = false;
         public bool UpdateCalled = false;
         public bool FixedUpdateCalled = false;

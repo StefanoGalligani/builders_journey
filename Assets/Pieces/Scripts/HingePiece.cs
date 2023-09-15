@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BuilderGame.Pieces {
+namespace BuilderGame.SpecialPieces {
     [RequireComponent(typeof(HingeJoint2D))]
     public class HingePiece : SpecialPiece {
         [SerializeField] private int _speed;
