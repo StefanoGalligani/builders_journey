@@ -25,7 +25,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
         public void TestToggleOnAtStart()
         {
             PlayerPrefs.SetInt("TutorialEnabled", 1);
-            tutorialToggle.Start();
+            tutorialToggle.Awake();
             Assert.True(toggle.isOn);
         }
 
@@ -33,7 +33,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
         public void TestToggleOffAtStart()
         {
             PlayerPrefs.SetInt("TutorialEnabled", 0);
-            tutorialToggle.Start();
+            tutorialToggle.Awake();
             Assert.False(toggle.isOn);
         }
 
@@ -41,7 +41,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
         public void TestEnableOnToggle()
         {
             PlayerPrefs.SetInt("TutorialEnabled", 0);
-            tutorialToggle.Start();
+            tutorialToggle.Awake();
             toggle.isOn = true;
             Assert.AreEqual(1, PlayerPrefs.GetInt("TutorialEnabled", 0));
         }
@@ -50,7 +50,7 @@ namespace BuilderGame.BuildingPhase.Tutorial
         public void TestDisableOnToggle()
         {
             PlayerPrefs.SetInt("TutorialEnabled", 1);
-            tutorialToggle.Start();
+            tutorialToggle.Awake();
             toggle.isOn = false;
             Assert.AreEqual(0, PlayerPrefs.GetInt("TutorialEnabled", 1));
         }

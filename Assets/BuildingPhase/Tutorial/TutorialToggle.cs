@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BuilderGame.BuildingPhase.Tutorial
-{
-    public class TutorialToggle : MonoBehaviour
-    {
+namespace BuilderGame.BuildingPhase.Tutorial {
+    public class TutorialToggle : MonoBehaviour {
         [SerializeField] internal Toggle toggle;
 
-        internal void Start() {
+        internal void Awake() {
             int tutorialEnabled = PlayerPrefs.GetInt("TutorialEnabled", 1);
             toggle.isOn = tutorialEnabled == 1;
             toggle.onValueChanged.AddListener(_ => OnToggle());
