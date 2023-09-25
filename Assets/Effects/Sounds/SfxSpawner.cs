@@ -8,6 +8,7 @@ namespace BuilderGame.Effects.Sounds {
         public void SpawnSound(int key, Vector3 position, float duration = 1) {
             GameObject instance = base.GetEffect(key);
             AudioSource audioSource = instance.GetComponent<AudioSource>();
+            audioSource.volume = _settings.GetSfxVolume();
             instance.transform.position = position;
             audioSource.Play();
             StartCoroutine(DestroySound(key, instance, duration));

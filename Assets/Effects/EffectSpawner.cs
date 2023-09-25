@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using BuilderGame.Utils;
+using BuilderGame.Settings;
 using UnityEngine.Events;
 using System.Linq;
 
@@ -11,9 +12,11 @@ namespace BuilderGame.Effects {
         [SerializeField] private int _initialPoolSize;
         [SerializeField] private int _maxPoolSize;
         private Dictionary<int, LimitedPool> _poolsDictionary;
+        internal SettingsFileAccess _settings;
 
         private void Awake() {
             _poolsDictionary = new Dictionary<int, LimitedPool>();
+            _settings = FindObjectOfType<SettingsFileAccess>();
             SceneManager.sceneLoaded += OnSceneChange;
         }
 

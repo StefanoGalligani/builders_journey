@@ -14,8 +14,6 @@ namespace BuilderGame.Effects.Sounds {
 
         protected override void StartHandler() {
             _settings = FindObjectOfType<SettingsFileAccess>();
-            _sound.volume = _settings.GetSfxVolume();
-            _settings.SettingsUpdated += data => _sound.volume = data.SfxVolume;
             _duration = _sound.clip.length;
         }
 
@@ -36,7 +34,7 @@ namespace BuilderGame.Effects.Sounds {
         }
 
         internal override void StartEffect() {
-            if (_sound.volume == 0) return;
+            if (_settings.GetSfxVolume() == 0) return;
             if (_isSoundPrefab) {
                 _sfxSpawner?.SpawnSound(_key, transform.position - Vector3.forward, _duration);
             } else {
