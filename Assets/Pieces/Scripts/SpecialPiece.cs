@@ -50,7 +50,7 @@ namespace BuilderGame.SpecialPieces {
         }
 
         internal void OnActionExecuted(InputAction.CallbackContext context) {
-            if (_pieceEnabled && _controller != null) _controller.OnActionExecuted(context);
+            if (_pieceEnabled && _controller != null && Time.timeScale > 0.5f) _controller.OnActionExecuted(context);
         }
 
         public void Interrupt() {
